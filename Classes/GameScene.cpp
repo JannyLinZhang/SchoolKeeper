@@ -7,7 +7,7 @@ USING_NS_CC;
 
 Scene* GameScene::createScene()
 {
-    
+    //21ejgnealalkmalmdsavnadlnaljfnel
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);

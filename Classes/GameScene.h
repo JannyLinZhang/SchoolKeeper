@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 #include "Pipe.h"
 #include "Bird.h"
+#include "SneakyJoystick.h"
+#include "SneakyJoystickSkinnedBase.h"
 
 
 class GameScene : public cocos2d::Layer
@@ -28,6 +30,9 @@ private:
     bool onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event);
     void StopFlying(float dt);
     void update(float dt);
+    SneakyJoystick *joyStick;
+    void joyStickInitialize();
+
     
 };
 

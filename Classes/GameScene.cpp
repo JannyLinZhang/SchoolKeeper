@@ -3,6 +3,8 @@
 #include "GameOverScene.h"
 
 
+
+
 USING_NS_CC;
 
 Scene* GameScene::createScene()
@@ -29,7 +31,6 @@ Scene* GameScene::createScene()
 // on "init" you need to initialize your instance
 bool GameScene::init()
 {
-    //////////////////////////////
     // 1. super init first
     if ( !Layer::init() )
     {
@@ -38,6 +39,8 @@ bool GameScene::init()
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    
+    joyStickInitialize();
     
     auto backgroundSprite = Sprite::create("Background.png");
     backgroundSprite->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
@@ -105,7 +108,42 @@ void GameScene::StopFlying(float dt){
 }
 void GameScene::update(float dt){
     bird->Fall();
+    Point poi = ccpMult(joyStick->getVelocity(), 50);
+    //right
+    if ((poi.x  >  0)  && (poi.x - poi.y) >0 && (poi.x + poi.y) > 0){
+      }
+    //left
+    else if ( (poi.x < 0)  && (poi.x + poi.y) < 0 &&(poi.x - poi.y) < 0) {        
+    }
+    //up
+    else if ((poi.y > 0) &&(poi.y - poi.x) > 0 &&(poi.y + poi.x) >0 ){
+        bird->Fly();
+          }
+    //down
+    else if ((poi.y < 0) &&(poi.y - poi.x) < 0 && (poi.y + poi.x) < 0) {
+        bird->StopFlying();
+    }
 }
+
+void GameScene::joyStickInitialize(){
+    float joystickRadius = 220;
+    joyStick=new SneakyJoystick();
+    joyStick->autorelease();
+    joyStick->initWithRect(CCRectZero);
+    joyStick->setAutoCenter(true);
+    joyStick->setHasDeadzone(true);
+    joyStick->setDeadRadius(10);
+    SneakyJoystickSkinnedBase *joystickSkin=new SneakyJoystickSkinnedBase();
+    joystickSkin->autorelease();
+    joystickSkin->init();
+    joystickSkin->setBackgroundSprite(CCSprite::create("CloseSelected.png"));
+    joystickSkin->setThumbSprite(CCSprite::create("Ball.png"));
+    joystickSkin->getThumbSprite()->setScale(1.0f);
+    joystickSkin->setPosition(Point(joystickRadius,joystickRadius));
+    joystickSkin->setJoystick(joyStick);
+    this->addChild(joystickSkin);
+}
+
 
 
 

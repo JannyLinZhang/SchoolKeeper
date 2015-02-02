@@ -61,6 +61,10 @@
 		B913A2A41A7D840900CF9553 /* Pipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B913A2A11A7D840900CF9553 /* Pipe.cpp */; };
 		B913A2A81A7EC14300CF9553 /* Bird.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B913A2A61A7EC14300CF9553 /* Bird.cpp */; };
 		B913A2A91A7EC14300CF9553 /* Bird.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B913A2A61A7EC14300CF9553 /* Bird.cpp */; };
+		B93F95451A7F3FF700F21148 /* SneakyJoystick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B93F95411A7F3FF700F21148 /* SneakyJoystick.cpp */; };
+		B93F95461A7F3FF700F21148 /* SneakyJoystick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B93F95411A7F3FF700F21148 /* SneakyJoystick.cpp */; };
+		B93F95471A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B93F95431A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp */; };
+		B93F95481A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B93F95431A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp */; };
 		B953A8531A7C9C6C00C85339 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = B953A8281A7C9C6C00C85339 /* HelloWorld.png */; };
 		B953A8541A7C9C6C00C85339 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = B953A8281A7C9C6C00C85339 /* HelloWorld.png */; };
 		B953A8551A7C9C6C00C85339 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = B953A82A1A7C9C6C00C85339 /* Background.png */; };
@@ -237,6 +241,10 @@
 		B913A2A21A7D840900CF9553 /* Pipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pipe.h; sourceTree = "<group>"; };
 		B913A2A61A7EC14300CF9553 /* Bird.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bird.cpp; sourceTree = "<group>"; };
 		B913A2A71A7EC14300CF9553 /* Bird.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bird.h; sourceTree = "<group>"; };
+		B93F95411A7F3FF700F21148 /* SneakyJoystick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SneakyJoystick.cpp; path = Joystick/SneakyJoystick.cpp; sourceTree = "<group>"; };
+		B93F95421A7F3FF700F21148 /* SneakyJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakyJoystick.h; path = Joystick/SneakyJoystick.h; sourceTree = "<group>"; };
+		B93F95431A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SneakyJoystickSkinnedBase.cpp; path = Joystick/SneakyJoystickSkinnedBase.cpp; sourceTree = "<group>"; };
+		B93F95441A7F3FF700F21148 /* SneakyJoystickSkinnedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakyJoystickSkinnedBase.h; path = Joystick/SneakyJoystickSkinnedBase.h; sourceTree = "<group>"; };
 		B953A8281A7C9C6C00C85339 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		B953A82A1A7C9C6C00C85339 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		B953A82B1A7C9C6C00C85339 /* Ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball.png; sourceTree = "<group>"; };
@@ -424,6 +432,10 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B93F95411A7F3FF700F21148 /* SneakyJoystick.cpp */,
+				B93F95421A7F3FF700F21148 /* SneakyJoystick.h */,
+				B93F95431A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp */,
+				B93F95441A7F3FF700F21148 /* SneakyJoystickSkinnedBase.h */,
 				B913A2A61A7EC14300CF9553 /* Bird.cpp */,
 				B913A2A71A7EC14300CF9553 /* Bird.h */,
 				B913A2A11A7D840900CF9553 /* Pipe.cpp */,
@@ -797,6 +809,8 @@
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				B953A8A11A7C9DC800C85339 /* SplashScene.cpp in Sources */,
 				B953A8AD1A7CA01D00C85339 /* MainMenuScene.cpp in Sources */,
+				B93F95471A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp in Sources */,
+				B93F95451A7F3FF700F21148 /* SneakyJoystick.cpp in Sources */,
 				B913A2A81A7EC14300CF9553 /* Bird.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
@@ -815,8 +829,10 @@
 				B913A2A91A7EC14300CF9553 /* Bird.cpp in Sources */,
 				B953A8A21A7C9DC800C85339 /* SplashScene.cpp in Sources */,
 				B953A8AA1A7CA01D00C85339 /* GameOverScene.cpp in Sources */,
+				B93F95461A7F3FF700F21148 /* SneakyJoystick.cpp in Sources */,
 				B913A2A41A7D840900CF9553 /* Pipe.cpp in Sources */,
 				B953A8AE1A7CA01D00C85339 /* MainMenuScene.cpp in Sources */,
+				B93F95481A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

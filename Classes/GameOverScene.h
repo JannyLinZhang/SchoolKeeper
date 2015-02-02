@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 
+
 class GameOverScene : public cocos2d::Layer
 {
 public:

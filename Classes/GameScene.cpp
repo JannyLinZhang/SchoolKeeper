@@ -45,6 +45,29 @@ bool GameScene::init()
     auto backgroundSprite = Sprite::create("Background.png");
     backgroundSprite->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
     this->addChild(backgroundSprite);
+
+    
+    
+    /**********/
+    //code for animation Bear
+    SpriteBatchNode* spriteSheet = SpriteBatchNode::create("BearAnimation/bearAnimationSheet.png");
+    SpriteFrameCache* cache = SpriteFrameCache::getInstance();
+    cache->addSpriteFramesWithFile("BearAnimation/bearAnimation.plist");
+    this->addChild(spriteSheet);
+    Vector<SpriteFrame*> animFrames(8);
+    char str[100]={0};
+    for(int i=1; i<=8; i++){
+        sprintf(str, "bear%d.png",i);
+        SpriteFrame* frame = cache->getSpriteFrameByName(str);
+        animFrames.insert(i-1, frame);
+    }
+    Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.3f);
+    Sprite* bear1 = Sprite::createWithSpriteFrameName("bear1.png");
+    bear1->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
+    bear1->runAction(RepeatForever::create(Animate::create(animation)));
+    spriteSheet->addChild(bear1);
+    /*************/
+    
     
     auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT,3);
     edgeBody->setCollisionBitmask(OBSTACLE_COLLISION_BITMASK);

@@ -61,7 +61,7 @@ bool GameScene::init()
         SpriteFrame* frame = cache->getSpriteFrameByName(str);
         animFrames.insert(i-1, frame);
     }
-    Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.3f);
+    Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
     Sprite* bear1 = Sprite::createWithSpriteFrameName("bear1.png");
     bear1->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
     bear1->runAction(RepeatForever::create(Animate::create(animation)));

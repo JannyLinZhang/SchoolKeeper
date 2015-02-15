@@ -2,10 +2,12 @@
 #define __GAME_SCENE_H__
 
 #include "cocos2d.h"
-#include "Pipe.h"
-#include "Bird.h"
 #include "SneakyJoystick.h"
 #include "SneakyJoystickSkinnedBase.h"
+#include "Role.h"
+#include "Character.h"
+#include <vector>
+using namespace std;
 
 
 class GameScene : public cocos2d::Layer
@@ -21,11 +23,12 @@ public:
     CREATE_FUNC(GameScene);
     
 private:
-    void SpawnPipe(float dt);
+    void RoleLogic(float dt);
+    vector<Role*> roles;
+    Character* character;
+
     cocos2d::PhysicsWorld *sceneWorld;
-    Pipe pipe;
     void SetPhysicsWorld(cocos2d::PhysicsWorld *world){sceneWorld = world;}
-    Bird *bird;
     bool onContactBegin(cocos2d::PhysicsContact &contact);
     bool onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event);
     void StopFlying(float dt);

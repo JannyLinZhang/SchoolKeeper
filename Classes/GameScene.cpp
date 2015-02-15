@@ -45,10 +45,21 @@ bool GameScene::init()
     auto backgroundSprite = Sprite::create("Background.png");
     backgroundSprite->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
     this->addChild(backgroundSprite);
+    
+    character = new Character(this);
+    
+    
+    
+    for (int i =0 ; i<2; i++) {
+        Role* role = new Role(this);
+        roles.push_back(role);
+        
+    }
+    this->schedule(schedule_selector(GameScene::RoleLogic), 1.0f);
 
     
+    /*
     
-    /**********/
     //code for animation Bear
     SpriteBatchNode* spriteSheet = SpriteBatchNode::create("BearAnimation/bearAnimationSheet.png");
     SpriteFrameCache* cache = SpriteFrameCache::getInstance();
@@ -65,9 +76,9 @@ bool GameScene::init()
     Sprite* bear1 = Sprite::createWithSpriteFrameName("bear1.png");
     bear1->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
     bear1->runAction(RepeatForever::create(Animate::create(animation)));
+    bear1->setScale(0.3);
     spriteSheet->addChild(bear1);
-    /*************/
-    
+        */
     
     auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT,3);
     edgeBody->setCollisionBitmask(OBSTACLE_COLLISION_BITMASK);
@@ -80,9 +91,6 @@ bool GameScene::init()
     edgeNode->setPhysicsBody(edgeBody);
     this->addChild(edgeNode);
     
-    this->schedule(schedule_selector(GameScene::SpawnPipe), PIPE_SPAWN_FREQUENCY*visibleSize.width);
-    
-    bird = new Bird(this);
     
     auto contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
@@ -98,9 +106,6 @@ bool GameScene::init()
 }
 
 
-void GameScene::SpawnPipe(float dt){
-    pipe.SpawnPipe(this);
-}
 
 bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     PhysicsBody *a = contact.getShapeA()->getBody();
@@ -120,33 +125,22 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
 
 bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
     
-    bird->Fly();
-    this->scheduleOnce(schedule_selector(GameScene::StopFlying), BIRD_FLY_DURATION);
-    
+    character->Jump();
     return true;
 }
 
-void GameScene::StopFlying(float dt){
-    bird->StopFlying();
-}
+
 void GameScene::update(float dt){
-    bird->Fall();
+  
     Point poi = ccpMult(joyStick->getVelocity(), 50);
     //right
-    if ((poi.x  >  0)  && (poi.x - poi.y) >0 && (poi.x + poi.y) > 0){
-      }
-    //left
-    else if ( (poi.x < 0)  && (poi.x + poi.y) < 0 &&(poi.x - poi.y) < 0) {        
-    }
-    //up
-    else if ((poi.y > 0) &&(poi.y - poi.x) > 0 &&(poi.y + poi.x) >0 ){
-        bird->Fly();
-          }
-    //down
-    else if ((poi.y < 0) &&(poi.y - poi.x) < 0 && (poi.y + poi.x) < 0) {
-        bird->StopFlying();
-    }
-}
+    //if(poi.x!=0 && poi.y!=0){
+        character->Move1(Vec2(poi.x, poi.y));
+
+    //}
+    
+    printf("%f, %f\n", poi.x, poi.y);
+                    }
 
 void GameScene::joyStickInitialize(){
     float joystickRadius = 220;
@@ -165,6 +159,14 @@ void GameScene::joyStickInitialize(){
     joystickSkin->setPosition(Point(joystickRadius,joystickRadius));
     joystickSkin->setJoystick(joyStick);
     this->addChild(joystickSkin);
+}
+
+
+void GameScene::RoleLogic(float dt){
+    for(int i=0; i<2; i++){
+        roles[i]->move();
+    }
+    
 }
 
 

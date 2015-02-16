@@ -14,11 +14,6 @@ USING_NS_CC;
 Character::Character(cocos2d::Layer *layer)
 {
     
-    
-
-    
-    
-    
     SpriteFrameCache* cache = SpriteFrameCache::getInstance();
     cache->addSpriteFramesWithFile("BearAnimation/bearAnimation.plist");
     
@@ -30,61 +25,35 @@ Character::Character(cocos2d::Layer *layer)
         SpriteFrame* frame = cache->getSpriteFrameByName(str);
         animFrames.insert(i-1, frame);
     }
-    Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
     
+    //Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
     visibleSize=Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
     
     
     
-    character = CCSprite::createWithSpriteFrameName("bear1.png");
+    character = Sprite::createWithSpriteFrameName("bear1.png");
     character->setScale(0.2);
+    layer->addChild(character);
+    }
 
-    
-    
-    
-    //Move(Vec2(900,100),animation,character);
-    
-    //Move(Vec2(0,100),animation,character);
-    
-    layer->addChild(character, 100);
-    
-    
-    
-}
-//
-void Character::Move(cocos2d::Vec2 vec,cocos2d::Animation *animation,cocos2d::CCSprite *character){
 
-    
-    
-    
-     CCMoveTo* move1 = CCMoveTo::create(12,vec);
+void Character::Move(cocos2d::Vec2 vec,cocos2d::Animation *animation,cocos2d::Sprite *character){
+     MoveTo* move1 = MoveTo::create(12,vec);
      character->runAction(RepeatForever::create(Animate::create(animation)));
-
-    character->runAction(move1);
-
+     character->runAction(move1);
 }
 
 void Character::Move1(cocos2d::Vec2 vec){
-    
-    
-    
-    
-    CCMoveBy* move1 = CCMoveBy::create(12,vec);
-   
-    
+ 
+    MoveBy* move1 = MoveBy::create(12,vec);
     character->runAction(move1);
     
 }
 
 void Character::Jump(){
-    
-
-  CCActionInterval*  actionUp = CCJumpBy::create(0.5, CCPointMake(0,0), 80, 1);
-
- 
- 
-    character->runAction(actionUp);
+  ActionInterval*  actionUp = CCJumpBy::create(0.5, Point(0,0), 80, 1);
+  character->runAction(actionUp);
     
 }
 

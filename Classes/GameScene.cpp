@@ -57,28 +57,7 @@ bool GameScene::init()
     }
     this->schedule(schedule_selector(GameScene::RoleLogic), 1.0f);
 
-    
-    /*
-    
-    //code for animation Bear
-    SpriteBatchNode* spriteSheet = SpriteBatchNode::create("BearAnimation/bearAnimationSheet.png");
-    SpriteFrameCache* cache = SpriteFrameCache::getInstance();
-    cache->addSpriteFramesWithFile("BearAnimation/bearAnimation.plist");
-    this->addChild(spriteSheet);
-    Vector<SpriteFrame*> animFrames(8);
-    char str[100]={0};
-    for(int i=1; i<=8; i++){
-        sprintf(str, "bear%d.png",i);
-        SpriteFrame* frame = cache->getSpriteFrameByName(str);
-        animFrames.insert(i-1, frame);
-    }
-    Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
-    Sprite* bear1 = Sprite::createWithSpriteFrameName("bear1.png");
-    bear1->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
-    bear1->runAction(RepeatForever::create(Animate::create(animation)));
-    bear1->setScale(0.3);
-    spriteSheet->addChild(bear1);
-        */
+
     
     auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT,3);
     edgeBody->setCollisionBitmask(OBSTACLE_COLLISION_BITMASK);
@@ -132,14 +111,13 @@ bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
 
 void GameScene::update(float dt){
   
-    Point poi = ccpMult(joyStick->getVelocity(), 50);
-    //right
-    //if(poi.x!=0 && poi.y!=0){
-        character->Move1(Vec2(poi.x, poi.y));
-
-    //}
+    Point poi = joyStick->getVelocity()*30;
+     character->Move1(Vec2(poi.x, poi.y));
+    if(poi.x!=0 && poi.y!=0){
+    //stop the character if joystick is at rest position
+    }
     
-    printf("%f, %f\n", poi.x, poi.y);
+    //printf("%f, %f\n", poi.x, poi.y);
                     }
 
 void GameScene::joyStickInitialize(){
@@ -168,6 +146,32 @@ void GameScene::RoleLogic(float dt){
     }
     
 }
+
+
+
+
+
+/*
+ 
+ //code for animation Bear
+ SpriteBatchNode* spriteSheet = SpriteBatchNode::create("BearAnimation/bearAnimationSheet.png");
+ SpriteFrameCache* cache = SpriteFrameCache::getInstance();
+ cache->addSpriteFramesWithFile("BearAnimation/bearAnimation.plist");
+ this->addChild(spriteSheet);
+ Vector<SpriteFrame*> animFrames(8);
+ char str[100]={0};
+ for(int i=1; i<=8; i++){
+ sprintf(str, "bear%d.png",i);
+ SpriteFrame* frame = cache->getSpriteFrameByName(str);
+ animFrames.insert(i-1, frame);
+ }
+ Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
+ Sprite* bear1 = Sprite::createWithSpriteFrameName("bear1.png");
+ bear1->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
+ bear1->runAction(RepeatForever::create(Animate::create(animation)));
+ bear1->setScale(0.3);
+ spriteSheet->addChild(bear1);
+ */
 
 
 

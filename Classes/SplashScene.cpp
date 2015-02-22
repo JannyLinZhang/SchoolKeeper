@@ -33,7 +33,7 @@ bool SplashScene::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
     this->scheduleOnce(schedule_selector(SplashScene::GoToMainMenuScene), DISPLAY_TIME_SPLASH_SCENE);
-    auto backgroundSprite = Sprite::create("Splash Screen.png");
+    auto backgroundSprite = Sprite::create("SplashScene.png");
     backgroundSprite->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
     this->addChild(backgroundSprite);
     return true;

@@ -33,7 +33,7 @@ bool MainMenuScene::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
     
-    auto backgroundSprite = Sprite::create("Background.png");
+    auto backgroundSprite = Sprite::create("MainMenuScene.png");
     backgroundSprite->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
     this->addChild(backgroundSprite);
 

@@ -40,11 +40,12 @@ bool GameScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    joyStickInitialize();
+    
     
     auto backgroundSprite = Sprite::create("Background.png");
     backgroundSprite->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
     this->addChild(backgroundSprite);
+    joyStickInitialize();
     
     character = new Character(this);
     
@@ -131,8 +132,8 @@ void GameScene::joyStickInitialize(){
     SneakyJoystickSkinnedBase *joystickSkin=new SneakyJoystickSkinnedBase();
     joystickSkin->autorelease();
     joystickSkin->init();
-    joystickSkin->setBackgroundSprite(CCSprite::create("CloseSelected.png"));
-    joystickSkin->setThumbSprite(CCSprite::create("Ball.png"));
+    joystickSkin->setBackgroundSprite(CCSprite::create("Virtual Joystick/VJ2.png"));
+    joystickSkin->setThumbSprite(CCSprite::create("Virtual Joystick/VJ1.png"));
     joystickSkin->getThumbSprite()->setScale(1.0f);
     joystickSkin->setPosition(Point(joystickRadius,joystickRadius));
     joystickSkin->setJoystick(joyStick);

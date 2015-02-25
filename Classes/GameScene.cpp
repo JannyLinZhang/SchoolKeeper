@@ -134,9 +134,14 @@ void GameScene::joyStickInitialize(){
     joystickSkin->init();
     joystickSkin->setBackgroundSprite(CCSprite::create("Virtual Joystick/VJ2.png"));
     joystickSkin->setThumbSprite(CCSprite::create("Virtual Joystick/VJ1.png"));
-    joystickSkin->getThumbSprite()->setScale(1.0f);
-    joystickSkin->setPosition(Point(joystickRadius,joystickRadius));
+    joystickSkin->getBackgroundSprite()->setOpacity(100);
+    joystickSkin->getThumbSprite()->setOpacity(20);
+    joystickSkin->getThumbSprite()->setScale(0.8f);
+    joystickSkin->getBackgroundSprite()->setScale(0.8f);
+    joystickSkin->setPosition(Point(joystickRadius-100,joystickRadius-100));
+    
     joystickSkin->setJoystick(joyStick);
+    
     this->addChild(joystickSkin);
 }
 
@@ -153,7 +158,6 @@ void GameScene::RoleLogic(float dt){
 
 
 /*
- 
  //code for animation Bear
  SpriteBatchNode* spriteSheet = SpriteBatchNode::create("BearAnimation/bearAnimationSheet.png");
  SpriteFrameCache* cache = SpriteFrameCache::getInstance();

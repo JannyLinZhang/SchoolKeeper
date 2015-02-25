@@ -6,6 +6,7 @@
 #include "SneakyJoystickSkinnedBase.h"
 #include "Role.h"
 #include "Character.h"
+#include "Item.h"
 #include <vector>
 using namespace std;
 

@@ -47,7 +47,16 @@ bool GameScene::init()
     joyStickInitialize();
     
     //character
-    character = new Character(this);
+    character = Character::create();
+    // character->setPosition(200,200);
+    
+    character->InitCharacterSprite("bear1.png");
+    
+    character->setScale(0.3f);
+    character->setPosition(300, 300);
+    
+    
+    this->addChild(character, 1);
         
     //Role
     for (int i =0 ; i<2; i++) {
@@ -108,10 +117,43 @@ bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
 
 
 void GameScene::update(float dt){
-  
-    Point poi = joyStick->getVelocity()*30;
-    character->Move1(Vec2(poi.x, poi.y));
+    Point poi = ccpMult(joyStick->getVelocity(), 50);
+    //right
+    if(poi.x==0 && poi.y==0){
+        
+        character->StopAnimation();
+        
+    }else{
+        
+        printf("%f,%f/n",poi.x,poi.y);
+        float x_1=abs(poi.x);
+        float y_1=abs(poi.y);
+        float length=pow(x_1*x_1+y_1*y_1,0.5);
+        float x=5*(1/length)*x_1;
+        float y=5*(1/length)*y_1;
+        
+        if(poi.x>=0){
+            character->SetAnimation("BearAnimation/bearAnimation.plist", "BearAnimation/bearAnimationSheet.png","bear", 8, true);
+            if(poi.y>=0){
+                
+                character->setPosition(character->getPosition().x+x,character->getPosition().y+y );
+            }else{
+                character->setPosition(character->getPosition().x+x,character->getPosition().y-y );
+            }
+            
+        }else{
+            character->SetAnimation("BearAnimation/bearAnimation.plist", "BearAnimation/bearAnimationSheet.png","bear", 8, false);
+            if(poi.y>=0){
+                character->setPosition(character->getPosition().x-x,character->getPosition().y+y );
+            }else{
+                character->setPosition(character->getPosition().x-x,character->getPosition().y-y );
+            }
+        }
+        
     }
+    
+    
+}
 
 void GameScene::joyStickInitialize(){
     float joystickRadius = 220;

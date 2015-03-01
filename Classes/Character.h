@@ -26,6 +26,4 @@ private:
     cocos2d::Size visibleSize;
     cocos2d::Vec2 origin;
     cocos2d::Sprite *character;
-    //bool isFalling;
-
 };

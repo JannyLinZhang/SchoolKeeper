@@ -27,6 +27,7 @@ private:
     void RoleLogic(float dt);
     vector<Role*> roles;
     Character* character;
+    Item* item;
 
     cocos2d::PhysicsWorld *sceneWorld;
     void SetPhysicsWorld(cocos2d::PhysicsWorld *world){sceneWorld = world;}
@@ -36,6 +37,7 @@ private:
     void update(float dt);
     SneakyJoystick *joyStick;
     void joyStickInitialize();
+    
 
     
 };

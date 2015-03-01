@@ -89,6 +89,9 @@
 		B953A8AC1A7CA01D00C85339 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B953A8A51A7CA01D00C85339 /* GameScene.cpp */; };
 		B953A8AD1A7CA01D00C85339 /* MainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B953A8A71A7CA01D00C85339 /* MainMenuScene.cpp */; };
 		B953A8AE1A7CA01D00C85339 /* MainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B953A8A71A7CA01D00C85339 /* MainMenuScene.cpp */; };
+		B9B583981AA3C99B00C82040 /* bomb.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B583971AA3C99B00C82040 /* bomb.png */; };
+		B9B5839A1AA3D26200C82040 /* numbers in Resources */ = {isa = PBXBuildFile; fileRef = B9B583991AA3D26200C82040 /* numbers */; };
+		B9B5839B1AA3D26200C82040 /* numbers in Resources */ = {isa = PBXBuildFile; fileRef = B9B583991AA3D26200C82040 /* numbers */; };
 		B9D3EFE31A9E535E00DEB208 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9D3EFE11A9E535E00DEB208 /* Item.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -210,6 +213,8 @@
 		B953A8A71A7CA01D00C85339 /* MainMenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuScene.cpp; sourceTree = "<group>"; };
 		B953A8A81A7CA01D00C85339 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		B953A8B01A7CA2BD00C85339 /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
+		B9B583971AA3C99B00C82040 /* bomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb.png; sourceTree = "<group>"; };
+		B9B583991AA3D26200C82040 /* numbers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = numbers; sourceTree = "<group>"; };
 		B9D3EFE11A9E535E00DEB208 /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
 		B9D3EFE21A9E535E00DEB208 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -333,6 +338,8 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B9B583991AA3D26200C82040 /* numbers */,
+				B9B583971AA3C99B00C82040 /* bomb.png */,
 				B94433F51A999EC2001CC802 /* Background */,
 				B94433F31A999D78001CC802 /* Virtual Joystick */,
 				B90C4D5C1A80895800F9D88A /* BearAnimation */,
@@ -561,6 +568,7 @@
 				B94434071A999EDF001CC802 /* Menu Button.png in Resources */,
 				B94434081A999EDF001CC802 /* Pipe.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
+				B9B5839A1AA3D26200C82040 /* numbers in Resources */,
 				B94433F41A999D78001CC802 /* Virtual Joystick in Resources */,
 				B94434091A999EDF001CC802 /* Play Button Clicked.png in Resources */,
 				B944340D1A999EDF001CC802 /* SplashScene_ipad.png in Resources */,
@@ -588,6 +596,7 @@
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
+				B9B583981AA3C99B00C82040 /* bomb.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,6 +607,7 @@
 				B90C4D5E1A80895800F9D88A /* BearAnimation in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
+				B9B5839B1AA3D26200C82040 /* numbers in Resources */,
 				B953A89C1A7C9C6C00C85339 /* Point.mp3 in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
 				B953A89A1A7C9C6C00C85339 /* Hit.mp3 in Resources */,

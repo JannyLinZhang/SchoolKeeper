@@ -27,7 +27,7 @@ private:
     void RoleLogic(float dt);
     vector<Role*> roles;
     Character* character;
-    Item* item;
+    Item** items;
     int numberOfItem;
 
     cocos2d::PhysicsWorld *sceneWorld;

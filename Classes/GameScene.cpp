@@ -67,8 +67,16 @@ bool GameScene::init()
     this->schedule(schedule_selector(GameScene::RoleLogic), 1.0f);
     
     //bomb
-    item = new Item(this);
-   
+    numberOfItem = 3;
+    items = new Item*[3];
+    for (int i =0 ; i<numberOfItem; i++) {
+        items[i] = new Item(this);
+    }
+    Point pp;
+    for(int i=0; i<numberOfItem; i++){
+        pp.set(300+300*i, 300);
+        items[i]->setPosition(pp);
+    }
     
     /*
     auto testBody = PhysicsBody::createBox(item->getContentSize());
@@ -168,11 +176,12 @@ void GameScene::update(float dt){
     
    
     
-    
-    if(abs(character->getPositionX()-item->getX())<100 &&
-       ((character->getPositionY()-item->getY())-50)<20 &&
-       ((character->getPositionY()-item->getY())-50)>-20){
-        item->explode();
+    for(int i=0; i<numberOfItem; i++){
+    if(abs(character->getPositionX()-items[i]->getX())<100 &&
+       ((character->getPositionY()-items[i]->getY())-50)<20 &&
+       ((character->getPositionY()-items[i]->getY())-50)>-20){
+        items[i]->explode();
+    }
     }
     
 }

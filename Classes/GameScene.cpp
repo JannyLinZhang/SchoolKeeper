@@ -22,7 +22,6 @@ Scene* GameScene::createScene()
 
     // add layer as a child to scene
     scene->addChild(layer);
-
     // return the scene
     return scene;
 }
@@ -48,17 +47,18 @@ bool GameScene::init()
     
     //character
     character = Character::create();
-    // character->setPosition(200,200);
-    
     character->InitCharacterSprite("bear1.png");
+    character->setPosition(100, 500);
+    auto characterBody = PhysicsBody::createBox(character->getSize()/6);
+    characterBody->setDynamic( false );
+    characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
+    characterBody->setContactTestBitmask( true );
+    //character->setPhysicsBody( characterBody );
+
+    this->addChild(character);
     
-    character->setScale(0.3f);
-    character->setPosition(300, 300);
     
-    
-    this->addChild(character, 1);
-        
-    //Role
+    //Enemy
     for (int i =0 ; i<2; i++) {
         Role* role = new Role(this);
         roles.push_back(role);
@@ -68,6 +68,20 @@ bool GameScene::init()
     
     //bomb
     item = new Item(this);
+   
+    
+    /*
+    auto testBody = PhysicsBody::createBox(item->getContentSize());
+    testBody->setCollisionBitmask(OBSTACLE_COLLISION_BITMASK);
+    testBody->setContactTestBitmask(true);
+    
+    auto testSprite = Sprite::create("bomb.png");
+    testSprite->setScale(2.0);
+    testSprite->setPhysicsBody(testBody);
+    testSprite->setPosition(600, 400);
+    this->addChild(testSprite);
+    */
+
     
     
     auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT,3);
@@ -98,14 +112,13 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     PhysicsBody *b = contact.getShapeB()->getBody();
     
     if(
-       (BIRD_COLLISION_BITMASK==a->getCollisionBitmask()&&OBSTACLE_COLLISION_BITMASK==b->getCollisionBitmask())||
-       (BIRD_COLLISION_BITMASK==b->getCollisionBitmask()&&OBSTACLE_COLLISION_BITMASK==a->getCollisionBitmask())
+       (CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==b->getCollisionBitmask())||
+       (CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==a->getCollisionBitmask())
       )
     {
-        auto scene = GameOverScene::createScene();
-        Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
+       
     }
-
+ 
     return true;
 }
 
@@ -117,15 +130,16 @@ bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
 
 
 void GameScene::update(float dt){
+    
+    //control of character
     Point poi = ccpMult(joyStick->getVelocity(), 50);
-    //right
+    
     if(poi.x==0 && poi.y==0){
-        
         character->StopAnimation();
         
     }else{
         
-        printf("%f,%f/n",poi.x,poi.y);
+        //printf("%f,%f/n",poi.x,poi.y);
         float x_1=abs(poi.x);
         float y_1=abs(poi.y);
         float length=pow(x_1*x_1+y_1*y_1,0.5);
@@ -150,8 +164,16 @@ void GameScene::update(float dt){
             }
         }
         
-    }
+    }//end of control of character
     
+   
+    
+    
+    if(abs(character->getPositionX()-item->getX())<100 &&
+       ((character->getPositionY()-item->getY())-50)<20 &&
+       ((character->getPositionY()-item->getY())-50)>-20){
+        item->explode();
+    }
     
 }
 

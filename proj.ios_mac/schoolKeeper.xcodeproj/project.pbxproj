@@ -95,6 +95,9 @@
 		B9B5839D1AA3DE2900C82040 /* bear1.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B5839C1AA3DE2900C82040 /* bear1.png */; };
 		B9B5839E1AA3DE2900C82040 /* bear1.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B5839C1AA3DE2900C82040 /* bear1.png */; };
 		B9D3EFE31A9E535E00DEB208 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9D3EFE11A9E535E00DEB208 /* Item.cpp */; };
+		B9E53B821AA7DF6C004684AC /* explode in Resources */ = {isa = PBXBuildFile; fileRef = B9E53B811AA7DF6C004684AC /* explode */; };
+		B9E53B831AA7DF6C004684AC /* explode in Resources */ = {isa = PBXBuildFile; fileRef = B9E53B811AA7DF6C004684AC /* explode */; };
+		B9F980AA1AA803A000FF2CA4 /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980A91AA803A000FF2CA4 /* empty.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -220,6 +223,8 @@
 		B9B5839C1AA3DE2900C82040 /* bear1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bear1.png; sourceTree = "<group>"; };
 		B9D3EFE11A9E535E00DEB208 /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
 		B9D3EFE21A9E535E00DEB208 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		B9E53B811AA7DF6C004684AC /* explode */ = {isa = PBXFileReference; lastKnownFileType = folder; path = explode; sourceTree = "<group>"; };
+		B9F980A91AA803A000FF2CA4 /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -341,6 +346,8 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B9F980A91AA803A000FF2CA4 /* empty.png */,
+				B9E53B811AA7DF6C004684AC /* explode */,
 				B9B5839C1AA3DE2900C82040 /* bear1.png */,
 				B9B583991AA3D26200C82040 /* numbers */,
 				B9B583971AA3C99B00C82040 /* bomb.png */,
@@ -578,6 +585,7 @@
 				B944340D1A999EDF001CC802 /* SplashScene_ipad.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
+				B9F980AA1AA803A000FF2CA4 /* empty.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				B944340E1A999EDF001CC802 /* SplashScene.png in Resources */,
 				B944340A1A999EDF001CC802 /* Play Button.png in Resources */,
@@ -597,6 +605,7 @@
 				B944340C1A999EDF001CC802 /* Retry Button.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				B953A8991A7C9C6C00C85339 /* Hit.mp3 in Resources */,
+				B9E53B821AA7DF6C004684AC /* explode in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
@@ -609,6 +618,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9E53B831AA7DF6C004684AC /* explode in Resources */,
 				B9B5839E1AA3DE2900C82040 /* bear1.png in Resources */,
 				B90C4D5E1A80895800F9D88A /* BearAnimation in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,

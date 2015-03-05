@@ -2,7 +2,6 @@
 //  Role.h
 //  schoolKeeper
 //
-//  Created by ZhangLin on 2/13/15.
 //
 //
 
@@ -22,11 +21,14 @@ public:
     Item(cocos2d::Layer *layer);
     void setPosition(Point p);
     void explode();
+    float getX();
+    float getY();
     
 private:
     cocos2d::Sprite *item;
     cocos2d::Size visibleSize;
     cocos2d::Vec2 origin;
+    bool haveExplode;
 };
 
 #endif /* defined(__schoolKeeper__Item__) */

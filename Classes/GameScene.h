@@ -28,6 +28,7 @@ private:
     vector<Role*> roles;
     Character* character;
     Item* item;
+    int numberOfItem;
 
     cocos2d::PhysicsWorld *sceneWorld;
     void SetPhysicsWorld(cocos2d::PhysicsWorld *world){sceneWorld = world;}

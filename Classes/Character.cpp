@@ -8,6 +8,7 @@
 
 #include "Character.h"
 #include "Definitions.h"
+
 USING_NS_CC;
 
 Character::Character(void)
@@ -24,7 +25,8 @@ Character::~Character(){
 void Character::InitCharacterSprite(char* char_name){
     
     Char_name=char_name;
-    this->character=CCSprite::create(char_name);
+    character=CCSprite::create(char_name);
+    character->setScale(0.3f);
     this->addChild(character);
     
 }
@@ -37,11 +39,11 @@ void Character::StopAnimation(){
   
     this->removeChild(character,true);//把原来的精灵删除掉
     character=CCSprite::create(Char_name);//恢复精灵原来的贴图样子
+    character->setScale(0.3f);
     character->setFlipX(CharDirecton);
     this->addChild(character);
     
     IsRunning=false;
-
 }
 
 void Character::SetAnimation(const char *name_plist, const char *name_png, const char *name_each, const unsigned int num, bool run_directon){
@@ -70,20 +72,12 @@ void Character::SetAnimation(const char *name_plist, const char *name_png, const
         
     }
     animation->setLoops(-1);//alwasy loop
-    printf("=======");
     animation->setDelayPerUnit(0.1f);
     
     CCAnimate* act=CCAnimate::create(animation);
-     character->runAction(act);
-      printf("&&&&&&&&&&&");
+    character->runAction(act);
     act->setTag(10001);
-   // character->setPosition(ccp(200,200));
-   // character->runAction(act);
     IsRunning=true;
-    
-
-    
-    
 }
 
 
@@ -97,37 +91,23 @@ void Character::Move(cocos2d::Vec2 vec,cocos2d::Animation* animation,cocos2d::CC
      CCMoveTo* move1 = CCMoveTo::create(12,vec);
      character->runAction(RepeatForever::create(Animate::create(animation)));
  //   character->runAction(Repeat::c)
-    character->runAction(move1);
+     character->runAction(move1);
 
 }
 
 
 void Character::Move1(cocos2d::Vec2 vec){
-    
-    
-    
-    
-    
-//    move1 = CCMoveBy::create(12,vec);
-//    
-//   
-//    move1->setTag(100001);
-//    
-//    character->runAction(move1);
-//   
+ 
 }
 void Character::stop(){
-    
     character->stopAllActionsByTag(100001);
-    
-    
 }
 
 void Character::Jump(){
-    
-
   CCActionInterval*  actionUp = CCJumpBy::create(0.5, CCPointMake(0,0), 80, 1);
+  character->runAction(actionUp);
+}
 
-    character->runAction(actionUp);
-    
+Size Character::getSize(){
+    return character->getContentSize();
 }

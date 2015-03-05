@@ -10,6 +10,8 @@
 #define __schoolKeeper__Character__
 
 #include <iostream>
+#include "cocos2d.h"
+
 
 #endif /* defined(__schoolKeeper__Character__) */
 
@@ -23,6 +25,7 @@ public:
     void Move1(cocos2d::Vec2 vec);
     void Jump();
     void stop();
+    cocos2d::Size getSize();
     
     
     

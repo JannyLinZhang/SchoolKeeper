@@ -53,6 +53,7 @@
 		521A8EAA19F11F5000D177D7 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 521A8EA819F11F5000D177D7 /* fonts */; };
 		B90C4D5D1A80895800F9D88A /* BearAnimation in Resources */ = {isa = PBXBuildFile; fileRef = B90C4D5C1A80895800F9D88A /* BearAnimation */; };
 		B90C4D5E1A80895800F9D88A /* BearAnimation in Resources */ = {isa = PBXBuildFile; fileRef = B90C4D5C1A80895800F9D88A /* BearAnimation */; };
+		B924E6B31AA9873D008D38EB /* Buttons in Resources */ = {isa = PBXBuildFile; fileRef = B924E6B21AA9873D008D38EB /* Buttons */; };
 		B934FD7B1A915986004AE287 /* Role.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B934FD791A915986004AE287 /* Role.cpp */; };
 		B934FD7C1A915986004AE287 /* Role.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B934FD791A915986004AE287 /* Role.cpp */; };
 		B934FD7F1A916170004AE287 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B934FD7D1A916170004AE287 /* Character.cpp */; };
@@ -198,6 +199,7 @@
 		521A8E6319F0C34300D177D7 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		521A8EA819F11F5000D177D7 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		B90C4D5C1A80895800F9D88A /* BearAnimation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BearAnimation; sourceTree = "<group>"; };
+		B924E6B21AA9873D008D38EB /* Buttons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Buttons; sourceTree = "<group>"; };
 		B934FD791A915986004AE287 /* Role.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Role.cpp; sourceTree = "<group>"; };
 		B934FD7A1A915986004AE287 /* Role.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Role.h; sourceTree = "<group>"; };
 		B934FD7D1A916170004AE287 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B924E6B21AA9873D008D38EB /* Buttons */,
 				B9F980C01AA9224D00FF2CA4 /* character.png */,
 				B9F980B41AA9221D00FF2CA4 /* kuang.png */,
 				B9F980B51AA9221D00FF2CA4 /* touxiang.png */,
@@ -642,6 +645,7 @@
 				B953A8991A7C9C6C00C85339 /* Hit.mp3 in Resources */,
 				B9E53B821AA7DF6C004684AC /* explode in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
+				B924E6B31AA9873D008D38EB /* Buttons in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				B9F980C11AA9224D00FF2CA4 /* character.png in Resources */,

@@ -45,6 +45,25 @@ bool GameScene::init()
     this->addChild(backgroundSprite);
     joyStickInitialize();
     
+    //initialize button
+    label = LabelTTF::create("This Label is For debug", "Marker Felt", 32);
+    label->setPosition(Point(visibleSize.width / 2 + origin.x, origin.y + visibleSize.height - 80));
+    label->setHorizontalAlignment(TextHAlignment::CENTER);
+    this->addChild(label);
+    
+    // Standard method to create a button
+    
+    auto starMenuItem = MenuItemImage::create(
+                                              "Buttons/button.png",
+                                              "Buttons/button.png", CC_CALLBACK_1(GameScene::buttonCallBack, this));
+    starMenuItem->setPosition(Point(1000, 80));
+    auto starMenu = Menu::create(starMenuItem, NULL);
+    starMenu->setPosition(Point::ZERO);
+    this->addChild(starMenu, 1);
+    
+    
+    
+    
     //character
     character = Character::create();
     character->InitCharacterSprite("character.png");
@@ -141,9 +160,7 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
 }
 
 bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
-    
-    //character->Jump();
-    character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
+    character->Jump();
     return true;
 }
 
@@ -237,7 +254,7 @@ void GameScene::joyStickInitialize(){
     joystickSkin->getThumbSprite()->setOpacity(20);
     joystickSkin->getThumbSprite()->setScale(0.8f);
     joystickSkin->getBackgroundSprite()->setScale(0.8f);
-    joystickSkin->setPosition(Point(joystickRadius-100,joystickRadius-100));
+    joystickSkin->setPosition(Point(80,80));
     
     joystickSkin->setJoystick(joyStick);
     
@@ -299,6 +316,11 @@ bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
         return false;//
     
     return true;
+}
+
+void GameScene::buttonCallBack(Object* pSender)
+{
+    character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
 }
 
 

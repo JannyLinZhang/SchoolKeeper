@@ -32,6 +32,7 @@ private:
     Item** items;
     int numberOfItem;
     Role* monster;
+    LabelTTF* label; 
 
 
     cocos2d::PhysicsWorld *sceneWorld;
@@ -44,6 +45,7 @@ private:
     void joyStickInitialize();
     ProgressView *progressView;  //血条
     bool isRectCollision (CCRect rect1, CCRect rect2);
+    void buttonCallBack(Object* pSender);
 
 
     

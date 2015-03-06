@@ -8,6 +8,8 @@
 #include "Character.h"
 #include "Item.h"
 #include <vector>
+#include "ProgressView.h"
+
 using namespace std;
 
 
@@ -29,6 +31,8 @@ private:
     Character* character;
     Item** items;
     int numberOfItem;
+    Role* monster;
+
 
     cocos2d::PhysicsWorld *sceneWorld;
     void SetPhysicsWorld(cocos2d::PhysicsWorld *world){sceneWorld = world;}
@@ -38,6 +42,10 @@ private:
     void update(float dt);
     SneakyJoystick *joyStick;
     void joyStickInitialize();
+    ProgressView *progressView;  //血条
+    bool isRectCollision (CCRect rect1, CCRect rect2);
+
+
     
 
     

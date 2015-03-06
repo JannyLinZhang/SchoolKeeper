@@ -20,6 +20,7 @@ class Role : public Sprite
 {
 public:
     Role(cocos2d::Layer *layer);
+    cocos2d::Sprite* GetSprite();
     //Role();
    // static Role* create(const std::string& name, FlightLayer* layer);
     //virtual bool init(const std:: string& name, FlightLayer* layer);

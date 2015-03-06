@@ -109,6 +109,10 @@ void Role::move(){
  setPositionY(getPositionY() + speed_y);
  }
  */
+Sprite* Role::GetSprite()
+{
+    return comrole;
+}
 
 
 

@@ -47,9 +47,9 @@ bool GameScene::init()
     
     //character
     character = Character::create();
-    character->InitCharacterSprite("bear1.png");
+    character->InitCharacterSprite("character.png");
     character->setPosition(100, 500);
-    auto characterBody = PhysicsBody::createBox(character->getSize()/6);
+    auto characterBody = PhysicsBody::createBox(character->GetSprite()->getContentSize()/6);
     characterBody->setDynamic( false );
     characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
     characterBody->setContactTestBitmask( true );
@@ -63,6 +63,8 @@ bool GameScene::init()
         Role* role = new Role(this);
         roles.push_back(role);
     }
+    
+    monster=roles[0];
         
     this->schedule(schedule_selector(GameScene::RoleLogic), 1.0f);
     
@@ -109,6 +111,30 @@ bool GameScene::init()
     touchListener->setSwallowTouches(true);
     touchListener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
+    
+    
+    
+    
+    //set progress view by Bo Yang
+    
+    progressView = new ProgressView();
+    progressView->setPosition(ccp(150, 500));
+    progressView->setScale(2.2f);
+    progressView->setBackgroundTexture("xue_back.png");
+    progressView->setForegroundTexture("xue_fore.png");
+    progressView->setTotalProgress(100.0f);
+    progressView->setCurrentProgress(100.0f);
+    //下面两个是为了让血条更好好看
+    CCSprite *xuekuang=CCSprite::create("kuang.png");//添加血条的框架
+    xuekuang->setPosition(ccp(progressView->getPositionX(),progressView->getPositionY()));
+    CCSprite *touxiang=CCSprite::create("touxiang.png");//添加英雄的左上角的小头像
+    touxiang->setPosition(ccp(progressView->getPositionX()-120,progressView->getPositionY()));
+    this->addChild(touxiang,2);
+    this->addChild(xuekuang,2);
+    this->addChild(progressView, 2);
+    
+    
+    
     this->scheduleUpdate();
     return true;
 }
@@ -132,7 +158,9 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
 
 bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
     
-    character->Jump();
+    //character->Jump();
+    character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
+
     return true;
 }
 
@@ -141,13 +169,14 @@ void GameScene::update(float dt){
     
     //control of character
     Point poi = ccpMult(joyStick->getVelocity(), 50);
-    
+    //right
     if(poi.x==0 && poi.y==0){
-        character->StopAnimation();
+        
+        character->StopAnimation(10001);
         
     }else{
         
-        //printf("%f,%f/n",poi.x,poi.y);
+        printf("%f,%f/n",poi.x,poi.y);
         float x_1=abs(poi.x);
         float y_1=abs(poi.y);
         float length=pow(x_1*x_1+y_1*y_1,0.5);
@@ -155,16 +184,20 @@ void GameScene::update(float dt){
         float y=5*(1/length)*y_1;
         
         if(poi.x>=0){
-            character->SetAnimation("BearAnimation/bearAnimation.plist", "BearAnimation/bearAnimationSheet.png","bear", 8, true);
+            
+            character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, false);
+            printf("?????");
             if(poi.y>=0){
                 
                 character->setPosition(character->getPosition().x+x,character->getPosition().y+y );
+                
             }else{
                 character->setPosition(character->getPosition().x+x,character->getPosition().y-y );
+                
             }
             
         }else{
-            character->SetAnimation("BearAnimation/bearAnimation.plist", "BearAnimation/bearAnimationSheet.png","bear", 8, false);
+            character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, true);
             if(poi.y>=0){
                 character->setPosition(character->getPosition().x-x,character->getPosition().y+y );
             }else{
@@ -172,6 +205,32 @@ void GameScene::update(float dt){
             }
         }
         
+    }
+    
+    
+    if(character->IsAttack){
+        //
+        //        printf("zezezz4");
+        //        cout<<character->getContentSize().width <<"," << character->getContentSize().height<<endl;
+        //        printf("%f",character->getContentSize().width);
+        cout<< character->GetSprite()->getContentSize().width<<"," <<  character->GetSprite()->getContentSize().height<<endl;
+        cout<< monster->GetSprite()->getContentSize().width <<"," <<  monster->GetSprite()->getContentSize().height<<endl;
+    
+        cout<< character->getPositionX()<<"," <<  character->getPositionY()<<endl;
+        cout<< monster->GetSprite()->getPositionX() <<"," <<  monster->GetSprite()->getPositionY()<<endl;
+        if(abs(character->getPositionY()-monster->GetSprite()->getPositionY())<40)//
+        {
+            
+            //                    cout<< character->GetSprite()->getContentSize().width <<"," <<  character->GetSprite()->getContentSize().height<<endl;
+            
+            if (this->isRectCollision(CCRectMake(character->getPositionX(), character->getPositionY(), character->GetSprite()->getContentSize().width-150, character->GetSprite()->getContentSize().height), CCRectMake(monster->GetSprite()->getPositionX(), monster->GetSprite()->getPositionY(), monster->GetSprite()->getContentSize().width-500,monster->GetSprite()->getContentSize().height-400)))
+            {
+                
+                
+                //monster1->HurtAnimation("monster_hurt",2,monster1->MonsterDirecton);// ‹…À
+                progressView->setCurrentProgress(progressView->getCurrentProgress()-0.4); //更改血量
+            }
+        }
     }//end of control of character
     
    
@@ -213,7 +272,7 @@ void GameScene::joyStickInitialize(){
 
 void GameScene::RoleLogic(float dt){
     for(int i=0; i<2; i++){
-        roles[i]->move();
+        //roles[i]->move();
     }
     
 }
@@ -242,6 +301,32 @@ void GameScene::RoleLogic(float dt){
  bear1->setScale(0.3);
  spriteSheet->addChild(bear1);
  */
+//write by Bo Yang
+
+
+bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
+{
+    float x1 = rect1.origin.x;//æÿ–Œ1÷––ƒµ„µƒ∫·◊¯±Í
+    float y1 = rect1.origin.y;//æÿ–Œ1÷––ƒµ„µƒ◊›◊¯±Í
+    float w1 = rect1.size.width;//æÿ–Œ1µƒøÌ∂»
+    float h1 = rect1.size.height;//æÿ–Œ1µƒ∏ﬂ∂»
+    float x2 = rect2.origin.x;
+    float y2 = rect2.origin.y;
+    float w2 = rect2.size.width;
+    float h2 = rect2.size.height;
+    
+    if (x1+w1*0.5<x2-w2*0.5)
+        return false;
+    else if (x1-w1*0.5>x2+w2*0.5)
+        return false;
+    else if (y1+h1*0.5<y2-h2*0.5)
+        return false;//
+    else if (y1-h1*0.5>y2+h2*0.5)
+        return false;//
+    
+    return true;
+}
+
 
 
 

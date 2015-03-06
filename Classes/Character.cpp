@@ -8,45 +8,62 @@
 
 #include "Character.h"
 #include "Definitions.h"
-
 USING_NS_CC;
 
 Character::Character(void)
 {
     
     IsRunning=false;
-    CharDirecton=false;
+    CharDirecton=true;
     Char_name=NULL;
+    IsAttack=false;
     }
 Character::~Character(){
 
 }
 
+CCSprite* Character::GetSprite()
+{
+    return character;
+}
+
 void Character::InitCharacterSprite(char* char_name){
     
     Char_name=char_name;
-    character=CCSprite::create(char_name);
-    character->setScale(0.3f);
+    this->character=CCSprite::create(char_name);
+    
+//    
+//    auto characterBody = PhysicsBody::createBox( character->getContentSize( ) );
+//    characterBody->setDynamic( false );
+//    characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
+//    characterBody->setContactTestBitmask( true );
+//    this->character->setPhysicsBody( characterBody );
+    
     this->addChild(character);
+    
+    
+    
+    
     
 }
 
-void Character::StopAnimation(){
+void Character::StopAnimation(unsigned int num){
+    
     if(!IsRunning)
         return;
     
-    character->stopAllActionsByTag(10001);//当前精灵停止所有动画
+    character->stopAllActionsByTag(num);//当前精灵停止所有动画
   
     this->removeChild(character,true);//把原来的精灵删除掉
     character=CCSprite::create(Char_name);//恢复精灵原来的贴图样子
-    character->setScale(0.3f);
     character->setFlipX(CharDirecton);
     this->addChild(character);
     
     IsRunning=false;
+
 }
 
-void Character::SetAnimation(const char *name_plist, const char *name_png, const char *name_each, const unsigned int num, bool run_directon){
+void Character::SetRunAnimation(const char *name_plist, const char *name_png, const char *name_each, const unsigned int num, bool run_directon){
     if(run_directon!=CharDirecton){
         CharDirecton=run_directon;
         character->setFlippedX(run_directon);
@@ -61,9 +78,11 @@ void Character::SetAnimation(const char *name_plist, const char *name_png, const
         for(int i=1; i<=num; i++){
             sprintf(str, "%s%d.png",name_each,i);
             
+            printf(str);
             SpriteFrame* frame = m_frameCache->getSpriteFrameByName(str);
             
             animFrames.insert(i-1, frame);
+            
         }
     CCAnimation* animation=CCAnimation::createWithSpriteFrames(animFrames);
 
@@ -72,42 +91,104 @@ void Character::SetAnimation(const char *name_plist, const char *name_png, const
         
     }
     animation->setLoops(-1);//alwasy loop
+    printf("=======");
     animation->setDelayPerUnit(0.1f);
     
     CCAnimate* act=CCAnimate::create(animation);
-    character->runAction(act);
+     character->runAction(act);
+      printf("&&&&&&&&&&&");
     act->setTag(10001);
+   // character->setPosition(ccp(200,200));
+   // character->runAction(act);
     IsRunning=true;
-}
-
-
+    
 
     
     
-
-//
-void Character::Move(cocos2d::Vec2 vec,cocos2d::Animation* animation,cocos2d::CCSprite *character){
-
-     CCMoveTo* move1 = CCMoveTo::create(12,vec);
-     character->runAction(RepeatForever::create(Animate::create(animation)));
- //   character->runAction(Repeat::c)
-     character->runAction(move1);
-
 }
 
 
-void Character::Move1(cocos2d::Vec2 vec){
- 
+
+
+void Character::SetAnimation(const char *name_plist, const char *name_png, const char *name_each, const unsigned int num,const char *name_type){
+    
+    if(IsAttack)
+        return;
+    IsAttack=true;
+    
+    CCSpriteFrameCache *m_frameCache=CCSpriteFrameCache::sharedSpriteFrameCache();
+    m_frameCache->addSpriteFramesWithFile(name_plist,name_png);
+    Vector<SpriteFrame*> animFrames(num);
+    char str[100]={0};
+    for(int i=1; i<=num; i++){
+        sprintf(str, "%s%d.png",name_each,i);
+        
+        SpriteFrame* frame = m_frameCache->getSpriteFrameByName(str);
+        
+        animFrames.insert(i-1, frame);
+    }
+    CCAnimation* animation=CCAnimation::createWithSpriteFrames(animFrames);
+    
+    
+    
+    animation->setLoops(1);//alwasy loop
+   // animation->se
+    printf("=======");
+    animation->setDelayPerUnit(0.1f);
+    
+    
+    
+    
+    
+    CCAnimate* act=CCAnimate::create(animation);
+    
+    
+    
+    CCCallFunc* callFunc=CCCallFunc::create(this,callfunc_selector(Character::AttackEnd));
+   
+    CCActionInterval* attackact=CCSequence::create(act,callFunc,NULL);
+    
+    
+    character->runAction(attackact);
+   
+
+    
+    act->setTag(10002);
+    
+  
+    return;
+    
+    
+    
 }
-void Character::stop(){
-    character->stopAllActionsByTag(100001);
-}
+
+
+
+
+
+
+
+
 
 void Character::Jump(){
+    
+
   CCActionInterval*  actionUp = CCJumpBy::create(0.5, CCPointMake(0,0), 80, 1);
-  character->runAction(actionUp);
+
+    character->runAction(actionUp);
+    
 }
 
-Size Character::getSize(){
-    return character->getContentSize();
+
+void Character::AttackEnd(){
+    
+ 
+    
+    this->removeChild(character,true);//把原来的精灵删除掉
+    character=CCSprite::create(Char_name);//恢复精灵原来的贴图样子
+    character->setFlipX(CharDirecton);
+    this->addChild(character);
+    
+    IsAttack=false;
+    
 }

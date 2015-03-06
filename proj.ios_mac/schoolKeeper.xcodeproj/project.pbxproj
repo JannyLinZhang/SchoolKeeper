@@ -98,6 +98,20 @@
 		B9E53B821AA7DF6C004684AC /* explode in Resources */ = {isa = PBXBuildFile; fileRef = B9E53B811AA7DF6C004684AC /* explode */; };
 		B9E53B831AA7DF6C004684AC /* explode in Resources */ = {isa = PBXBuildFile; fileRef = B9E53B811AA7DF6C004684AC /* explode */; };
 		B9F980AA1AA803A000FF2CA4 /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980A91AA803A000FF2CA4 /* empty.png */; };
+		B9F980AE1AA9217E00FF2CA4 /* character in Resources */ = {isa = PBXBuildFile; fileRef = B9F980AD1AA9217E00FF2CA4 /* character */; };
+		B9F980AF1AA9217E00FF2CA4 /* character in Resources */ = {isa = PBXBuildFile; fileRef = B9F980AD1AA9217E00FF2CA4 /* character */; };
+		B9F980B21AA921AA00FF2CA4 /* ProgressView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9F980B01AA921AA00FF2CA4 /* ProgressView.cpp */; };
+		B9F980B31AA921AA00FF2CA4 /* ProgressView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9F980B01AA921AA00FF2CA4 /* ProgressView.cpp */; };
+		B9F980B81AA9221D00FF2CA4 /* kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980B41AA9221D00FF2CA4 /* kuang.png */; };
+		B9F980B91AA9221D00FF2CA4 /* kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980B41AA9221D00FF2CA4 /* kuang.png */; };
+		B9F980BA1AA9221D00FF2CA4 /* touxiang.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980B51AA9221D00FF2CA4 /* touxiang.png */; };
+		B9F980BB1AA9221D00FF2CA4 /* touxiang.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980B51AA9221D00FF2CA4 /* touxiang.png */; };
+		B9F980BC1AA9221D00FF2CA4 /* xue_back.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980B61AA9221D00FF2CA4 /* xue_back.png */; };
+		B9F980BD1AA9221D00FF2CA4 /* xue_back.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980B61AA9221D00FF2CA4 /* xue_back.png */; };
+		B9F980BE1AA9221D00FF2CA4 /* xue_fore.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980B71AA9221D00FF2CA4 /* xue_fore.png */; };
+		B9F980BF1AA9221D00FF2CA4 /* xue_fore.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980B71AA9221D00FF2CA4 /* xue_fore.png */; };
+		B9F980C11AA9224D00FF2CA4 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980C01AA9224D00FF2CA4 /* character.png */; };
+		B9F980C21AA9224D00FF2CA4 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980C01AA9224D00FF2CA4 /* character.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -225,6 +239,14 @@
 		B9D3EFE21A9E535E00DEB208 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		B9E53B811AA7DF6C004684AC /* explode */ = {isa = PBXFileReference; lastKnownFileType = folder; path = explode; sourceTree = "<group>"; };
 		B9F980A91AA803A000FF2CA4 /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
+		B9F980AD1AA9217E00FF2CA4 /* character */ = {isa = PBXFileReference; lastKnownFileType = folder; path = character; sourceTree = "<group>"; };
+		B9F980B01AA921AA00FF2CA4 /* ProgressView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProgressView.cpp; sourceTree = "<group>"; };
+		B9F980B11AA921AA00FF2CA4 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
+		B9F980B41AA9221D00FF2CA4 /* kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuang.png; sourceTree = "<group>"; };
+		B9F980B51AA9221D00FF2CA4 /* touxiang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touxiang.png; sourceTree = "<group>"; };
+		B9F980B61AA9221D00FF2CA4 /* xue_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xue_back.png; sourceTree = "<group>"; };
+		B9F980B71AA9221D00FF2CA4 /* xue_fore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xue_fore.png; sourceTree = "<group>"; };
+		B9F980C01AA9224D00FF2CA4 /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = character.png; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -346,6 +368,12 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B9F980C01AA9224D00FF2CA4 /* character.png */,
+				B9F980B41AA9221D00FF2CA4 /* kuang.png */,
+				B9F980B51AA9221D00FF2CA4 /* touxiang.png */,
+				B9F980B61AA9221D00FF2CA4 /* xue_back.png */,
+				B9F980B71AA9221D00FF2CA4 /* xue_fore.png */,
+				B9F980AD1AA9217E00FF2CA4 /* character */,
 				B9F980A91AA803A000FF2CA4 /* empty.png */,
 				B9E53B811AA7DF6C004684AC /* explode */,
 				B9B5839C1AA3DE2900C82040 /* bear1.png */,
@@ -365,6 +393,8 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B9F980B01AA921AA00FF2CA4 /* ProgressView.cpp */,
+				B9F980B11AA921AA00FF2CA4 /* ProgressView.h */,
 				B9D3EFE11A9E535E00DEB208 /* Item.cpp */,
 				B9D3EFE21A9E535E00DEB208 /* Item.h */,
 				B934FD7D1A916170004AE287 /* Character.cpp */,
@@ -570,6 +600,7 @@
 			files = (
 				B944340B1A999EDF001CC802 /* Retry Button Clicked.png in Resources */,
 				B94434041A999EDF001CC802 /* Ball.png in Resources */,
+				B9F980AE1AA9217E00FF2CA4 /* character in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
@@ -583,6 +614,7 @@
 				B94433F41A999D78001CC802 /* Virtual Joystick in Resources */,
 				B94434091A999EDF001CC802 /* Play Button Clicked.png in Resources */,
 				B944340D1A999EDF001CC802 /* SplashScene_ipad.png in Resources */,
+				B9F980BA1AA9221D00FF2CA4 /* touxiang.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				B9F980AA1AA803A000FF2CA4 /* empty.png in Resources */,
@@ -594,12 +626,15 @@
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				B9F980BE1AA9221D00FF2CA4 /* xue_fore.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				B90C4D5D1A80895800F9D88A /* BearAnimation in Resources */,
+				B9F980BC1AA9221D00FF2CA4 /* xue_back.png in Resources */,
 				B94434031A999EDF001CC802 /* Background.png in Resources */,
 				B94434061A999EDF001CC802 /* Menu Button Clicked.png in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
+				B9F980B81AA9221D00FF2CA4 /* kuang.png in Resources */,
 				B953A89D1A7C9C6C00C85339 /* Wing.mp3 in Resources */,
 				B944340F1A999EDF001CC802 /* Title.png in Resources */,
 				B944340C1A999EDF001CC802 /* Retry Button.png in Resources */,
@@ -609,6 +644,7 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
+				B9F980C11AA9224D00FF2CA4 /* character.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				B9B583981AA3C99B00C82040 /* bomb.png in Resources */,
 			);
@@ -619,13 +655,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9E53B831AA7DF6C004684AC /* explode in Resources */,
+				B9F980BB1AA9221D00FF2CA4 /* touxiang.png in Resources */,
 				B9B5839E1AA3DE2900C82040 /* bear1.png in Resources */,
+				B9F980AF1AA9217E00FF2CA4 /* character in Resources */,
 				B90C4D5E1A80895800F9D88A /* BearAnimation in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
+				B9F980BD1AA9221D00FF2CA4 /* xue_back.png in Resources */,
+				B9F980B91AA9221D00FF2CA4 /* kuang.png in Resources */,
 				B9B5839B1AA3D26200C82040 /* numbers in Resources */,
+				B9F980BF1AA9221D00FF2CA4 /* xue_fore.png in Resources */,
 				B953A89C1A7C9C6C00C85339 /* Point.mp3 in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
+				B9F980C21AA9224D00FF2CA4 /* character.png in Resources */,
 				B953A89A1A7C9C6C00C85339 /* Hit.mp3 in Resources */,
 				B953A89E1A7C9C6C00C85339 /* Wing.mp3 in Resources */,
 			);
@@ -645,6 +687,7 @@
 				B93F95471A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp in Sources */,
 				B93F95451A7F3FF700F21148 /* SneakyJoystick.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				B9F980B21AA921AA00FF2CA4 /* ProgressView.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				B934FD7B1A915986004AE287 /* Role.cpp in Sources */,
 				B953A8AB1A7CA01D00C85339 /* GameScene.cpp in Sources */,
@@ -665,6 +708,7 @@
 				B953A8A21A7C9DC800C85339 /* SplashScene.cpp in Sources */,
 				B953A8AA1A7CA01D00C85339 /* GameOverScene.cpp in Sources */,
 				B93F95461A7F3FF700F21148 /* SneakyJoystick.cpp in Sources */,
+				B9F980B31AA921AA00FF2CA4 /* ProgressView.cpp in Sources */,
 				B953A8AE1A7CA01D00C85339 /* MainMenuScene.cpp in Sources */,
 				B93F95481A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,

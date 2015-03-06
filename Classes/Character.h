@@ -10,8 +10,6 @@
 #define __schoolKeeper__Character__
 
 #include <iostream>
-#include "cocos2d.h"
-
 
 #endif /* defined(__schoolKeeper__Character__) */
 
@@ -25,7 +23,7 @@ public:
     void Move1(cocos2d::Vec2 vec);
     void Jump();
     void stop();
-    cocos2d::Size getSize();
+    void hit();
     
     
     
@@ -34,14 +32,17 @@ public:
     //根据图片名创建英雄
     void InitCharacterSprite(char *char_name);
     //设置动画,num为图片数目，run_directon为精灵脸朝向，false朝右,name_each为name_png中每一小张图片的公共名称部分
-    void SetAnimation(const char *name_plist,const char *name_png,const char *name_each,const unsigned int num,bool run_directon);
+    void SetRunAnimation(const char *name_plist,const char *name_png,const char *name_each,const unsigned int num,bool run_directon);
     //停止动画
-    void StopAnimation();
+    void StopAnimation(const unsigned int num);
     //判断是否在跑动画
     bool IsRunning;
     //英雄运动的方向
     bool CharDirecton;
-    
+    bool IsAttack;
+    void SetAnimation(const char *name_plist,const char *name_png,const char *name_each,const unsigned int num,const char *name_type);
+    void AttackEnd();
+    cocos2d::CCSprite* GetSprite();
     CREATE_FUNC(Character);
     
     

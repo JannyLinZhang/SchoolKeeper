@@ -51,8 +51,12 @@ void Item::explode(){
 
     Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
     Animate* act = Animate::create(animation);
-    item->runAction(act);
-    //item->removeFromParentAndCleanup(true);
+    //item->runAction(act);
+    CCCallFunc* callFunc=CCCallFunc::create(this,callfunc_selector(Item::explodeEnd));
+        
+    CCActionInterval* explodeact=CCSequence::create(act,callFunc,NULL);
+    item->runAction(explodeact);
+
     }
 }
 
@@ -61,6 +65,10 @@ float Item::getX(){
 }
 float Item::getY(){
     return item->getPositionY();
+}
+
+void Item::explodeEnd(){
+    //layer->removeChild(item, true);//把原来的精灵删除掉
 }
 
 

@@ -32,12 +32,12 @@ void Character::InitCharacterSprite(char* char_name){
     Char_name=char_name;
     this->character=CCSprite::create(char_name);
     
-//    
-//    auto characterBody = PhysicsBody::createBox( character->getContentSize( ) );
-//    characterBody->setDynamic( false );
-//    characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
-//    characterBody->setContactTestBitmask( true );
-//    this->character->setPhysicsBody( characterBody );
+    
+    //auto characterBody = PhysicsBody::createBox( character->getContentSize( ) );
+    //characterBody->setDynamic( false );
+    //characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
+    //characterBody->setContactTestBitmask( true );
+    //this->character->setPhysicsBody( characterBody );
     
     this->addChild(character);
 }

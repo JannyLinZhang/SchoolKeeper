@@ -17,13 +17,15 @@ Item::Item(cocos2d::Layer *layer)
 {
     item = Sprite::create("bomb.png");
     auto itemBody = PhysicsBody::createBox( item->getContentSize());
+    itemBody->setDynamic(false);
     itemBody->setCollisionBitmask( ITEM_COLLISION_BITMASK );
-    itemBody->setContactTestBitmask( true );
+    itemBody->setCategoryBitmask(2);
+    itemBody->setContactTestBitmask( 1 );
 
     item->setScale(1.5);
     item->setPosition(600, 200);
-    //item->setPhysicsBody( itemBody );
-    layer->addChild(item);
+    item->setPhysicsBody( itemBody );
+    layer->addChild(item, 50);
     haveExplode = 0;
 }
 

@@ -11,6 +11,7 @@ Scene* GameScene::createScene()
 {
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
+    //this line make physics body visible
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
     scene->getPhysicsWorld()->setGravity(Vect(0,0));
@@ -68,11 +69,12 @@ bool GameScene::init()
     character = Character::create();
     character->InitCharacterSprite("character.png");
     character->setPosition(100, 500);
-    auto characterBody = PhysicsBody::createBox(character->GetSprite()->getContentSize()/6);
-    characterBody->setDynamic( false );
+    auto characterBody = PhysicsBody::createBox(character->GetSprite()->getContentSize());
+    characterBody->setRotationEnable(false);;
     characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
-    characterBody->setContactTestBitmask( true );
-    //character->setPhysicsBody( characterBody );
+    characterBody->setCategoryBitmask(1);
+    characterBody->setContactTestBitmask( 2 );
+    character->setPhysicsBody( characterBody );
 
     this->addChild(character);
     
@@ -121,7 +123,7 @@ bool GameScene::init()
     //set progress view by Bo Yang
     
     progressView = new ProgressView();
-    progressView->setPosition(ccp(150, 500));
+    progressView->setPosition(Point(150, 620));
     progressView->setScale(2.2f);
     progressView->setBackgroundTexture("xue_back.png");
     progressView->setForegroundTexture("xue_fore.png");
@@ -145,19 +147,40 @@ bool GameScene::init()
 
 
 bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
+
     PhysicsBody *a = contact.getShapeA()->getBody();
     PhysicsBody *b = contact.getShapeB()->getBody();
+    Point aPosition = a->getPosition();
+    Point bPosition = b->getPosition();
     
-    if(
-       (CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==b->getCollisionBitmask())||
-       (CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==a->getCollisionBitmask())
-      )
+    if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==b->getCollisionBitmask())
     {
-       
+        
+        if(aPosition.y<=bPosition.y){
+            label->setString("111");
+            this->reorderChild(character, 75);
+        }else{
+            label->setString("222");
+            this->reorderChild(character, 25);
+        }
     }
- 
+    
+    if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==a->getCollisionBitmask()){
+            if(bPosition.y<=aPosition.y){
+            label->setString("111");
+                this->reorderChild(character, 75);
+            
+            }else{
+            label->setString("222");
+                this->reorderChild(character, 25);
+            }
+        
+    }
+    
     return true;
 }
+    
+
 
 bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
     character->Jump();

@@ -15,7 +15,6 @@ using namespace cocos2d;
 
 Item::Item(cocos2d::Layer *layer)
 {
-    
     item = Sprite::create("bomb.png");
     auto itemBody = PhysicsBody::createBox( item->getContentSize());
     itemBody->setCollisionBitmask( ITEM_COLLISION_BITMASK );
@@ -25,14 +24,11 @@ Item::Item(cocos2d::Layer *layer)
     item->setPosition(600, 200);
     //item->setPhysicsBody( itemBody );
     layer->addChild(item);
-    
-
-    
     haveExplode = 0;
 }
 
-void Item::setPosition(Point p){
-    item->setPosition(p);
+void Item::setPosition(double x, double y){
+    item->setPosition(x, y);
 }
 
 void Item::explode(){
@@ -51,11 +47,7 @@ void Item::explode(){
 
     Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
     Animate* act = Animate::create(animation);
-    //item->runAction(act);
-    CCCallFunc* callFunc=CCCallFunc::create(this,callfunc_selector(Item::explodeEnd));
-        
-    CCActionInterval* explodeact=CCSequence::create(act,callFunc,NULL);
-    item->runAction(explodeact);
+    item->runAction(act);
 
     }
 }
@@ -67,9 +59,6 @@ float Item::getY(){
     return item->getPositionY();
 }
 
-void Item::explodeEnd(){
-    //layer->removeChild(item, true);//把原来的精灵删除掉
-}
 
 
 

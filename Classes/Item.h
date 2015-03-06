@@ -19,17 +19,16 @@ class Item : public Sprite
 {
 public:
     Item(cocos2d::Layer *layer);
-    void setPosition(Point p);
+    void setPosition(double x, double y);
     void explode();
     float getX();
     float getY();
-    void explodeEnd();
     
 private:
     cocos2d::Sprite *item;
     cocos2d::Size visibleSize;
     cocos2d::Vec2 origin;
     bool haveExplode;
-};
+    };
 
 #endif /* defined(__schoolKeeper__Item__) */

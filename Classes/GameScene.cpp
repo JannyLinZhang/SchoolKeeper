@@ -59,11 +59,10 @@ bool GameScene::init()
     
     
     //Enemy
-    for (int i =0 ; i<2; i++) {
+    for (int i=0 ; i<1; i++) {
         Role* role = new Role(this);
         roles.push_back(role);
     }
-    
     monster=roles[0];
         
     this->schedule(schedule_selector(GameScene::RoleLogic), 1.0f);
@@ -76,23 +75,8 @@ bool GameScene::init()
     }
     Point pp;
     for(int i=0; i<numberOfItem; i++){
-        pp.set(300+300*i, 300);
-        items[i]->setPosition(pp);
+        items[i]->setPosition(300+300*i, 300);
     }
-    
-    /*
-    auto testBody = PhysicsBody::createBox(item->getContentSize());
-    testBody->setCollisionBitmask(OBSTACLE_COLLISION_BITMASK);
-    testBody->setContactTestBitmask(true);
-    
-    auto testSprite = Sprite::create("bomb.png");
-    testSprite->setScale(2.0);
-    testSprite->setPhysicsBody(testBody);
-    testSprite->setPosition(600, 400);
-    this->addChild(testSprite);
-    */
-
-    
     
     auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT,3);
     edgeBody->setCollisionBitmask(OBSTACLE_COLLISION_BITMASK);
@@ -160,7 +144,6 @@ bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
     
     //character->Jump();
     character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
-
     return true;
 }
 
@@ -175,8 +158,6 @@ void GameScene::update(float dt){
         character->StopAnimation(10001);
         
     }else{
-        
-        printf("%f,%f/n",poi.x,poi.y);
         float x_1=abs(poi.x);
         float y_1=abs(poi.y);
         float length=pow(x_1*x_1+y_1*y_1,0.5);
@@ -186,7 +167,7 @@ void GameScene::update(float dt){
         if(poi.x>=0){
             
             character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, false);
-            printf("?????");
+
             if(poi.y>=0){
                 
                 character->setPosition(character->getPosition().x+x,character->getPosition().y+y );
@@ -209,32 +190,26 @@ void GameScene::update(float dt){
     
     
     if(character->IsAttack){
-        //
-        //        printf("zezezz4");
-        //        cout<<character->getContentSize().width <<"," << character->getContentSize().height<<endl;
-        //        printf("%f",character->getContentSize().width);
+        /*
         cout<< character->GetSprite()->getContentSize().width<<"," <<  character->GetSprite()->getContentSize().height<<endl;
         cout<< monster->GetSprite()->getContentSize().width <<"," <<  monster->GetSprite()->getContentSize().height<<endl;
     
         cout<< character->getPositionX()<<"," <<  character->getPositionY()<<endl;
         cout<< monster->GetSprite()->getPositionX() <<"," <<  monster->GetSprite()->getPositionY()<<endl;
-        if(abs(character->getPositionY()-monster->GetSprite()->getPositionY())<40)//
+         */
+        if(abs(character->getPositionY()-monster->GetSprite()->getPositionY())<40)
         {
-            
-            //                    cout<< character->GetSprite()->getContentSize().width <<"," <<  character->GetSprite()->getContentSize().height<<endl;
             
             if (this->isRectCollision(CCRectMake(character->getPositionX(), character->getPositionY(), character->GetSprite()->getContentSize().width-150, character->GetSprite()->getContentSize().height), CCRectMake(monster->GetSprite()->getPositionX(), monster->GetSprite()->getPositionY(), monster->GetSprite()->getContentSize().width-500,monster->GetSprite()->getContentSize().height-400)))
             {
                 
-                
-                //monster1->HurtAnimation("monster_hurt",2,monster1->MonsterDirecton);// ‹…À
                 progressView->setCurrentProgress(progressView->getCurrentProgress()-0.4); //更改血量
             }
         }
     }//end of control of character
     
    
-    
+    //for explode
     for(int i=0; i<numberOfItem; i++){
     if(abs(character->getPositionX()-items[i]->getX())<100 &&
        ((character->getPositionY()-items[i]->getY())-50)<20 &&
@@ -301,15 +276,14 @@ void GameScene::RoleLogic(float dt){
  bear1->setScale(0.3);
  spriteSheet->addChild(bear1);
  */
-//write by Bo Yang
 
 
 bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
 {
-    float x1 = rect1.origin.x;//æÿ–Œ1÷––ƒµ„µƒ∫·◊¯±Í
-    float y1 = rect1.origin.y;//æÿ–Œ1÷––ƒµ„µƒ◊›◊¯±Í
-    float w1 = rect1.size.width;//æÿ–Œ1µƒøÌ∂»
-    float h1 = rect1.size.height;//æÿ–Œ1µƒ∏ﬂ∂»
+    float x1 = rect1.origin.x;
+    float y1 = rect1.origin.y;
+    float w1 = rect1.size.width;
+    float h1 = rect1.size.height;
     float x2 = rect2.origin.x;
     float y2 = rect2.origin.y;
     float w2 = rect2.size.width;

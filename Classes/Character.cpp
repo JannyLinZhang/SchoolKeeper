@@ -40,11 +40,6 @@ void Character::InitCharacterSprite(char* char_name){
 //    this->character->setPhysicsBody( characterBody );
     
     this->addChild(character);
-    
-    
-    
-    
-    
 }
 
 void Character::StopAnimation(unsigned int num){
@@ -77,12 +72,8 @@ void Character::SetRunAnimation(const char *name_plist, const char *name_png, co
         char str[100]={0};
         for(int i=1; i<=num; i++){
             sprintf(str, "%s%d.png",name_each,i);
-            
-            printf(str);
             SpriteFrame* frame = m_frameCache->getSpriteFrameByName(str);
-            
             animFrames.insert(i-1, frame);
-            
         }
     CCAnimation* animation=CCAnimation::createWithSpriteFrames(animFrames);
 
@@ -91,20 +82,11 @@ void Character::SetRunAnimation(const char *name_plist, const char *name_png, co
         
     }
     animation->setLoops(-1);//alwasy loop
-    printf("=======");
     animation->setDelayPerUnit(0.1f);
-    
     CCAnimate* act=CCAnimate::create(animation);
      character->runAction(act);
-      printf("&&&&&&&&&&&");
-    act->setTag(10001);
-   // character->setPosition(ccp(200,200));
-   // character->runAction(act);
-    IsRunning=true;
-    
-
-    
-    
+     act->setTag(10001);
+     IsRunning=true;
 }
 
 
@@ -122,9 +104,7 @@ void Character::SetAnimation(const char *name_plist, const char *name_png, const
     char str[100]={0};
     for(int i=1; i<=num; i++){
         sprintf(str, "%s%d.png",name_each,i);
-        
         SpriteFrame* frame = m_frameCache->getSpriteFrameByName(str);
-        
         animFrames.insert(i-1, frame);
     }
     CCAnimation* animation=CCAnimation::createWithSpriteFrames(animFrames);
@@ -133,62 +113,29 @@ void Character::SetAnimation(const char *name_plist, const char *name_png, const
     
     animation->setLoops(1);//alwasy loop
    // animation->se
-    printf("=======");
     animation->setDelayPerUnit(0.1f);
     
-    
-    
-    
-    
     CCAnimate* act=CCAnimate::create(animation);
-    
-    
-    
     CCCallFunc* callFunc=CCCallFunc::create(this,callfunc_selector(Character::AttackEnd));
-   
     CCActionInterval* attackact=CCSequence::create(act,callFunc,NULL);
     
-    
     character->runAction(attackact);
-   
-
-    
     act->setTag(10002);
-    
-  
     return;
-    
-    
-    
 }
-
-
-
-
-
-
 
 
 
 void Character::Jump(){
-    
-
-  CCActionInterval*  actionUp = CCJumpBy::create(0.5, CCPointMake(0,0), 80, 1);
-
+    CCActionInterval*  actionUp = CCJumpBy::create(0.5, CCPointMake(0,0), 80, 1);
     character->runAction(actionUp);
-    
 }
 
 
 void Character::AttackEnd(){
-    
- 
-    
     this->removeChild(character,true);//把原来的精灵删除掉
     character=CCSprite::create(Char_name);//恢复精灵原来的贴图样子
     character->setFlipX(CharDirecton);
     this->addChild(character);
-    
     IsAttack=false;
-    
 }

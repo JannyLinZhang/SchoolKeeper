@@ -33,7 +33,6 @@ void Monster::InitMonsterSprite(char* name){
     //monstersp->setFlippedX(MonsterDirection);
     monstersp->setScale(1.0);
     this->addChild(monstersp);
-    
 }
 
 
@@ -217,7 +216,6 @@ void Monster::DeadAnimation(const char *name_each,const unsigned int num,bool di
 }
 
 void Monster::BlinkEnd(){
-    cout<<"111"<<endl;
     this->removeAllChildren();
     
 }
@@ -230,7 +228,7 @@ void Monster::GetInjured(){
 void Monster::updateMonster(float delta){
     if(dead) return;
     if(!isrunning)
-       MonsterSeeRun();
+    MonsterSeeRun();
 }
 
 void Monster::gamelogic(){

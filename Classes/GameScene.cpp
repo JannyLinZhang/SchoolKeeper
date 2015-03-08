@@ -47,16 +47,16 @@ bool GameScene::init()
     joyStickInitialize();
     
     //initialize button
-    label = LabelTTF::create("This Label is For debug", "Marker Felt", 32);
-    label->setPosition(Point(visibleSize.width / 2 + origin.x, origin.y + visibleSize.height - 80));
+    label = LabelTTF::create("Number of bomb is 0", "Marker Felt", 32);
+    label->setPosition(Point(visibleSize.width / 2 + origin.x, origin.y + visibleSize.height - 20));
     label->setHorizontalAlignment(TextHAlignment::CENTER);
     this->addChild(label);
     
     // Standard method to create a button
     
     auto button1 = MenuItemImage::create(
-                                              "Buttons/button.png",
-                                              "Buttons/button.png", CC_CALLBACK_1(GameScene::button1CallBack, this));
+                                        "Buttons/button.png",
+                                        "Buttons/button.png", CC_CALLBACK_1(GameScene::button1CallBack, this));
     button1->setPosition(Point(1000, 80));
     auto button_1 = Menu::create(button1, NULL);
     button_1->setPosition(Point::ZERO);
@@ -72,7 +72,16 @@ bool GameScene::init()
     this->addChild(button_2, 1);
     
     
+    auto button3 = MenuItemImage::create(
+                                         "Buttons/button.png",
+                                         "Buttons/button.png", CC_CALLBACK_1(GameScene::button3CallBack, this));
+    button3->setPosition(Point(600, 80));
+    auto button_3 = Menu::create(button3, NULL);
+    button_3->setPosition(Point::ZERO);
+    this->addChild(button_3, 1);
     
+    
+    face = true;
     
     //character
     character = Character::create();
@@ -165,23 +174,39 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     {
         
         if(aPosition.y<=bPosition.y){
-            label->setString("111");
             this->reorderChild(character, 75);
         }else{
-            label->setString("222");
             this->reorderChild(character, 25);
         }
     }
     
     if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==a->getCollisionBitmask()){
             if(bPosition.y<=aPosition.y){
-            label->setString("111");
                 this->reorderChild(character, 75);
             
             }else{
-            label->setString("222");
                 this->reorderChild(character, 25);
             }
+        
+    }
+    
+    if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&&MONSTER_COLLISION_BITMASK==b->getCollisionBitmask())
+    {
+        
+        if(aPosition.y<=bPosition.y){
+            this->reorderChild(character, 75);
+        }else{
+            this->reorderChild(character, 25);
+        }
+    }
+    
+    if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&MONSTER_COLLISION_BITMASK==a->getCollisionBitmask()){
+        if(bPosition.y<=aPosition.y){
+            this->reorderChild(character, 75);
+            
+        }else{
+            this->reorderChild(character, 25);
+        }
         
     }
     
@@ -200,7 +225,16 @@ void GameScene::update(float dt){
     
     //control of character
     Point poi = ccpMult(joyStick->getVelocity(), 50);
-    //right
+    if(poi.x >0){
+        face =true;
+    }
+    
+    if(poi.x <0){
+        face =false;
+    }
+    
+    
+    
     if(poi.x==0 && poi.y==0){
         
         character->StopAnimation(10001);
@@ -239,12 +273,7 @@ void GameScene::update(float dt){
     
     if(character->IsAttack){
         
-            character->IsAttack=false;
-//        cout<< character->GetSprite()->getContentSize().width<<"," <<  character->GetSprite()->getContentSize().height<<endl;
-//        cout<< monster->GetSprite()->getContentSize().width <<"," <<  monster->GetSprite()->getContentSize().height<<endl;
-//        cout<< character->getPositionX()<<"," <<  character->getPositionY()<<endl;
-//        cout<< monster->GetSprite()->getPositionX() <<"," <<  monster->GetSprite()->getPositionY()<<endl;
-        
+        character->IsAttack=false;
         
         for(int i=0; i<5; i++){
             if(monsters[i]->dead==true)
@@ -268,10 +297,10 @@ void GameScene::update(float dt){
     //for explode
     for(int i=0; i<numberOfItem; i++){
     if(abs(character->getPositionX()-items[i]->getX())<100 &&
-       ((character->getPositionY()-items[i]->getY())-50)<20 &&
-       ((character->getPositionY()-items[i]->getY())-50)>-20){
+       ((character->getPositionY()-items[i]->getY())-80)<20 &&
+       ((character->getPositionY()-items[i]->getY())-80)>-20){
+        if(items[i]->isPicked()==false)
         canPickUp[i]=1;
-        //cout<<"you can pick up"<<i<<endl;
     }else{
         canPickUp[i]=0;
     }
@@ -335,7 +364,9 @@ void GameScene::button1CallBack(Object* pSender)
     character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
     for(int i=0; i<numberOfItem; i++){
         if (canPickUp[i]==1) {
+            canPickUp[i]=0;
             items[i]->explode();
+            items[i]->havePickedUp=true;
         }
     }
 }
@@ -344,15 +375,40 @@ void GameScene::button1CallBack(Object* pSender)
 void GameScene::button2CallBack(Object* pSender)
 {
    
-    label->setString("button2");
     for(int i=0; i<numberOfItem; i++){
         if (canPickUp[i]==1) {
+            canPickUp[i]=0;
             items[i]->Visible(false);
+            items[i]->havePickedUp=true;
+            
+            
             character->increaseBomb();
+            int temp = character->getNumOfBomb();
+            string temps = std::to_string(temp);
+            temps = "number of Bomb "+temps;
+            label->setString(temps);
         }
     }
+}
 
-
+void GameScene::button3CallBack(Object* pSender)
+{
+    if(character->getNumOfBomb()>0){
+        for(int i=0; i<numberOfItem; i++){
+            if(items[i]->havePickedUp==true){
+                items[i]->havePickedUp=false;
+                items[i]->throwBomb(character->getPosition(), face);
+                
+                character->decreaseBomb();
+                int temp = character->getNumOfBomb();
+                string temps = std::to_string(temp);
+                temps = "number of Bomb "+temps;
+                label->setString(temps);
+                return;
+            }
+        }
+    }
+    
 }
 
 
@@ -393,7 +449,15 @@ void GameScene::InitialMonsters(){
     
     
     for(int i=0;i<5;i++){
-        this->addChild(monsters[i]);
+        auto monsterBody = PhysicsBody::createBox(monsters[i]->GetSprite()->getContentSize());
+        monsterBody->setRotationEnable(false);
+        monsterBody->setDynamic(false);
+        monsterBody->setCollisionBitmask( MONSTER_COLLISION_BITMASK );
+        monsterBody->setCategoryBitmask(2);
+        monsterBody->setContactTestBitmask(1);
+        monsters[i]->setPhysicsBody(monsterBody);
+        
+        this->addChild(monsters[i], 50);
         monsters[i]->gamelogic();
     }
     

@@ -26,6 +26,7 @@ public:
     void hit();
     void increaseBomb();
     void decreaseBomb();
+    int getNumOfBomb();
     
     
     

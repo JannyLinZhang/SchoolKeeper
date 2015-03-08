@@ -25,7 +25,9 @@ public:
     float getY();
     void Visible(bool b);
     void explodeEnd();
-
+    bool isPicked();
+    bool havePickedUp;
+    void throwBomb(Point Start, bool flip);
     
 private:
     cocos2d::Sprite *item;

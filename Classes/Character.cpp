@@ -140,3 +140,7 @@ void Character::increaseBomb(){
 void Character::decreaseBomb(){
     numberOfBomb--;
 }
+
+int Character::getNumOfBomb(){
+    return numberOfBomb;
+}

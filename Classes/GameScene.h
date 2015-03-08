@@ -32,6 +32,7 @@ private:
     int numberOfItem;
     int* canPickUp;
     LabelTTF* label;
+    bool face;
     
     Monster *monster;
     vector<Monster*> monsters;
@@ -50,6 +51,8 @@ private:
     bool isRectCollision (CCRect rect1, CCRect rect2);
     void button1CallBack(Object* pSender);
     void button2CallBack(Object* pSender);
+    void button3CallBack(Object* pSender);
+
 
 
 

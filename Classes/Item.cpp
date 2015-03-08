@@ -27,6 +27,7 @@ Item::Item(cocos2d::Layer *layer)
     item->setPhysicsBody( itemBody );
     layer->addChild(item, 50);
     haveExplode = 0;
+    havePickedUp = 0;
 }
 
 void Item::setPosition(double x, double y){
@@ -70,6 +71,28 @@ void Item::Visible(bool b){
 void Item::explodeEnd(){
     item->setVisible(false);
     //item->removeFromParent();
+}
+
+bool Item::isPicked(){
+    if(havePickedUp==0){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+void Item::throwBomb(Point Start, bool flip){
+    item->setPosition(Start);
+    item->setVisible(true);
+    MoveTo *moveto;
+    Point End;
+    if(flip == true){
+        End = Start+Point(200,-45);
+    }else{
+        End = Start+Point(-200,-45);
+    }
+    moveto = MoveTo::create(0.3, End);
+    item->runAction(moveto);
 }
 
 

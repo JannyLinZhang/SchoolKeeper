@@ -49,7 +49,10 @@ void Item::explode(){
 
     Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
     Animate* act = Animate::create(animation);
-    item->runAction(act);
+        
+    CCCallFunc* callFunc=CCCallFunc::create(this,callfunc_selector(Item::explodeEnd));
+    CCActionInterval* endAct=CCSequence::create(act,callFunc,NULL);
+    item->runAction(endAct);
 
     }
 }
@@ -59,6 +62,14 @@ float Item::getX(){
 }
 float Item::getY(){
     return item->getPositionY();
+}
+void Item::Visible(bool b){
+    item->setVisible(b);
+}
+
+void Item::explodeEnd(){
+    item->setVisible(false);
+    //item->removeFromParent();
 }
 
 

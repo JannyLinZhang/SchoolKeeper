@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "SneakyJoystick.h"
 #include "SneakyJoystickSkinnedBase.h"
-#include "Role.h"
+#include "monster.h"
 #include "Character.h"
 #include "Item.h"
 #include <vector>
@@ -21,18 +21,21 @@ public:
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
-    
+    void InitialMonsters();
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
     
 private:
     void RoleLogic(float dt);
-    vector<Role*> roles;
     Character* character;
     Item** items;
     int numberOfItem;
-    Role* monster;
-    LabelTTF* label; 
+    int* canPickUp;
+    LabelTTF* label;
+    
+    Monster *monster;
+    vector<Monster*> monsters;
+    Monster *testMonster;
 
 
     cocos2d::PhysicsWorld *sceneWorld;
@@ -45,7 +48,9 @@ private:
     void joyStickInitialize();
     ProgressView *progressView;  //血条
     bool isRectCollision (CCRect rect1, CCRect rect2);
-    void buttonCallBack(Object* pSender);
+    void button1CallBack(Object* pSender);
+    void button2CallBack(Object* pSender);
+
 
 
     

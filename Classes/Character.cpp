@@ -31,14 +31,7 @@ void Character::InitCharacterSprite(char* char_name){
     
     Char_name=char_name;
     this->character=CCSprite::create(char_name);
-    
-    
-    //auto characterBody = PhysicsBody::createBox( character->getContentSize( ) );
-    //characterBody->setDynamic( false );
-    //characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
-    //characterBody->setContactTestBitmask( true );
-    //this->character->setPhysicsBody( characterBody );
-    
+    numberOfBomb=0;
     this->addChild(character);
 }
 
@@ -138,4 +131,12 @@ void Character::AttackEnd(){
     character->setFlipX(CharDirecton);
     this->addChild(character);
     IsAttack=false;
+}
+
+void Character::increaseBomb(){
+    numberOfBomb++;
+    
+}
+void Character::decreaseBomb(){
+    numberOfBomb--;
 }

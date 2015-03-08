@@ -41,7 +41,7 @@ bool GameScene::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
     //background
-    auto backgroundSprite = Sprite::create("Background.png");
+    auto backgroundSprite = Sprite::create("bbg_fall_grassland.jpg");
     backgroundSprite->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
     this->addChild(backgroundSprite);
     joyStickInitialize();
@@ -54,13 +54,22 @@ bool GameScene::init()
     
     // Standard method to create a button
     
-    auto starMenuItem = MenuItemImage::create(
+    auto button1 = MenuItemImage::create(
                                               "Buttons/button.png",
-                                              "Buttons/button.png", CC_CALLBACK_1(GameScene::buttonCallBack, this));
-    starMenuItem->setPosition(Point(1000, 80));
-    auto starMenu = Menu::create(starMenuItem, NULL);
-    starMenu->setPosition(Point::ZERO);
-    this->addChild(starMenu, 1);
+                                              "Buttons/button.png", CC_CALLBACK_1(GameScene::button1CallBack, this));
+    button1->setPosition(Point(1000, 80));
+    auto button_1 = Menu::create(button1, NULL);
+    button_1->setPosition(Point::ZERO);
+    this->addChild(button_1, 1);
+    
+    
+    auto button2 = MenuItemImage::create(
+                                         "Buttons/button.png",
+                                         "Buttons/button.png", CC_CALLBACK_1(GameScene::button2CallBack, this));
+    button2->setPosition(Point(800, 80));
+    auto button_2 = Menu::create(button2, NULL);
+    button_2->setPosition(Point::ZERO);
+    this->addChild(button_2, 1);
     
     
     
@@ -75,28 +84,27 @@ bool GameScene::init()
     characterBody->setCategoryBitmask(1);
     characterBody->setContactTestBitmask( 2 );
     character->setPhysicsBody( characterBody );
-
     this->addChild(character);
     
     
-    //Enemy
-    for (int i=0 ; i<1; i++) {
-        Role* role = new Role(this);
-        roles.push_back(role);
-    }
-    monster=roles[0];
-        
-    this->schedule(schedule_selector(GameScene::RoleLogic), 1.0f);
+    //Monster
+    InitialMonsters();
+    
+    
+    
     
     //bomb
     numberOfItem = 3;
-    items = new Item*[3];
+    items = new Item*[numberOfItem];
     for (int i =0 ; i<numberOfItem; i++) {
         items[i] = new Item(this);
     }
-    Point pp;
     for(int i=0; i<numberOfItem; i++){
-        items[i]->setPosition(300+300*i, 300);
+        items[i]->setPosition(300+300*i, 150+150*i);
+    }
+    canPickUp = new int[numberOfItem];
+    for(int i=0; i<numberOfItem; i++){
+        canPickUp[i] = 0;
     }
     
     auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT,3);
@@ -230,22 +238,30 @@ void GameScene::update(float dt){
     
     
     if(character->IsAttack){
-        /*
-        cout<< character->GetSprite()->getContentSize().width<<"," <<  character->GetSprite()->getContentSize().height<<endl;
-        cout<< monster->GetSprite()->getContentSize().width <<"," <<  monster->GetSprite()->getContentSize().height<<endl;
-    
-        cout<< character->getPositionX()<<"," <<  character->getPositionY()<<endl;
-        cout<< monster->GetSprite()->getPositionX() <<"," <<  monster->GetSprite()->getPositionY()<<endl;
-         */
-        if(abs(character->getPositionY()-monster->GetSprite()->getPositionY())<40)
+        
+            character->IsAttack=false;
+//        cout<< character->GetSprite()->getContentSize().width<<"," <<  character->GetSprite()->getContentSize().height<<endl;
+//        cout<< monster->GetSprite()->getContentSize().width <<"," <<  monster->GetSprite()->getContentSize().height<<endl;
+//        cout<< character->getPositionX()<<"," <<  character->getPositionY()<<endl;
+//        cout<< monster->GetSprite()->getPositionX() <<"," <<  monster->GetSprite()->getPositionY()<<endl;
+        
+        
+        for(int i=0; i<5; i++){
+            if(monsters[i]->dead==true)
+            continue;
+            
+        testMonster=monsters[i];
+        if(abs(character->getPositionY()-testMonster->getPositionY())<40)
         {
             
-            if (this->isRectCollision(CCRectMake(character->getPositionX(), character->getPositionY(), character->GetSprite()->getContentSize().width-150, character->GetSprite()->getContentSize().height), CCRectMake(monster->GetSprite()->getPositionX(), monster->GetSprite()->getPositionY(), monster->GetSprite()->getContentSize().width-500,monster->GetSprite()->getContentSize().height-400)))
+            if (this->isRectCollision(CCRectMake(character->getPositionX(), character->getPositionY(), character->GetSprite()->getContentSize().width-150, character->GetSprite()->getContentSize().height), CCRectMake(testMonster->getPositionX(), testMonster->getPositionY(), testMonster->GetSprite()->getContentSize().width,testMonster->GetSprite()->getContentSize().height)))
             {
-                
-                progressView->setCurrentProgress(progressView->getCurrentProgress()-0.4); //更改血量
+                //progressView->setCurrentProgress(progressView->getCurrentProgress()-0.4); //更改血量//
+                testMonster->InjuredAnimation("MonsterAnimation/monster_fall", 2, true);
             }
         }
+        }//end of for loop
+        
     }//end of control of character
     
    
@@ -254,7 +270,10 @@ void GameScene::update(float dt){
     if(abs(character->getPositionX()-items[i]->getX())<100 &&
        ((character->getPositionY()-items[i]->getY())-50)<20 &&
        ((character->getPositionY()-items[i]->getY())-50)>-20){
-        items[i]->explode();
+        canPickUp[i]=1;
+        //cout<<"you can pick up"<<i<<endl;
+    }else{
+        canPickUp[i]=0;
     }
     }
     
@@ -285,37 +304,7 @@ void GameScene::joyStickInitialize(){
 }
 
 
-void GameScene::RoleLogic(float dt){
-    for(int i=0; i<2; i++){
-        //roles[i]->move();
-    }
-    
-}
 
-
-
-
-
-/*
- //code for animation Bear
- SpriteBatchNode* spriteSheet = SpriteBatchNode::create("BearAnimation/bearAnimationSheet.png");
- SpriteFrameCache* cache = SpriteFrameCache::getInstance();
- cache->addSpriteFramesWithFile("BearAnimation/bearAnimation.plist");
- this->addChild(spriteSheet);
- Vector<SpriteFrame*> animFrames(8);
- char str[100]={0};
- for(int i=1; i<=8; i++){
- sprintf(str, "bear%d.png",i);
- SpriteFrame* frame = cache->getSpriteFrameByName(str);
- animFrames.insert(i-1, frame);
- }
- Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
- Sprite* bear1 = Sprite::createWithSpriteFrameName("bear1.png");
- bear1->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
- bear1->runAction(RepeatForever::create(Animate::create(animation)));
- bear1->setScale(0.3);
- spriteSheet->addChild(bear1);
- */
 
 
 bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
@@ -341,12 +330,74 @@ bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
     return true;
 }
 
-void GameScene::buttonCallBack(Object* pSender)
+void GameScene::button1CallBack(Object* pSender)
 {
     character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
+    for(int i=0; i<numberOfItem; i++){
+        if (canPickUp[i]==1) {
+            items[i]->explode();
+        }
+    }
 }
 
 
+void GameScene::button2CallBack(Object* pSender)
+{
+   
+    label->setString("button2");
+    for(int i=0; i<numberOfItem; i++){
+        if (canPickUp[i]==1) {
+            items[i]->Visible(false);
+            character->increaseBomb();
+        }
+    }
+
+
+}
+
+
+void GameScene::InitialMonsters(){
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    
+    monster = Monster::create();
+    monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
+    monster->setPosition(Point(visibleSize.width-150,visibleSize.height/2));
+    //this->addChild(monster);
+    monsters.push_back(monster);
+    
+    
+    monster = Monster::create();
+    monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
+    monster->setPosition(Point(visibleSize.width-100,visibleSize.height/4));
+    //this->addChild(monster);
+    monsters.push_back(monster);
+    
+    monster = Monster::create();
+    monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
+    monster->setPosition(Point(visibleSize.width-30,visibleSize.height/5));
+    //this->addChild(monster);
+    monsters.push_back(monster);
+    
+    monster = Monster::create();
+    monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
+    monster->setPosition(Point(visibleSize.width-120,visibleSize.height/2));
+    //this->addChild(monster);
+    monsters.push_back(monster);
+    
+    monster = Monster::create();
+    monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
+    monster->setPosition(Point(visibleSize.width-120,visibleSize.height/2));
+    //this->addChild(monster);
+    monsters.push_back(monster);
+
+    
+    
+    for(int i=0;i<5;i++){
+        this->addChild(monsters[i]);
+        monsters[i]->gamelogic();
+    }
+    
+}
 
 
 

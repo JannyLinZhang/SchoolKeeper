@@ -24,6 +24,8 @@ public:
     void Jump();
     void stop();
     void hit();
+    void increaseBomb();
+    void decreaseBomb();
     
     
     
@@ -50,5 +52,6 @@ private:
     
     cocos2d::CCSprite* character;//精灵
     char *Char_name;//用来保存初始状态的精灵图片名称
+    int numberOfBomb;
 
 };

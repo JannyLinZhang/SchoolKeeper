@@ -23,6 +23,9 @@ public:
     void explode();
     float getX();
     float getY();
+    void Visible(bool b);
+    void explodeEnd();
+
     
 private:
     cocos2d::Sprite *item;

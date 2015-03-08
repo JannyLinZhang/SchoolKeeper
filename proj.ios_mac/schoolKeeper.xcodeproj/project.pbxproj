@@ -54,8 +54,6 @@
 		B90C4D5D1A80895800F9D88A /* BearAnimation in Resources */ = {isa = PBXBuildFile; fileRef = B90C4D5C1A80895800F9D88A /* BearAnimation */; };
 		B90C4D5E1A80895800F9D88A /* BearAnimation in Resources */ = {isa = PBXBuildFile; fileRef = B90C4D5C1A80895800F9D88A /* BearAnimation */; };
 		B924E6B31AA9873D008D38EB /* Buttons in Resources */ = {isa = PBXBuildFile; fileRef = B924E6B21AA9873D008D38EB /* Buttons */; };
-		B934FD7B1A915986004AE287 /* Role.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B934FD791A915986004AE287 /* Role.cpp */; };
-		B934FD7C1A915986004AE287 /* Role.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B934FD791A915986004AE287 /* Role.cpp */; };
 		B934FD7F1A916170004AE287 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B934FD7D1A916170004AE287 /* Character.cpp */; };
 		B934FD801A916170004AE287 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B934FD7D1A916170004AE287 /* Character.cpp */; };
 		B93F95451A7F3FF700F21148 /* SneakyJoystick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B93F95411A7F3FF700F21148 /* SneakyJoystick.cpp */; };
@@ -76,6 +74,12 @@
 		B944340D1A999EDF001CC802 /* SplashScene_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B94434001A999EDF001CC802 /* SplashScene_ipad.png */; };
 		B944340E1A999EDF001CC802 /* SplashScene.png in Resources */ = {isa = PBXBuildFile; fileRef = B94434011A999EDF001CC802 /* SplashScene.png */; };
 		B944340F1A999EDF001CC802 /* Title.png in Resources */ = {isa = PBXBuildFile; fileRef = B94434021A999EDF001CC802 /* Title.png */; };
+		B94A28701AAB916700E67907 /* monster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B94A286E1AAB916700E67907 /* monster.cpp */; };
+		B94A28711AAB916700E67907 /* monster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B94A286E1AAB916700E67907 /* monster.cpp */; };
+		B94A28731AAB91B600E67907 /* MonsterAnimation in Resources */ = {isa = PBXBuildFile; fileRef = B94A28721AAB91B600E67907 /* MonsterAnimation */; };
+		B94A28741AAB91B600E67907 /* MonsterAnimation in Resources */ = {isa = PBXBuildFile; fileRef = B94A28721AAB91B600E67907 /* MonsterAnimation */; };
+		B94A28791AAB9B4600E67907 /* bbg_fall_grassland.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B94A28781AAB9B4600E67907 /* bbg_fall_grassland.jpg */; };
+		B94A287A1AAB9B4600E67907 /* bbg_fall_grassland.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B94A28781AAB9B4600E67907 /* bbg_fall_grassland.jpg */; };
 		B953A8991A7C9C6C00C85339 /* Hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B953A8501A7C9C6C00C85339 /* Hit.mp3 */; };
 		B953A89A1A7C9C6C00C85339 /* Hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B953A8501A7C9C6C00C85339 /* Hit.mp3 */; };
 		B953A89B1A7C9C6C00C85339 /* Point.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B953A8511A7C9C6C00C85339 /* Point.mp3 */; };
@@ -200,8 +204,6 @@
 		521A8EA819F11F5000D177D7 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		B90C4D5C1A80895800F9D88A /* BearAnimation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BearAnimation; sourceTree = "<group>"; };
 		B924E6B21AA9873D008D38EB /* Buttons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Buttons; sourceTree = "<group>"; };
-		B934FD791A915986004AE287 /* Role.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Role.cpp; sourceTree = "<group>"; };
-		B934FD7A1A915986004AE287 /* Role.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Role.h; sourceTree = "<group>"; };
 		B934FD7D1A916170004AE287 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
 		B934FD7E1A916170004AE287 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		B93F95411A7F3FF700F21148 /* SneakyJoystick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SneakyJoystick.cpp; path = Joystick/SneakyJoystick.cpp; sourceTree = "<group>"; };
@@ -222,6 +224,10 @@
 		B94434001A999EDF001CC802 /* SplashScene_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SplashScene_ipad.png; path = Background/SplashScene_ipad.png; sourceTree = "<group>"; };
 		B94434011A999EDF001CC802 /* SplashScene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SplashScene.png; path = Background/SplashScene.png; sourceTree = "<group>"; };
 		B94434021A999EDF001CC802 /* Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Title.png; path = Background/Title.png; sourceTree = "<group>"; };
+		B94A286E1AAB916700E67907 /* monster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = monster.cpp; sourceTree = "<group>"; };
+		B94A286F1AAB916700E67907 /* monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = monster.h; sourceTree = "<group>"; };
+		B94A28721AAB91B600E67907 /* MonsterAnimation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MonsterAnimation; sourceTree = "<group>"; };
+		B94A28781AAB9B4600E67907 /* bbg_fall_grassland.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bbg_fall_grassland.jpg; sourceTree = "<group>"; };
 		B953A8501A7C9C6C00C85339 /* Hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Hit.mp3; sourceTree = "<group>"; };
 		B953A8511A7C9C6C00C85339 /* Point.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Point.mp3; sourceTree = "<group>"; };
 		B953A8521A7C9C6C00C85339 /* Wing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Wing.mp3; sourceTree = "<group>"; };
@@ -370,6 +376,8 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B94A28781AAB9B4600E67907 /* bbg_fall_grassland.jpg */,
+				B94A28721AAB91B600E67907 /* MonsterAnimation */,
 				B924E6B21AA9873D008D38EB /* Buttons */,
 				B9F980C01AA9224D00FF2CA4 /* character.png */,
 				B9F980B41AA9221D00FF2CA4 /* kuang.png */,
@@ -396,14 +404,14 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B94A286E1AAB916700E67907 /* monster.cpp */,
+				B94A286F1AAB916700E67907 /* monster.h */,
 				B9F980B01AA921AA00FF2CA4 /* ProgressView.cpp */,
 				B9F980B11AA921AA00FF2CA4 /* ProgressView.h */,
 				B9D3EFE11A9E535E00DEB208 /* Item.cpp */,
 				B9D3EFE21A9E535E00DEB208 /* Item.h */,
 				B934FD7D1A916170004AE287 /* Character.cpp */,
 				B934FD7E1A916170004AE287 /* Character.h */,
-				B934FD791A915986004AE287 /* Role.cpp */,
-				B934FD7A1A915986004AE287 /* Role.h */,
 				B93F95411A7F3FF700F21148 /* SneakyJoystick.cpp */,
 				B93F95421A7F3FF700F21148 /* SneakyJoystick.h */,
 				B93F95431A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp */,
@@ -607,6 +615,7 @@
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				B94A28791AAB9B4600E67907 /* bbg_fall_grassland.jpg in Resources */,
 				B953A89B1A7C9C6C00C85339 /* Point.mp3 in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
@@ -617,6 +626,7 @@
 				B94433F41A999D78001CC802 /* Virtual Joystick in Resources */,
 				B94434091A999EDF001CC802 /* Play Button Clicked.png in Resources */,
 				B944340D1A999EDF001CC802 /* SplashScene_ipad.png in Resources */,
+				B94A28731AAB91B600E67907 /* MonsterAnimation in Resources */,
 				B9F980BA1AA9221D00FF2CA4 /* touxiang.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
@@ -672,8 +682,10 @@
 				B953A89C1A7C9C6C00C85339 /* Point.mp3 in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
 				B9F980C21AA9224D00FF2CA4 /* character.png in Resources */,
+				B94A287A1AAB9B4600E67907 /* bbg_fall_grassland.jpg in Resources */,
 				B953A89A1A7C9C6C00C85339 /* Hit.mp3 in Resources */,
 				B953A89E1A7C9C6C00C85339 /* Wing.mp3 in Resources */,
+				B94A28741AAB91B600E67907 /* MonsterAnimation in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,8 +704,8 @@
 				B93F95451A7F3FF700F21148 /* SneakyJoystick.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				B9F980B21AA921AA00FF2CA4 /* ProgressView.cpp in Sources */,
+				B94A28701AAB916700E67907 /* monster.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
-				B934FD7B1A915986004AE287 /* Role.cpp in Sources */,
 				B953A8AB1A7CA01D00C85339 /* GameScene.cpp in Sources */,
 				B953A8A91A7CA01D00C85339 /* GameOverScene.cpp in Sources */,
 				B9D3EFE31A9E535E00DEB208 /* Item.cpp in Sources */,
@@ -705,12 +717,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B934FD7C1A915986004AE287 /* Role.cpp in Sources */,
 				B953A8AC1A7CA01D00C85339 /* GameScene.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				B934FD801A916170004AE287 /* Character.cpp in Sources */,
 				B953A8A21A7C9DC800C85339 /* SplashScene.cpp in Sources */,
 				B953A8AA1A7CA01D00C85339 /* GameOverScene.cpp in Sources */,
+				B94A28711AAB916700E67907 /* monster.cpp in Sources */,
 				B93F95461A7F3FF700F21148 /* SneakyJoystick.cpp in Sources */,
 				B9F980B31AA921AA00FF2CA4 /* ProgressView.cpp in Sources */,
 				B953A8AE1A7CA01D00C85339 /* MainMenuScene.cpp in Sources */,

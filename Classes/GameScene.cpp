@@ -109,7 +109,7 @@ bool GameScene::init()
         items[i] = new Item(this);
     }
     for(int i=0; i<numberOfItem; i++){
-        items[i]->setPosition(300+300*i, 150+150*i);
+        items[i]->setPosition(100+200*i, 100+100*i);
     }
     canPickUp = new int[numberOfItem];
     for(int i=0; i<numberOfItem; i++){
@@ -296,14 +296,12 @@ void GameScene::update(float dt){
    
     //for explode
     for(int i=0; i<numberOfItem; i++){
-    if(abs(character->getPositionX()-items[i]->getX())<100 &&
+        if(abs(character->getPositionX()-items[i]->getX())<100 &&
        ((character->getPositionY()-items[i]->getY())-80)<20 &&
        ((character->getPositionY()-items[i]->getY())-80)>-20){
-        if(items[i]->isPicked()==false)
-        canPickUp[i]=1;
-    }else{
-        canPickUp[i]=0;
-    }
+            if(items[i]->havePickedUp == false)
+            canPickUp[i]=1;
+        }
     }
     
 }
@@ -381,7 +379,6 @@ void GameScene::button2CallBack(Object* pSender)
             items[i]->Visible(false);
             items[i]->havePickedUp=true;
             
-            
             character->increaseBomb();
             int temp = character->getNumOfBomb();
             string temps = std::to_string(temp);
@@ -396,9 +393,8 @@ void GameScene::button3CallBack(Object* pSender)
     if(character->getNumOfBomb()>0){
         for(int i=0; i<numberOfItem; i++){
             if(items[i]->havePickedUp==true){
-                items[i]->havePickedUp=false;
                 items[i]->throwBomb(character->getPosition(), face);
-                
+
                 character->decreaseBomb();
                 int temp = character->getNumOfBomb();
                 string temps = std::to_string(temp);

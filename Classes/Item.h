@@ -9,6 +9,7 @@
 #define __schoolKeeper__Item__
 
 #include <stdio.h>
+#include <iostream>
 
 #include "cocos2d.h"
 
@@ -21,11 +22,11 @@ public:
     Item(cocos2d::Layer *layer);
     void setPosition(double x, double y);
     void explode();
+
     float getX();
     float getY();
     void Visible(bool b);
     void explodeEnd();
-    bool isPicked();
     bool havePickedUp;
     void throwBomb(Point Start, bool flip);
     

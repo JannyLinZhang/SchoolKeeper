@@ -50,13 +50,17 @@ void Item::explode(){
 
     Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
     Animate* act = Animate::create(animation);
+    std::cout<<"111111";
+
         
-    CCCallFunc* callFunc=CCCallFunc::create(this,callfunc_selector(Item::explodeEnd));
-    CCActionInterval* endAct=CCSequence::create(act,callFunc,NULL);
+    //CallFunc* callFunc1=CallFunc::create(this,callfunc_selector(Item::explodeEnd));
+    Sequence* endAct=Sequence::create(act,CallFunc::create( std::bind(&Item::explodeEnd,this) ),NULL);
     item->runAction(endAct);
 
     }
 }
+
+
 
 float Item::getX(){
     return item->getPositionX();
@@ -69,16 +73,8 @@ void Item::Visible(bool b){
 }
 
 void Item::explodeEnd(){
+    std::cout<<"222222"<<std::endl;
     item->setVisible(false);
-    //item->removeFromParent();
-}
-
-bool Item::isPicked(){
-    if(havePickedUp==0){
-        return false;
-    }else{
-        return true;
-    }
 }
 
 void Item::throwBomb(Point Start, bool flip){
@@ -91,8 +87,13 @@ void Item::throwBomb(Point Start, bool flip){
     }else{
         End = Start+Point(-200,-45);
     }
-    moveto = MoveTo::create(0.3, End);
-    item->runAction(moveto);
+    moveto = MoveTo::create(0.2, End);
+    
+    std::cout<<"000000";
+    //CallFunc* callFunc0=CallFunc::create(this,callfunc_selector(Item::explode));
+    Sequence* throwAct=Sequence::create(moveto, CallFunc::create( std::bind(&Item::explode,this) ), NULL);
+    item->runAction(throwAct);
+
 }
 
 

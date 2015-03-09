@@ -29,12 +29,13 @@ public:
     void explodeEnd();
     bool havePickedUp;
     void throwBomb(Point Start, bool flip);
+    bool haveExplode;
+
     
 private:
     cocos2d::Sprite *item;
     cocos2d::Size visibleSize;
     cocos2d::Vec2 origin;
-    bool haveExplode;
     };
 
 #endif /* defined(__schoolKeeper__Item__) */

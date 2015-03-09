@@ -296,11 +296,13 @@ void GameScene::update(float dt){
    
     //for explode
     for(int i=0; i<numberOfItem; i++){
-        if(abs(character->getPositionX()-items[i]->getX())<100 &&
-       ((character->getPositionY()-items[i]->getY())-80)<20 &&
-       ((character->getPositionY()-items[i]->getY())-80)>-20){
-            if(items[i]->havePickedUp == false)
-            canPickUp[i]=1;
+        if(     abs(character->getPositionX()-items[i]->getX())<100  &&
+                ((character->getPositionY()-items[i]->getY())-80)<20 &&
+                ((character->getPositionY()-items[i]->getY())-80)>-20){
+            if(items[i]->havePickedUp == 0)
+                canPickUp[i]=1;
+        }else{
+                canPickUp[i]=0;
         }
     }
     
@@ -350,9 +352,9 @@ bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
     else if (x1-w1*0.5>x2+w2*0.5)
         return false;
     else if (y1+h1*0.5<y2-h2*0.5)
-        return false;//
+        return false;
     else if (y1-h1*0.5>y2+h2*0.5)
-        return false;//
+        return false;
     
     return true;
 }
@@ -364,7 +366,7 @@ void GameScene::button1CallBack(Object* pSender)
         if (canPickUp[i]==1) {
             canPickUp[i]=0;
             items[i]->explode();
-            items[i]->havePickedUp=true;
+            items[i]->havePickedUp=1;
         }
     }
 }
@@ -377,7 +379,7 @@ void GameScene::button2CallBack(Object* pSender)
         if (canPickUp[i]==1) {
             canPickUp[i]=0;
             items[i]->Visible(false);
-            items[i]->havePickedUp=true;
+            items[i]->havePickedUp=1;
             
             character->increaseBomb();
             int temp = character->getNumOfBomb();
@@ -392,7 +394,7 @@ void GameScene::button3CallBack(Object* pSender)
 {
     if(character->getNumOfBomb()>0){
         for(int i=0; i<numberOfItem; i++){
-            if(items[i]->havePickedUp==true){
+            if(items[i]->havePickedUp==1 && items[i]->haveExplode==0){
                 items[i]->throwBomb(character->getPosition(), face);
 
                 character->decreaseBomb();

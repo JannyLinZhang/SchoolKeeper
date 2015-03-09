@@ -7,6 +7,7 @@
 //
 #include <iostream>
 #include "monster.h"
+#include "Definitions.h"
 USING_NS_CC;
 using namespace std;
 
@@ -19,6 +20,8 @@ Monster::Monster(void)
     MonsterDirection = true;  //right
     Monster_blood = NULL;
     speed = 100;
+    isAdded = false;
+
 }
 
 Monster::~Monster(void){}
@@ -32,6 +35,17 @@ void Monster::InitMonsterSprite(char* name){
     this->monstersp = Sprite::create(name);
     //monstersp->setFlippedX(MonsterDirection);
     monstersp->setScale(1.0);
+    
+    //initialize it's fireball
+    fireball = Sprite::create("fireball.png");
+    fireball->setVisible(false);
+    fireball->setScale(0.2);
+    auto fireBody = PhysicsBody::createBox( fireball->getContentSize()/5);
+    fireBody->setDynamic(false);
+    fireBody->setCollisionBitmask( FIREBALL_COLLISION_BITMASK );
+    fireBody->setCategoryBitmask(2);
+    fireBody->setContactTestBitmask( 1 );
+    fireball->setPhysicsBody(fireBody);
     this->addChild(monstersp);
 }
 
@@ -77,11 +91,17 @@ void Monster::StopAnimation(){
     monstersp->stopAllActions();
     this->removeChild(monstersp, true);
     monstersp = Sprite::create(Monster_name);
+    /*
     if(MonsterDirection == false){
         MonsterDirection = true;
     }
     else{
         MonsterDirection = false;
+    }*/
+    if(MonsterDirection == true){
+        
+        monstersp->setFlippedX(true);
+        
     }
     monstersp->setScale(1.0);
     this->addChild(monstersp);
@@ -233,6 +253,21 @@ void Monster::updateMonster(float delta){
 
 void Monster::gamelogic(){
     if(dead) return;
-    this->schedule(schedule_selector(Monster::updateMonster), 3.0f);
+    this->schedule(schedule_selector(Monster::updateMonster), 0.2f);
+}
+
+void Monster::shoot(Point toPoint, cocos2d::Layer* layer){
+    fireball->setPosition(this->getPosition());
+    fireball->setVisible(true);
+    Point direction = toPoint-this->getPosition();
+    direction.normalize();
+    Point destination = this->getPosition()+1200*direction;
+    MoveTo *moveto = MoveTo::create(6, destination);
+    Sequence* shoot=Sequence::create(moveto, CallFunc::create( std::bind(&Monster::shootEnd,this) ), NULL);
+    fireball->runAction(shoot);    
+}
+
+void Monster::shootEnd(){
+    fireball->setVisible(false);
 }
 

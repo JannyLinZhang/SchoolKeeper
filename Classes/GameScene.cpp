@@ -88,7 +88,7 @@ bool GameScene::init()
     character->InitCharacterSprite("character.png");
     character->setPosition(100, 500);
     auto characterBody = PhysicsBody::createBox(character->GetSprite()->getContentSize());
-    characterBody->setRotationEnable(false);;
+    characterBody->setRotationEnable(false);
     characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
     characterBody->setCategoryBitmask(1);
     characterBody->setContactTestBitmask( 2 );
@@ -97,7 +97,7 @@ bool GameScene::init()
     
     
     //Monster
-    numbeOfMonster = 10;
+    numbeOfMonster = 5;
     InitialMonsters(numbeOfMonster);
     
     
@@ -212,6 +212,23 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
         
     }
     
+    if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&&FIREBALL_COLLISION_BITMASK==b->getCollisionBitmask())
+    {
+        progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
+
+        
+    }
+    
+    if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&FIREBALL_COLLISION_BITMASK==a->getCollisionBitmask())
+    {
+       
+        progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
+
+    }
+
+    
+    
+    
     return true;
 }
     
@@ -324,6 +341,7 @@ void GameScene::update(float dt){
         }
     }
     
+    
 }
 
 void GameScene::joyStickInitialize(){
@@ -392,6 +410,8 @@ void GameScene::button1CallBack(Object* pSender)
         
     }else{
         character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
+        progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
+        
     }
 }
 
@@ -493,7 +513,6 @@ void GameScene::InitialMonsters(int num){
     for(int i=0; i<num; i++){
         monster = Monster::create();
         monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
-       
         int minY = monster->monstersp->getContentSize().height / 2;
         int maxY = (visibleSize.height - monster->monstersp->getContentSize().height / 2)-170;
         int rangeY = maxY-minY;
@@ -510,9 +529,22 @@ void GameScene::InitialMonsters(int num){
         monsterBody->setCategoryBitmask(2);
         monsterBody->setContactTestBitmask(1);
         monsters[i]->setPhysicsBody(monsterBody);
-        
         this->addChild(monsters[i], 50);
         monsters[i]->gamelogic();
+        this->addChild(monsters[i]->fireball);
+        //monsters[i]->shoot(character->getPosition(), this);
+        //monsters[i]->shoot(character->getPosition(), this);
+    }
+    
+    schedule(schedule_selector(GameScene::shootFireBall), 7.0f, 1.0f, 1.0f);
+    
+    
+}
+
+void GameScene::shootFireBall(float delta){
+    
+    for(int i=0; i<numbeOfMonster; i++){
+        monsters[i]->shoot(character->getPosition(), this);
     }
     
 }

@@ -46,6 +46,8 @@ public:
     //void update(float delta);
     void updateMonster(float delta);
     void gamelogic();
+    void shoot(Point toPoint, cocos2d::Layer *layer);
+    void shootEnd();
     CREATE_FUNC(Monster);
     
     
@@ -56,6 +58,8 @@ public:
     bool dead;
     bool MonsterDirection;
     Sprite* monstersp;
+    Sprite* fireball;
+    bool isAdded=false;
 
     
    

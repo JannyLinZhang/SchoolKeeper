@@ -53,11 +53,8 @@ private:
     void button1CallBack(Object* pSender);
     void button2CallBack(Object* pSender);
     void button3CallBack(Object* pSender);
-
-
-
-
     
+    void shootFireBall(float delta);
 
     
 };

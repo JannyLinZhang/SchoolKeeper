@@ -93,7 +93,6 @@ void Item::throwBomb(Point Start, bool flip){
     moveto = MoveTo::create(0.2, End);
     
     std::cout<<"000000";
-    //CallFunc* callFunc0=CallFunc::create(this,callfunc_selector(Item::explode));
     Sequence* throwAct=Sequence::create(moveto, CallFunc::create( std::bind(&Item::explode,this) ), NULL);
     item->runAction(throwAct);
 

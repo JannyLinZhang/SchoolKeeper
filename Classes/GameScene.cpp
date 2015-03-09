@@ -56,28 +56,31 @@ bool GameScene::init()
     
     auto button1 = MenuItemImage::create(
                                         "Buttons/button.png",
-                                        "Buttons/button.png", CC_CALLBACK_1(GameScene::button1CallBack, this));
+                                        "empty.png", CC_CALLBACK_1(GameScene::button1CallBack, this));
     button1->setPosition(Point(1000, 80));
     auto button_1 = Menu::create(button1, NULL);
     button_1->setPosition(Point::ZERO);
+    button_1->setOpacity(150);
     this->addChild(button_1, 1);
     
     
     auto button2 = MenuItemImage::create(
                                          "Buttons/button.png",
-                                         "Buttons/button.png", CC_CALLBACK_1(GameScene::button2CallBack, this));
+                                         "empty.png", CC_CALLBACK_1(GameScene::button2CallBack, this));
     button2->setPosition(Point(800, 80));
     auto button_2 = Menu::create(button2, NULL);
     button_2->setPosition(Point::ZERO);
+    button_2->setOpacity(150);
     this->addChild(button_2, 1);
     
     
     auto button3 = MenuItemImage::create(
                                          "Buttons/button.png",
-                                         "Buttons/button.png", CC_CALLBACK_1(GameScene::button3CallBack, this));
+                                         "empty.png", CC_CALLBACK_1(GameScene::button3CallBack, this));
     button3->setPosition(Point(600, 80));
     auto button_3 = Menu::create(button3, NULL);
     button_3->setPosition(Point::ZERO);
+    button_3->setOpacity(150);
     this->addChild(button_3, 1);
     
     

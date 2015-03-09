@@ -181,12 +181,23 @@ void Monster::InjuredAnimation(const char* name_each, const unsigned int num,boo
     injured=true;
 }
 
-/*Injured animation end*/
+/*Injured animation end
 void Monster::InjuredEnd(){
     injured=false;
     Monster_blood->setCurrentProgress(Monster_blood->getCurrentProgress()-250);
     if(Monster_blood->getCurrentProgress()<=0){
         DeadAnimation("MonsterAnimation/monster_fall", 2, MonsterDirection);
+    }
+}
+*/
+void Monster::InjuredEnd(){
+    injured=false;
+    Monster_blood->setCurrentProgress(Monster_blood->getCurrentProgress()-250);
+    if(Monster_blood->getCurrentProgress()<=0){
+        DeadAnimation("MonsterAnimation/monster_fall", 2, MonsterDirection);
+    }
+    else{
+        this->stopAllActions();
     }
 }
 

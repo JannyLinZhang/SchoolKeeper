@@ -87,8 +87,9 @@ bool GameScene::init()
     character = Character::create();
     character->InitCharacterSprite("character.png");
     character->setPosition(100, 500);
-    auto characterBody = PhysicsBody::createBox(character->GetSprite()->getContentSize());
+    auto characterBody = PhysicsBody::createBox(character->GetSprite()->getContentSize()/1.2);
     characterBody->setRotationEnable(false);
+    //characterBody->setDynamic(false);//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
     characterBody->setCategoryBitmask(1);
     characterBody->setContactTestBitmask( 2 );
@@ -215,15 +216,15 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&&FIREBALL_COLLISION_BITMASK==b->getCollisionBitmask())
     {
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
-
-        
+        b->setEnable(false);
+        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
     }
     
     if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&FIREBALL_COLLISION_BITMASK==a->getCollisionBitmask())
     {
-       
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
-
+        a->setEnable(false);
+        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
     }
 
     
@@ -241,6 +242,16 @@ bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
 
 
 void GameScene::update(float dt){
+    
+    if(character->getPosition().y<10)
+        character->setPositionY(10);
+    if(character->getPosition().y>500)
+        character->setPositionY(500);
+    if(character->getPosition().x<5)
+        character->setPositionX(5);
+    if(character->getPosition().x>1130)
+        character->setPositionX(1130);
+    
     
     //control of character
     Point poi = ccpMult(joyStick->getVelocity(), 50);
@@ -304,7 +315,6 @@ void GameScene::update(float dt){
             
             if (this->isRectCollision(CCRectMake(character->getPositionX(), character->getPositionY(), character->GetSprite()->getContentSize().width-150, character->GetSprite()->getContentSize().height), CCRectMake(testMonster->getPositionX(), testMonster->getPositionY(), testMonster->GetSprite()->getContentSize().width,testMonster->GetSprite()->getContentSize().height)))
             {
-                //progressView->setCurrentProgress(progressView->getCurrentProgress()-0.4); //更改血量//
                 testMonster->InjuredAnimation("MonsterAnimation/monster_fall", 2, true);
             }
         }
@@ -536,15 +546,22 @@ void GameScene::InitialMonsters(int num){
         //monsters[i]->shoot(character->getPosition(), this);
     }
     
-    schedule(schedule_selector(GameScene::shootFireBall), 7.0f, 1.0f, 1.0f);
+    schedule(schedule_selector(GameScene::shootFireBall), 7.0f, 100, 1.0f);
     
     
 }
 
 void GameScene::shootFireBall(float delta){
-    
+    int j=0;
     for(int i=0; i<numbeOfMonster; i++){
+        monsters[i]->fireball->getPhysicsBody()->setEnable(true);
+        if(CCRANDOM_0_1()>0.9&& monsters[i]->dead == false){
         monsters[i]->shoot(character->getPosition(), this);
+            j++;
+        }
+        if(j==2){
+            return;
+        }
     }
     
 }

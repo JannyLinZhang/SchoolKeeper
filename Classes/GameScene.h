@@ -21,7 +21,7 @@ public:
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
-    void InitialMonsters();
+    void InitialMonsters(int num);
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
     
@@ -33,6 +33,7 @@ private:
     int* canPickUp;
     LabelTTF* label;
     bool face;
+    int numbeOfMonster;
     
     Monster *monster;
     vector<Monster*> monsters;

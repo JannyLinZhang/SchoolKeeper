@@ -55,14 +55,14 @@ public:
     bool injured;
     bool dead;
     bool MonsterDirection;
+    Sprite* monstersp;
+
     
    
 private:    
     char *Monster_name;
     int speed;
     ProgressView* Monster_blood;
-    Sprite* monstersp;
-
 };
 
 

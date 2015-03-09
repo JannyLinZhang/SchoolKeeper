@@ -97,7 +97,8 @@ bool GameScene::init()
     
     
     //Monster
-    InitialMonsters();
+    numbeOfMonster = 10;
+    InitialMonsters(numbeOfMonster);
     
     
     
@@ -211,18 +212,6 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
         
     }
     
-    
-    /*
-    //explode damage to character and monster
-    if(MONSTER_COLLISION_BITMASK==a->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==b->getCollisionBitmask())
-    {
-    }
-    
-    if(MONSTER_COLLISION_BITMASK==b->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==a->getCollisionBitmask())
-    {
-    }
-     */
-    
     return true;
 }
     
@@ -321,12 +310,14 @@ void GameScene::update(float dt){
     
     for(int i=0; i<numberOfItem; i++){
         if(items[i]->explodeIndicator == 1){
+            items[i]->explodeIndicator = 0;
             Point bombPosition = Point(items[i]->getX(), items[i]->getY());
-            for(int j=0; j<5; j++){///////////////////////////////////////////////////////////////////////////////////////number of monsters
+            for(int j=0; j<numbeOfMonster; j++){////////////////////////////////////////////////////////////////////////////////////////////////////////////////number of monsters
                 if(monsters[j]->dead==true)
                     continue;
-                Point monsterPosition = monsters[j]->GetSprite()->getPosition();
-                if((bombPosition-monsterPosition).length()<1000){
+                Point monsterPosition = monsters[j]->getPosition();
+                double length =(bombPosition-monsterPosition).length();
+                if(length<150){
                     monsters[j]->InjuredAnimation("MonsterAnimation/monster_fall", 2, true);
                 }
             }
@@ -388,13 +379,19 @@ bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
 
 void GameScene::button1CallBack(Object* pSender)
 {
-    character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
     for(int i=0; i<numberOfItem; i++){
         if (canPickUp[i]==1) {
             canPickUp[i]=0;
             items[i]->explode();
             items[i]->havePickedUp=1;
+            character->Isbomb=true;
         }
+    }
+    if(character->Isbomb==false){
+        character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
+        
+    }else{
+        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
     }
 }
 
@@ -436,7 +433,7 @@ void GameScene::button3CallBack(Object* pSender)
     
 }
 
-
+/*
 void GameScene::InitialMonsters(){
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
@@ -488,6 +485,37 @@ void GameScene::InitialMonsters(){
     
 }
 
+
+*/
+void GameScene::InitialMonsters(int num){
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    
+    for(int i=0; i<num; i++){
+        monster = Monster::create();
+        monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
+       
+        int minY = monster->monstersp->getContentSize().height / 2;
+        int maxY = (visibleSize.height - monster->monstersp->getContentSize().height / 2)-170;
+        int rangeY = maxY-minY;
+        monster->setPosition(Point(visibleSize.width*CCRANDOM_0_1(),rangeY/(i+1)));
+        monsters.push_back(monster);
+        
+    }
+    
+    for(int i=0;i<num;i++){
+        auto monsterBody = PhysicsBody::createBox(monsters[i]->GetSprite()->getContentSize());
+        monsterBody->setRotationEnable(false);
+        monsterBody->setDynamic(false);
+        monsterBody->setCollisionBitmask( MONSTER_COLLISION_BITMASK );
+        monsterBody->setCategoryBitmask(2);
+        monsterBody->setContactTestBitmask(1);
+        monsters[i]->setPhysicsBody(monsterBody);
+        
+        this->addChild(monsters[i], 50);
+        monsters[i]->gamelogic();
+    }
+    
+}
 
 
 

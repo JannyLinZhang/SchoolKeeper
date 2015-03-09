@@ -94,7 +94,7 @@ void Monster:: MonsterSeeRun(){
 /*next position*/
     Size visibleSize = Director::getInstance()->getVisibleSize();
     int minY = monstersp->getContentSize().height / 2;
-    int maxY = visibleSize.height - monstersp->getContentSize().height / 2;
+    int maxY = (visibleSize.height - monstersp->getContentSize().height / 2)-170;
     int minX = monstersp->getContentSize().width /2;
     int maxX = visibleSize.width - monstersp->getContentSize().width / 2;
     

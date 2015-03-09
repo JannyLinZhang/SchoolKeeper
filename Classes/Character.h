@@ -27,6 +27,9 @@ public:
     void increaseBomb();
     void decreaseBomb();
     int getNumOfBomb();
+    void BombEnd();
+    void SetBombAnimation(const char *name_plist,const char *name_png,const char *name_each,const unsigned int num,const char *name_type);
+    bool Isbomb;
     
     
     

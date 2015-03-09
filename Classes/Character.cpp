@@ -28,7 +28,7 @@ CCSprite* Character::GetSprite()
 }
 
 void Character::InitCharacterSprite(char* char_name){
-    
+    Isbomb=false;
     Char_name=char_name;
     this->character=CCSprite::create(char_name);
     numberOfBomb=0;
@@ -143,4 +143,43 @@ void Character::decreaseBomb(){
 
 int Character::getNumOfBomb(){
     return numberOfBomb;
+}
+
+
+
+void Character::SetBombAnimation(const char *name_plist, const char *name_png, const char *name_each, const unsigned int num,const char *name_type){
+    
+    CCSpriteFrameCache *m_frameCache=CCSpriteFrameCache::sharedSpriteFrameCache();
+    m_frameCache->addSpriteFramesWithFile(name_plist,name_png);
+    Vector<SpriteFrame*> animFrames(num);
+    char str[100]={0};
+    for(int i=1; i<=num; i++){
+        sprintf(str, "%s%d.png",name_each,i);
+        SpriteFrame* frame = m_frameCache->getSpriteFrameByName(str);
+        animFrames.insert(i-1, frame);
+    }
+    CCAnimation* animation=CCAnimation::createWithSpriteFrames(animFrames);
+    
+    
+    
+    animation->setLoops(1);//alwasy loop
+    // animation->se
+    animation->setDelayPerUnit(0.1f);
+    
+    CCAnimate* act=CCAnimate::create(animation);
+    CCCallFunc* callFunc=CCCallFunc::create(this,callfunc_selector(Character::BombEnd));
+    CCActionInterval* attackact=CCSequence::create(act,callFunc,NULL);
+    
+    character->runAction(attackact);
+    act->setTag(10003);
+    return;
+}
+
+
+void Character::BombEnd(){
+    this->removeChild(character,true);//把原来的精灵删除掉
+    character=CCSprite::create(Char_name);//恢复精灵原来的贴图样子
+    character->setFlipX(CharDirecton);
+    this->addChild(character);
+    Isbomb=false;
 }

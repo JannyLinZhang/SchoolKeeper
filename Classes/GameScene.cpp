@@ -169,6 +169,7 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     PhysicsBody *b = contact.getShapeB()->getBody();
     Point aPosition = a->getPosition();
     Point bPosition = b->getPosition();
+    //double distance = (aPosition-bPosition).length();
     
     if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==b->getCollisionBitmask())
     {
@@ -209,6 +210,18 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
         }
         
     }
+    
+    
+    /*
+    //explode damage to character and monster
+    if(MONSTER_COLLISION_BITMASK==a->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==b->getCollisionBitmask())
+    {
+    }
+    
+    if(MONSTER_COLLISION_BITMASK==b->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==a->getCollisionBitmask())
+    {
+    }
+     */
     
     return true;
 }
@@ -303,6 +316,20 @@ void GameScene::update(float dt){
                 canPickUp[i]=1;
         }else{
                 canPickUp[i]=0;
+        }
+    }
+    
+    for(int i=0; i<numberOfItem; i++){
+        if(items[i]->explodeIndicator == 1){
+            Point bombPosition = Point(items[i]->getX(), items[i]->getY());
+            for(int j=0; j<5; j++){///////////////////////////////////////////////////////////////////////////////////////number of monsters
+                if(monsters[j]->dead==true)
+                    continue;
+                Point monsterPosition = monsters[j]->GetSprite()->getPosition();
+                if((bombPosition-monsterPosition).length()<1000){
+                    monsters[j]->InjuredAnimation("MonsterAnimation/monster_fall", 2, true);
+                }
+            }
         }
     }
     

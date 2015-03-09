@@ -30,6 +30,7 @@ public:
     bool havePickedUp;
     void throwBomb(Point Start, bool flip);
     bool haveExplode;
+    bool explodeIndicator;
 
     
 private:

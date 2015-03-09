@@ -28,6 +28,7 @@ Item::Item(cocos2d::Layer *layer)
     layer->addChild(item, 50);
     haveExplode = 0;
     havePickedUp = 0;
+    explodeIndicator = 0;
 }
 
 void Item::setPosition(double x, double y){
@@ -36,6 +37,7 @@ void Item::setPosition(double x, double y){
 
 void Item::explode(){
     //play the explode animation
+    explodeIndicator = 1;
     if(haveExplode == 0){
     haveExplode=1;
     SpriteFrameCache* cache = SpriteFrameCache::getInstance();
@@ -75,6 +77,7 @@ void Item::Visible(bool b){
 void Item::explodeEnd(){
     std::cout<<"222222"<<std::endl;
     item->setVisible(false);
+     explodeIndicator = 0;
 }
 
 void Item::throwBomb(Point Start, bool flip){

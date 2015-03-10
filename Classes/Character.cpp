@@ -177,9 +177,11 @@ void Character::SetBombAnimation(const char *name_plist, const char *name_png, c
 
 
 void Character::BombEnd(){
+    character->stopActionByTag(10001);
     this->removeChild(character,true);//把原来的精灵删除掉
     character=CCSprite::create(Char_name);//恢复精灵原来的贴图样子
     character->setFlipX(CharDirecton);
     this->addChild(character);
     Isbomb=false;
+    IsRunning=false;
 }

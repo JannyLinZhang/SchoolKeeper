@@ -57,7 +57,7 @@ bool GameScene::init()
     auto button1 = MenuItemImage::create(
                                         "Buttons/button.png",
                                         "empty.png", CC_CALLBACK_1(GameScene::button1CallBack, this));
-    button1->setPosition(Point(1000, 80));
+    button1->setPosition(Point(1050, 80));
     auto button_1 = Menu::create(button1, NULL);
     button_1->setPosition(Point::ZERO);
     button_1->setOpacity(150);
@@ -67,7 +67,7 @@ bool GameScene::init()
     auto button2 = MenuItemImage::create(
                                          "Buttons/button.png",
                                          "empty.png", CC_CALLBACK_1(GameScene::button2CallBack, this));
-    button2->setPosition(Point(800, 80));
+    button2->setPosition(Point(940, 80));
     auto button_2 = Menu::create(button2, NULL);
     button_2->setPosition(Point::ZERO);
     button_2->setOpacity(150);
@@ -77,7 +77,7 @@ bool GameScene::init()
     auto button3 = MenuItemImage::create(
                                          "Buttons/button.png",
                                          "empty.png", CC_CALLBACK_1(GameScene::button3CallBack, this));
-    button3->setPosition(Point(600, 80));
+    button3->setPosition(Point(830, 80));
     auto button_3 = Menu::create(button3, NULL);
     button_3->setPosition(Point::ZERO);
     button_3->setOpacity(150);
@@ -90,11 +90,12 @@ bool GameScene::init()
     character = Character::create();
     character->InitCharacterSprite("character.png");
     character->setPosition(100, 500);
-    auto characterBody = PhysicsBody::createBox(character->GetSprite()->getContentSize()/1.2);
+    auto characterBody = PhysicsBody::createBox(character->GetSprite()->getContentSize()/1.1);
     characterBody->setRotationEnable(false);
     characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
     characterBody->setCategoryBitmask(1);
     characterBody->setContactTestBitmask( 2 );
+    characterBody->setPositionOffset(Point(0,-5));
     character->setPhysicsBody( characterBody );
     this->addChild(character);
     
@@ -107,13 +108,18 @@ bool GameScene::init()
     
     
     //bomb
-    numberOfItem = 3;
+    numberOfItem = 5;
     items = new Item*[numberOfItem];
     for (int i =0 ; i<numberOfItem; i++) {
         items[i] = new Item(this);
     }
     for(int i=0; i<numberOfItem; i++){
-        items[i]->setPosition(100+200*i, 100+100*i);
+        double randomx = CCRANDOM_0_1();
+        double randomy = CCRANDOM_0_1();
+        
+        double xr = 200*randomx+1000*(1-randomx);
+        double yr = 150*randomy+400*(1-randomy);
+        items[i]->setPosition(xr, yr);
     }
     canPickUp = new int[numberOfItem];
     for(int i=0; i<numberOfItem; i++){
@@ -173,7 +179,6 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     PhysicsBody *b = contact.getShapeB()->getBody();
     Point aPosition = a->getPosition();
     Point bPosition = b->getPosition();
-    //double distance = (aPosition-bPosition).length();
     
     if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==b->getCollisionBitmask())
     {
@@ -188,7 +193,6 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&ITEM_COLLISION_BITMASK==a->getCollisionBitmask()){
             if(bPosition.y<=aPosition.y){
                 this->reorderChild(character, 75);
-            
             }else{
                 this->reorderChild(character, 25);
             }
@@ -208,7 +212,6 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&MONSTER_COLLISION_BITMASK==a->getCollisionBitmask()){
         if(bPosition.y<=aPosition.y){
             this->reorderChild(character, 75);
-            
         }else{
             this->reorderChild(character, 25);
         }
@@ -220,6 +223,8 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
         b->setEnable(false);
         //character->StopAnimation(10001);///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        character->GetSprite()->stopAllActions();
+        character->stopAllActions();
         character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
     }
     
@@ -228,6 +233,8 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
         a->setEnable(false);
         //character->StopAnimation(10001);///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        character->GetSprite()->stopAllActions();
+        character->stopAllActions();
         character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
     }
 
@@ -281,16 +288,11 @@ void GameScene::update(float dt){
         float y=5*(1/length)*y_1;
         
         if(poi.x>=0){
-            
             character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, false);
-
             if(poi.y>=0){
-                
                 character->setPosition(character->getPosition().x+x,character->getPosition().y+y );
-                
             }else{
                 character->setPosition(character->getPosition().x+x,character->getPosition().y-y );
-                
             }
             
         }else{
@@ -317,7 +319,15 @@ void GameScene::update(float dt){
         if(abs(character->getPositionY()-testMonster->getPositionY())<40)
         {
             
-            if (this->isRectCollision(CCRectMake(character->getPositionX(), character->getPositionY(), character->GetSprite()->getContentSize().width-150, character->GetSprite()->getContentSize().height), CCRectMake(testMonster->getPositionX(), testMonster->getPositionY(), testMonster->GetSprite()->getContentSize().width,testMonster->GetSprite()->getContentSize().height)))
+            if (this->isRectCollision(
+                                      CCRectMake(character->getPositionX(),
+                                                 character->getPositionY(),
+                                                 character->GetSprite()->getContentSize().width,
+                                                 character->GetSprite()->getContentSize().height),
+                                      CCRectMake(testMonster->getPositionX(),
+                                                 testMonster->getPositionY(),
+                                                 testMonster->GetSprite()->getContentSize().width,
+                                                 testMonster->GetSprite()->getContentSize().height)))
             {
                 testMonster->InjuredAnimation("MonsterAnimation/monster_fall", 2, true);
             }
@@ -373,9 +383,9 @@ void GameScene::joyStickInitialize(){
     joystickSkin->setThumbSprite(CCSprite::create("Virtual Joystick/VJ1.png"));
     joystickSkin->getBackgroundSprite()->setOpacity(100);
     joystickSkin->getThumbSprite()->setOpacity(20);
-    joystickSkin->getThumbSprite()->setScale(0.8f);
-    joystickSkin->getBackgroundSprite()->setScale(0.8f);
-    joystickSkin->setPosition(Point(80,80));
+    joystickSkin->getThumbSprite()->setScale(1.2f);
+    joystickSkin->getBackgroundSprite()->setScale(1.2f);
+    joystickSkin->setPosition(Point(100,100));
     
     joystickSkin->setJoystick(joyStick);
     

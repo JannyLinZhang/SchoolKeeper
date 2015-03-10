@@ -52,10 +52,7 @@ void Item::explode(){
 
     Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
     Animate* act = Animate::create(animation);
-    std::cout<<"111111";
-
         
-    //CallFunc* callFunc1=CallFunc::create(this,callfunc_selector(Item::explodeEnd));
     Sequence* endAct=Sequence::create(act,CallFunc::create( std::bind(&Item::explodeEnd,this) ),NULL);
     item->runAction(endAct);
 
@@ -75,7 +72,6 @@ void Item::Visible(bool b){
 }
 
 void Item::explodeEnd(){
-    std::cout<<"222222"<<std::endl;
     item->setVisible(false);
      explodeIndicator = 0;
 }
@@ -86,13 +82,12 @@ void Item::throwBomb(Point Start, bool flip){
     MoveTo *moveto;
     Point End;
     if(flip == true){
-        End = Start+Point(200,-45);
+        End = Start+Point(200,-70);
     }else{
-        End = Start+Point(-200,-45);
+        End = Start+Point(-200,-70);
     }
     moveto = MoveTo::create(0.2, End);
     
-    std::cout<<"000000";
     Sequence* throwAct=Sequence::create(moveto, CallFunc::create( std::bind(&Item::explode,this) ), NULL);
     item->runAction(throwAct);
 

@@ -12,7 +12,7 @@ Scene* GameScene::createScene()
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
     //this line make physics body visible
-    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    //scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
     scene->getPhysicsWorld()->setGravity(Vect(0,0));
     
@@ -222,7 +222,6 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     {
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
         b->setEnable(false);
-        //character->StopAnimation(10001);///////////////////////////////////////////////////////////////////////////////////////////////////////////
         character->GetSprite()->stopAllActions();
         character->stopAllActions();
         character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
@@ -232,7 +231,6 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     {
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
         a->setEnable(false);
-        //character->StopAnimation(10001);///////////////////////////////////////////////////////////////////////////////////////////////////////////
         character->GetSprite()->stopAllActions();
         character->stopAllActions();
         character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
@@ -281,6 +279,7 @@ void GameScene::update(float dt){
         character->StopAnimation(10001);
         
     }else{
+        if(character->attactDuration==false){
         float x_1=abs(poi.x);
         float y_1=abs(poi.y);
         float length=pow(x_1*x_1+y_1*y_1,0.5);
@@ -303,8 +302,8 @@ void GameScene::update(float dt){
                 character->setPosition(character->getPosition().x-x,character->getPosition().y-y );
             }
         }
-        
-    }
+        }
+        }
     
     
     if(character->IsAttack){
@@ -418,7 +417,7 @@ bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
     
     return true;
 }
-
+/*
 void GameScene::button1CallBack(Object* pSender)
 {
     for(int i=0; i<numberOfItem; i++){
@@ -429,15 +428,40 @@ void GameScene::button1CallBack(Object* pSender)
             character->Isbomb=true;
         }
     }
-    if(character->Isbomb==false){
+    
+    if(character->Isbomb==false && character->beingAttactDuration == false){
         character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
         
     }else{
-        //character->StopAnimation(10001);///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(character->beingAttactDuration==false){
         character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
+        }
     }
 }
+*/
+
+void GameScene::button1CallBack(Object* pSender)
+{
+    for(int i=0; i<numberOfItem; i++){
+        if (canPickUp[i]==1) {
+            canPickUp[i]=0;
+            items[i]->explode();
+            items[i]->havePickedUp=1;
+            character->Isbomb=true;
+            character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
+            progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
+        }
+    }
+    
+    if(character->Isbomb==false && character->beingAttactDuration == false){
+        character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
+    }
+}
+
+
+
+
 
 
 void GameScene::button2CallBack(Object* pSender)
@@ -513,7 +537,7 @@ void GameScene::shootFireBall(float delta){
     int j=0;
     for(int i=0; i<numbeOfMonster; i++){
         monsters[i]->fireball->getPhysicsBody()->setEnable(true);
-        if(CCRANDOM_0_1()>0.9&& monsters[i]->dead == false){
+        if(CCRANDOM_0_1()>0.8&& monsters[i]->dead == false){
         monsters[i]->shoot(character->getPosition(), this);
             j++;
         }

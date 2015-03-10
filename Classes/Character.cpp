@@ -17,6 +17,8 @@ Character::Character(void)
     CharDirecton=true;
     Char_name=NULL;
     IsAttack=false;
+    attactDuration = false;
+    beingAttactDuration = false;
     }
 Character::~Character(){
 
@@ -90,6 +92,7 @@ void Character::SetAnimation(const char *name_plist, const char *name_png, const
     if(IsAttack)
         return;
     IsAttack=true;
+    attactDuration = true;
     
     CCSpriteFrameCache *m_frameCache=CCSpriteFrameCache::sharedSpriteFrameCache();
     m_frameCache->addSpriteFramesWithFile(name_plist,name_png);
@@ -105,7 +108,6 @@ void Character::SetAnimation(const char *name_plist, const char *name_png, const
     
     
     animation->setLoops(1);//alwasy loop
-   // animation->se
     animation->setDelayPerUnit(0.1f);
     
     CCAnimate* act=CCAnimate::create(animation);
@@ -131,6 +133,8 @@ void Character::AttackEnd(){
     character->setFlipX(CharDirecton);
     this->addChild(character);
     IsAttack=false;
+    IsRunning=false;
+    attactDuration =false;
 }
 
 void Character::increaseBomb(){
@@ -148,6 +152,7 @@ int Character::getNumOfBomb(){
 
 
 void Character::SetBombAnimation(const char *name_plist, const char *name_png, const char *name_each, const unsigned int num,const char *name_type){
+    beingAttactDuration =true;
     
     CCSpriteFrameCache *m_frameCache=CCSpriteFrameCache::sharedSpriteFrameCache();
     m_frameCache->addSpriteFramesWithFile(name_plist,name_png);
@@ -184,4 +189,5 @@ void Character::BombEnd(){
     this->addChild(character);
     Isbomb=false;
     IsRunning=false;
+    beingAttactDuration =false;
 }

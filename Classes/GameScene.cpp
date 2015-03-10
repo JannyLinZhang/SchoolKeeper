@@ -92,7 +92,6 @@ bool GameScene::init()
     character->setPosition(100, 500);
     auto characterBody = PhysicsBody::createBox(character->GetSprite()->getContentSize()/1.2);
     characterBody->setRotationEnable(false);
-    //characterBody->setDynamic(false);//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
     characterBody->setCategoryBitmask(1);
     characterBody->setContactTestBitmask( 2 );
@@ -220,6 +219,7 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     {
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
         b->setEnable(false);
+        //character->StopAnimation(10001);///////////////////////////////////////////////////////////////////////////////////////////////////////////
         character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
     }
     
@@ -227,6 +227,7 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     {
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
         a->setEnable(false);
+        //character->StopAnimation(10001);///////////////////////////////////////////////////////////////////////////////////////////////////////////
         character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
     }
 
@@ -422,9 +423,9 @@ void GameScene::button1CallBack(Object* pSender)
         character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
         
     }else{
+        //character->StopAnimation(10001);///////////////////////////////////////////////////////////////////////////////////////////////////////////
         character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
-        
     }
 }
 
@@ -466,60 +467,6 @@ void GameScene::button3CallBack(Object* pSender)
     
 }
 
-/*
-void GameScene::InitialMonsters(){
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    
-    monster = Monster::create();
-    monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
-    monster->setPosition(Point(visibleSize.width-150,visibleSize.height/2));
-    //this->addChild(monster);
-    monsters.push_back(monster);
-    
-    
-    monster = Monster::create();
-    monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
-    monster->setPosition(Point(visibleSize.width-100,visibleSize.height/4));
-    //this->addChild(monster);
-    monsters.push_back(monster);
-    
-    monster = Monster::create();
-    monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
-    monster->setPosition(Point(visibleSize.width-30,visibleSize.height/5));
-    //this->addChild(monster);
-    monsters.push_back(monster);
-    
-    monster = Monster::create();
-    monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
-    monster->setPosition(Point(visibleSize.width-120,visibleSize.height/2));
-    //this->addChild(monster);
-    monsters.push_back(monster);
-    
-    monster = Monster::create();
-    monster-> InitMonsterSprite("MonsterAnimation/monster.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
-    monster->setPosition(Point(visibleSize.width-120,visibleSize.height/2));
-    //this->addChild(monster);
-    monsters.push_back(monster);
-
-    
-    
-    for(int i=0;i<5;i++){
-        auto monsterBody = PhysicsBody::createBox(monsters[i]->GetSprite()->getContentSize());
-        monsterBody->setRotationEnable(false);
-        monsterBody->setDynamic(false);
-        monsterBody->setCollisionBitmask( MONSTER_COLLISION_BITMASK );
-        monsterBody->setCategoryBitmask(2);
-        monsterBody->setContactTestBitmask(1);
-        monsters[i]->setPhysicsBody(monsterBody);
-        
-        this->addChild(monsters[i], 50);
-        monsters[i]->gamelogic();
-    }
-    
-}
-
-
-*/
 void GameScene::InitialMonsters(int num){
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
@@ -545,9 +492,7 @@ void GameScene::InitialMonsters(int num){
         this->addChild(monsters[i], 50);
         monsters[i]->gamelogic();
         this->addChild(monsters[i]->fireball);
-        //monsters[i]->shoot(character->getPosition(), this);
-        //monsters[i]->shoot(character->getPosition(), this);
-    }
+        }
     
     schedule(schedule_selector(GameScene::shootFireBall), 7.0f, 100, 1.0f);
     

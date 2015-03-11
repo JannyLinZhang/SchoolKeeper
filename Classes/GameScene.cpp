@@ -222,18 +222,22 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     {
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
         b->setEnable(false);
+        if(character->beingAttactDuration==false){
         character->GetSprite()->stopAllActions();
         character->stopAllActions();
-        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
+        character->Isbomb=true;
+        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
     }
     
     if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&FIREBALL_COLLISION_BITMASK==a->getCollisionBitmask())
     {
         progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
         a->setEnable(false);
+        if(character->beingAttactDuration==false){
         character->GetSprite()->stopAllActions();
         character->stopAllActions();
-        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
+        character->Isbomb=true;
+        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
     }
 
     
@@ -245,6 +249,7 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
 
 
 bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
+    if(character->beingAttactDuration==false && character->attactDuration==false)
     character->Jump();
     return true;
 }
@@ -273,38 +278,39 @@ void GameScene::update(float dt){
     }
     
     
-    
+    if(character->attactDuration==false && character->beingAttactDuration==false){
+
     if(poi.x==0 && poi.y==0){
         
         character->StopAnimation(10001);
         
     }else{
-        if(character->attactDuration==false){
+        if(character->attactDuration==false && character->beingAttactDuration==false){
         float x_1=abs(poi.x);
         float y_1=abs(poi.y);
         float length=pow(x_1*x_1+y_1*y_1,0.5);
-        float x=5*(1/length)*x_1;
-        float y=5*(1/length)*y_1;
+        float x=5*(1/length)*x_1*0.6;
+        float y=5*(1/length)*y_1*0.6;
         
         if(poi.x>=0){
             character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, false);
             if(poi.y>=0){
-                character->setPosition(character->getPosition().x+x,character->getPosition().y+y );
+                character->setPosition(character->getPosition().x+x,character->getPosition().y+y);
             }else{
-                character->setPosition(character->getPosition().x+x,character->getPosition().y-y );
+                character->setPosition(character->getPosition().x+x,character->getPosition().y-y);
             }
             
         }else{
             character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, true);
             if(poi.y>=0){
-                character->setPosition(character->getPosition().x-x,character->getPosition().y+y );
+                character->setPosition(character->getPosition().x-x,character->getPosition().y+y);
             }else{
-                character->setPosition(character->getPosition().x-x,character->getPosition().y-y );
+                character->setPosition(character->getPosition().x-x,character->getPosition().y-y);
             }
         }
         }
         }
-    
+    }
     
     if(character->IsAttack){
         
@@ -488,7 +494,6 @@ void GameScene::button3CallBack(Object* pSender)
         for(int i=0; i<numberOfItem; i++){
             if(items[i]->havePickedUp==1 && items[i]->haveExplode==0){
                 items[i]->throwBomb(character->getPosition(), face);
-
                 character->decreaseBomb();
                 int temp = character->getNumOfBomb();
                 string temps = std::to_string(temp);
@@ -498,6 +503,8 @@ void GameScene::button3CallBack(Object* pSender)
             }
         }
     }
+    character->attactDuration=false;
+    character->beingAttactDuration=false;
     
 }
 
@@ -537,7 +544,7 @@ void GameScene::shootFireBall(float delta){
     int j=0;
     for(int i=0; i<numbeOfMonster; i++){
         monsters[i]->fireball->getPhysicsBody()->setEnable(true);
-        if(CCRANDOM_0_1()>0.8&& monsters[i]->dead == false){
+        if(CCRANDOM_0_1()>0.7&& monsters[i]->dead == false){
         monsters[i]->shoot(character->getPosition(), this);
             j++;
         }

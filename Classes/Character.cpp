@@ -134,7 +134,9 @@ void Character::AttackEnd(){
     this->addChild(character);
     IsAttack=false;
     IsRunning=false;
+    Isbomb=false;
     attactDuration =false;
+    beingAttactDuration =false;
 }
 
 void Character::increaseBomb(){
@@ -190,4 +192,5 @@ void Character::BombEnd(){
     Isbomb=false;
     IsRunning=false;
     beingAttactDuration =false;
+    attactDuration =false;
 }

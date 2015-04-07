@@ -1,10 +1,3 @@
-//
-//  Role.h
-//  schoolKeeper
-//
-//
-//
-
 #ifndef __schoolKeeper__Item__
 #define __schoolKeeper__Item__
 
@@ -31,7 +24,6 @@ public:
     void throwBomb(Point Start, bool flip);
     bool haveExplode;
     bool explodeIndicator;
-
     
 private:
     cocos2d::Sprite *item;

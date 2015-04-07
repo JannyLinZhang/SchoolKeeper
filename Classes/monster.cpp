@@ -267,10 +267,16 @@ void Monster::gamelogic(){
     this->schedule(schedule_selector(Monster::updateMonster), 0.2f);
 }
 
-void Monster::shoot(Point toPoint, cocos2d::Layer* layer){
+void Monster::shoot(cocos2d::Layer* layer){
     fireball->setPosition(this->getPosition());
     fireball->setVisible(true);
-    Point direction = toPoint-this->getPosition();
+    
+    Point direction;
+    if(this->MonsterDirection==true){
+        direction = Point(-1, 0);
+    }else{
+        direction = Point(1, 0);
+    }
     direction.normalize();
     Point destination = this->getPosition()+1200*direction;
     MoveTo *moveto = MoveTo::create(6, destination);

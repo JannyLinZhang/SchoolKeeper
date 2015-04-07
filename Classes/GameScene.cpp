@@ -12,7 +12,7 @@ Scene* GameScene::createScene()
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
     //this line make physics body visible
-    //scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
     scene->getPhysicsWorld()->setGravity(Vect(0,0));
     
@@ -55,7 +55,7 @@ bool GameScene::init()
     // Standard method to create a button
     
     auto button1 = MenuItemImage::create(
-                                        "Buttons/button.png",
+                                        "Buttons/attack.png",
                                         "empty.png", CC_CALLBACK_1(GameScene::button1CallBack, this));
     button1->setPosition(Point(1050, 80));
     auto button_1 = Menu::create(button1, NULL);
@@ -65,7 +65,7 @@ bool GameScene::init()
     
     
     auto button2 = MenuItemImage::create(
-                                         "Buttons/button.png",
+                                         "Buttons/loot.png",
                                          "empty.png", CC_CALLBACK_1(GameScene::button2CallBack, this));
     button2->setPosition(Point(940, 80));
     auto button_2 = Menu::create(button2, NULL);
@@ -75,9 +75,9 @@ bool GameScene::init()
     
     
     auto button3 = MenuItemImage::create(
-                                         "Buttons/button.png",
+                                         "Buttons/bombButton.png",
                                          "empty.png", CC_CALLBACK_1(GameScene::button3CallBack, this));
-    button3->setPosition(Point(830, 80));
+    button3->setPosition(Point(1000, 550));
     auto button_3 = Menu::create(button3, NULL);
     button_3->setPosition(Point::ZERO);
     button_3->setOpacity(150);
@@ -104,6 +104,14 @@ bool GameScene::init()
     numbeOfMonster = 5;
     InitialMonsters(numbeOfMonster);
     
+    //Bread
+    numbeOfBread = 2;
+    breads = new Bread*[numbeOfBread];
+    for(int i=0 ;i<numbeOfBread; i++){
+        breads[i] = new Bread(this);
+        breads[i]->bread->getPhysicsBody()->setTag(i);
+    }
+    breads[0]->setPosition(600, 500);
     
     
     
@@ -239,6 +247,23 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
         character->Isbomb=true;
         character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
     }
+    
+    if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&& BREAD_COLLISION_BITMASK==b->getCollisionBitmask())
+    {
+        progressView->setCurrentProgress(progressView->getCurrentProgress()+20);
+        b->setEnable(false);
+        int i = b->getTag();
+        breads[i]->disappear();
+    }
+    
+    if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&& BREAD_COLLISION_BITMASK==a->getCollisionBitmask())
+    {
+        progressView->setCurrentProgress(progressView->getCurrentProgress()+20);
+        a->setEnable(false);
+        int i = a->getTag();
+        breads[i]->disappear();
+    }
+
 
     
     
@@ -423,29 +448,7 @@ bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
     
     return true;
 }
-/*
-void GameScene::button1CallBack(Object* pSender)
-{
-    for(int i=0; i<numberOfItem; i++){
-        if (canPickUp[i]==1) {
-            canPickUp[i]=0;
-            items[i]->explode();
-            items[i]->havePickedUp=1;
-            character->Isbomb=true;
-        }
-    }
-    
-    if(character->Isbomb==false && character->beingAttactDuration == false){
-        character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
-        
-    }else{
-        if(character->beingAttactDuration==false){
-        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
-        progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
-        }
-    }
-}
-*/
+
 
 void GameScene::button1CallBack(Object* pSender)
 {
@@ -545,7 +548,7 @@ void GameScene::shootFireBall(float delta){
     for(int i=0; i<numbeOfMonster; i++){
         monsters[i]->fireball->getPhysicsBody()->setEnable(true);
         if(CCRANDOM_0_1()>0.7&& monsters[i]->dead == false){
-        monsters[i]->shoot(character->getPosition(), this);
+        monsters[i]->shoot(this);
             j++;
         }
         if(j==2){

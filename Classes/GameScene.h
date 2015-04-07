@@ -7,6 +7,7 @@
 #include "monster.h"
 #include "Character.h"
 #include "Item.h"
+#include "bread.h"
 #include <vector>
 #include "ProgressView.h"
 
@@ -34,6 +35,9 @@ private:
     LabelTTF* label;
     bool face;
     int numbeOfMonster;
+    Bread** breads;
+    int numbeOfBread;
+
     
     Monster *monster;
     vector<Monster*> monsters;

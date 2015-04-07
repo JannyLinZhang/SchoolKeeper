@@ -53,6 +53,8 @@
 		521A8EAA19F11F5000D177D7 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 521A8EA819F11F5000D177D7 /* fonts */; };
 		B90C4D5D1A80895800F9D88A /* BearAnimation in Resources */ = {isa = PBXBuildFile; fileRef = B90C4D5C1A80895800F9D88A /* BearAnimation */; };
 		B90C4D5E1A80895800F9D88A /* BearAnimation in Resources */ = {isa = PBXBuildFile; fileRef = B90C4D5C1A80895800F9D88A /* BearAnimation */; };
+		B90D94FC1AC77DFF005E8020 /* bread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B90D94FA1AC77DFF005E8020 /* bread.cpp */; };
+		B90D94FE1AC797D1005E8020 /* health.png in Resources */ = {isa = PBXBuildFile; fileRef = B90D94FD1AC797D1005E8020 /* health.png */; };
 		B924E6B31AA9873D008D38EB /* Buttons in Resources */ = {isa = PBXBuildFile; fileRef = B924E6B21AA9873D008D38EB /* Buttons */; };
 		B934FD7F1A916170004AE287 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B934FD7D1A916170004AE287 /* Character.cpp */; };
 		B934FD801A916170004AE287 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B934FD7D1A916170004AE287 /* Character.cpp */; };
@@ -204,6 +206,9 @@
 		521A8E6319F0C34300D177D7 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		521A8EA819F11F5000D177D7 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		B90C4D5C1A80895800F9D88A /* BearAnimation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BearAnimation; sourceTree = "<group>"; };
+		B90D94FA1AC77DFF005E8020 /* bread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bread.cpp; sourceTree = "<group>"; };
+		B90D94FB1AC77DFF005E8020 /* bread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bread.h; sourceTree = "<group>"; };
+		B90D94FD1AC797D1005E8020 /* health.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = health.png; sourceTree = "<group>"; };
 		B924E6B21AA9873D008D38EB /* Buttons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Buttons; sourceTree = "<group>"; };
 		B934FD7D1A916170004AE287 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
 		B934FD7E1A916170004AE287 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
@@ -378,6 +383,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B90D94FD1AC797D1005E8020 /* health.png */,
 				B9A7EE851AAD6D87001196AD /* fireball.png */,
 				B94A28781AAB9B4600E67907 /* bbg_fall_grassland.jpg */,
 				B94A28721AAB91B600E67907 /* MonsterAnimation */,
@@ -407,6 +413,8 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B90D94FA1AC77DFF005E8020 /* bread.cpp */,
+				B90D94FB1AC77DFF005E8020 /* bread.h */,
 				B94A286E1AAB916700E67907 /* monster.cpp */,
 				B94A286F1AAB916700E67907 /* monster.h */,
 				B9F980B01AA921AA00FF2CA4 /* ProgressView.cpp */,
@@ -655,6 +663,7 @@
 				B944340F1A999EDF001CC802 /* Title.png in Resources */,
 				B944340C1A999EDF001CC802 /* Retry Button.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
+				B90D94FE1AC797D1005E8020 /* health.png in Resources */,
 				B953A8991A7C9C6C00C85339 /* Hit.mp3 in Resources */,
 				B9E53B821AA7DF6C004684AC /* explode in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
@@ -711,6 +720,7 @@
 				B94A28701AAB916700E67907 /* monster.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				B953A8AB1A7CA01D00C85339 /* GameScene.cpp in Sources */,
+				B90D94FC1AC77DFF005E8020 /* bread.cpp in Sources */,
 				B953A8A91A7CA01D00C85339 /* GameOverScene.cpp in Sources */,
 				B9D3EFE31A9E535E00DEB208 /* Item.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,

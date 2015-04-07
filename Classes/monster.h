@@ -46,7 +46,7 @@ public:
     //void update(float delta);
     void updateMonster(float delta);
     void gamelogic();
-    void shoot(Point toPoint, cocos2d::Layer *layer);
+    void shoot(cocos2d::Layer *layer);
     void shootEnd();
     CREATE_FUNC(Monster);
     

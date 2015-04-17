@@ -387,7 +387,27 @@ void GameScene::update(float dt){
     if(character->IsAttack){
         
         character->IsAttack=false;
-        
+        if(abs(character->getPositionY()-boss->getPositionY())<40)
+        {
+            if (this->isRectCollision(
+                                      CCRectMake(character->getPositionX(),
+                                                 character->getPositionY(),
+                                                 character->GetSprite()->getContentSize().width,
+                                                 character->GetSprite()->getContentSize().height),
+                                      CCRectMake(boss->getPositionX(),
+                                                 boss->getPositionY(),
+                                                 boss->GetSprite()->getContentSize().width,
+                                                 boss->GetSprite()->getContentSize().height)))
+            {
+                boss->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
+            }
+    
+
+    
+        }
+
+
+        //test collision with five monsters
         for(int i=0; i<5; i++){
             if(monsters[i]->dead==true)
             continue;

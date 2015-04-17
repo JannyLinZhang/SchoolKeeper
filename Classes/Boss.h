@@ -7,6 +7,8 @@
 
 
 #include <iostream>
+#include "progressview.h"
+
 
 
 class Boss:public cocos2d::Node{
@@ -62,5 +64,7 @@ private:
     cocos2d::Sprite* bullet3;
     char *Char_name;//用来保存初始状态的精灵图片名称
     int numberOfBomb;
+    ProgressView* Boss_health;
+
 
 };

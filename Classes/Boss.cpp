@@ -73,6 +73,15 @@ void Boss::InitCharacterSprite(char* char_name){
     this->boss=Sprite::create(char_name);
     numberOfBomb=0;
     this->addChild(boss);
+    
+    Boss_health = new ProgressView();
+    Boss_health -> setPosition(Point(this->getPositionX(), this->getPositionY()+100));
+    Boss_health->setBackgroundTexture("MonsterAnimation/Blood_back.png");
+    Boss_health->setForegroundTexture("MonsterAnimation/Blood_fore.png");
+    Boss_health->setTotalProgress(600.0f);
+    Boss_health->setCurrentProgress(600.f);
+    this->addChild(Boss_health);
+
 }
 
 void Boss::StopAnimation(unsigned int num){
@@ -222,6 +231,7 @@ void Boss::SetBombAnimation(const char *name_plist, const char *name_png, const 
 
 
 void Boss::BombEnd(){
+    Boss_health->setCurrentProgress(Boss_health->getCurrentProgress()-50);
     boss->stopActionByTag(10001);
     this->removeChild(boss,true);//把原来的精灵删除掉
     boss=CCSprite::create(Char_name);//恢复精灵原来的贴图样子

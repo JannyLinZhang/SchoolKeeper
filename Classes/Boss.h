@@ -28,6 +28,8 @@ public:
     bool Isbomb;
     bool attactDuration;
     bool beingAttactDuration;
+    bool bossAttackCoolDown;
+
     
     void InitBullets(cocos2d::Layer *layer);
     void shoot(cocos2d::Layer* layer);

@@ -68,6 +68,7 @@ void Boss::InitBullets(cocos2d::Layer *layer){
 }
 
 void Boss::InitCharacterSprite(char* char_name){
+    bossAttackCoolDown = true;
     Isbomb=false;
     Char_name=char_name;
     this->boss=Sprite::create(char_name);
@@ -184,6 +185,7 @@ void Boss::AttackEnd(){
     Isbomb=false;
     attactDuration =false;
     beingAttactDuration =false;
+    bossAttackCoolDown = true;
 }
 
 void Boss::increaseBomb(){
@@ -231,7 +233,7 @@ void Boss::SetBombAnimation(const char *name_plist, const char *name_png, const 
 
 
 void Boss::BombEnd(){
-    Boss_health->setCurrentProgress(Boss_health->getCurrentProgress()-50);
+    Boss_health->setCurrentProgress(Boss_health->getCurrentProgress()-100);
     boss->stopActionByTag(10001);
     this->removeChild(boss,true);//把原来的精灵删除掉
     boss=CCSprite::create(Char_name);//恢复精灵原来的贴图样子

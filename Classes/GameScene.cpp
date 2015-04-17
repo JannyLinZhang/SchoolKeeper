@@ -94,10 +94,20 @@ bool GameScene::init()
     characterBody->setRotationEnable(false);
     characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
     characterBody->setCategoryBitmask(1);
-    characterBody->setContactTestBitmask( 2 );
+    characterBody->setContactTestBitmask(2);
     characterBody->setPositionOffset(Point(0,-5));
     character->setPhysicsBody( characterBody );
     this->addChild(character);
+    
+    
+    //Boss
+    boss = Boss::create();
+    boss->InitBullets(this);
+    boss->InitCharacterSprite("character.png");
+    boss->setPosition(500, 500);
+    this->addChild(boss);
+    
+    
     
     
     //Monster
@@ -263,6 +273,26 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
         int i = a->getTag();
         breads[i]->disappear();
     }
+    
+    if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&& BULLET_COLLISION_BITMASK==b->getCollisionBitmask()){
+        progressView->setCurrentProgress(progressView->getCurrentProgress()-10);
+        b->setEnable(false);
+        if(character->beingAttactDuration==false){
+            character->GetSprite()->stopAllActions();
+            character->stopAllActions();
+            character->Isbomb=true;
+            character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
+        
+    }
+    if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&& BULLET_COLLISION_BITMASK==a->getCollisionBitmask()){
+        progressView->setCurrentProgress(progressView->getCurrentProgress()-10);
+        a->setEnable(false);
+        if(character->beingAttactDuration==false){
+            character->GetSprite()->stopAllActions();
+            character->stopAllActions();
+            character->Isbomb=true;
+            character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
+    }
 
 
     
@@ -281,6 +311,7 @@ bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
 
 
 void GameScene::update(float dt){
+    Point poi = ccpMult(joyStick->getVelocity(), 50);
     
     if(character->getPosition().y<10)
         character->setPositionY(10);
@@ -291,9 +322,26 @@ void GameScene::update(float dt){
     if(character->getPosition().x>1130)
         character->setPositionX(1130);
     
+    //boss follow character
+    Point distanceVector = character->getPosition()-boss->getPosition();
+    float distance = distanceVector.getLength();
+    distanceVector.normalize();
+    if(distance>200){
+        //boss will approach character
+        if(distanceVector.x>=0){
+            boss->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, false);
+            boss->setPosition(boss->getPosition().x+distanceVector.x,boss->getPosition().y+distanceVector.y);
+        }else{
+            boss->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, true);
+            boss->setPosition(boss->getPosition().x+distanceVector.x,boss->getPosition().y+distanceVector.y);
+        }
+    }else{
+        boss->StopAnimation(10001);
+    }
+    
+    
     
     //control of character
-    Point poi = ccpMult(joyStick->getVelocity(), 50);
     if(poi.x >0){
         face =true;
     }
@@ -301,7 +349,6 @@ void GameScene::update(float dt){
     if(poi.x <0){
         face =false;
     }
-    
     
     if(character->attactDuration==false && character->beingAttactDuration==false){
 
@@ -383,7 +430,7 @@ void GameScene::update(float dt){
         if(items[i]->explodeIndicator == 1){
             items[i]->explodeIndicator = 0;
             Point bombPosition = Point(items[i]->getX(), items[i]->getY());
-            for(int j=0; j<numbeOfMonster; j++){////////////////////////////////////////////////////////////////////////////////////////////////////////////////number of monsters
+            for(int j=0; j<numbeOfMonster; j++){
                 if(monsters[j]->dead==true)
                     continue;
                 Point monsterPosition = monsters[j]->getPosition();
@@ -539,6 +586,7 @@ void GameScene::InitialMonsters(int num){
         }
     
     schedule(schedule_selector(GameScene::shootFireBall), 7.0f, 100, 1.0f);
+    schedule(schedule_selector(GameScene::bossShoot), 7.0f, 100, 1.0f);
     
     
 }
@@ -556,6 +604,10 @@ void GameScene::shootFireBall(float delta){
         }
     }
     
+}
+
+void GameScene::bossShoot(float delta){
+    boss->shoot(this);
 }
 
 

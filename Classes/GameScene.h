@@ -10,6 +10,7 @@
 #include "bread.h"
 #include <vector>
 #include "ProgressView.h"
+#include "Boss.h"
 
 using namespace std;
 
@@ -29,6 +30,7 @@ public:
 private:
     void RoleLogic(float dt);
     Character* character;
+    Boss* boss;
     Item** items;
     int numberOfItem;
     int* canPickUp;
@@ -59,6 +61,8 @@ private:
     void button3CallBack(Object* pSender);
     
     void shootFireBall(float delta);
+    
+    void bossShoot(float delta);
 
     
 };

@@ -103,7 +103,7 @@ bool GameScene::init()
     //Boss
     boss = Boss::create();
     boss->InitBullets(this);
-    boss->InitCharacterSprite("character.png");
+    boss->InitCharacterSprite("boss_plist/boss.png");
     boss->setPosition(500, 500);
     this->addChild(boss);
     
@@ -330,16 +330,16 @@ void GameScene::update(float dt){
     distanceVector.normalize();
     if(distance>100 || distanceY>10){
         //boss will approach character
-        if(boss->attactDuration == false){
+        if(boss->attactDuration == false && boss->beingAttactDuration == false){
         if(distanceVector.x>=0){
-            boss->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, false);
+            boss->SetRunAnimation("boss_plist/boss_run/boss_run-ipadhd.plist", "boss_plist/boss_run/boss_run-ipadhd.png","boss_run", 7, false);
             if(distanceX>100){
             boss->setPosition(boss->getPosition().x+distanceVector.x,boss->getPosition().y+2*distanceVector.y);
             }else{
             boss->setPosition(boss->getPosition().x,boss->getPosition().y+2*distanceVector.y);
             }
         }else{
-            boss->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, true);
+            boss->SetRunAnimation("boss_plist/boss_run/boss_run-ipadhd.plist", "boss_plist/boss_run/boss_run-ipadhd.png","boss_run", 7, true);
             if(distanceX>100){
                 boss->setPosition(boss->getPosition().x+distanceVector.x,boss->getPosition().y+2*distanceVector.y);
             }else{
@@ -353,7 +353,7 @@ void GameScene::update(float dt){
         if(boss->bossAttackCoolDown){
             boss->bossAttackCoolDown = false;
             if(boss->Isbomb==false && boss->beingAttactDuration == false){
-                boss->SetAnimation("boss_plist/boss_hit/boss_hit-hd.plist", "boss_plist/boss_hit/boss_hit-hd.png","boss_hit", 16, "boss_hit");
+                boss->SetAnimation("boss_plist/boss_hit/boss_hit-ipadhd.plist", "boss_plist/boss_hit/boss_hit-ipadhd.png","boss_hit", 16, "boss_hit");
             }
             
             progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
@@ -427,7 +427,8 @@ void GameScene::update(float dt){
                                                  boss->GetSprite()->getContentSize().height)))
             {
                 //boss->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
-                boss->SetBombAnimation("boss_plist/boss_dead/boss_dead-hd.plist", "boss_plist/boss_dead/boss_dead-hd.png","boss_dead", 15, "boss_dead");
+                boss->StopAnimation(10001);
+                boss->SetBombAnimation("boss_plist/boss_dead/boss_dead-ipadhd.plist", "boss_plist/boss_dead/boss_dead-ipadhd.png","boss_dead", 15, "boss_dead");
             }
     
 
@@ -659,6 +660,8 @@ void GameScene::shootFireBall(float delta){
 }
 
 void GameScene::bossShoot(float delta){
+    boss->StopAnimation(10001);
+    boss->SetAnimation("boss_plist/boss_shot/boss_shot-ipadhd.plist", "boss_plist/boss_shot/boss_shot-ipadhd.png","boss_shot", 23, "boss_shot");
     boss->shoot(this);
 }
 

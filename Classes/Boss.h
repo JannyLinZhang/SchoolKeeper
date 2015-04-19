@@ -34,6 +34,7 @@ public:
     void InitBullets(cocos2d::Layer *layer);
     void shoot(cocos2d::Layer* layer);
     void shootEnd();
+    void StopShoot();
 
 
     

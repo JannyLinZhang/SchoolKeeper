@@ -90,6 +90,11 @@ void Boss::StopAnimation(unsigned int num){
     if(!IsRunning)
         return;
     
+    attactDuration=false;
+    beingAttactDuration=false;
+    IsAttack=false;
+    
+    
     boss->stopAllActionsByTag(num);//当前精灵停止所有动画
   
     this->removeChild(boss,true);//把原来的精灵删除掉
@@ -299,3 +304,7 @@ void Boss::shootEnd(){
     this->bullet2->setFlippedX(false);
     this->bullet3->setFlippedX(false);
    }
+
+void Boss::StopShoot(){
+    boss->stopAllActions();
+}

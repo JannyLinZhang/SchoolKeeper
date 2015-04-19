@@ -12,7 +12,7 @@ Scene* GameScene::createScene()
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
     //this line make physics body visible
-    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    //scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
     scene->getPhysicsWorld()->setGravity(Vect(0,0));
     
@@ -426,8 +426,8 @@ void GameScene::update(float dt){
                                                  boss->GetSprite()->getContentSize().width,
                                                  boss->GetSprite()->getContentSize().height)))
             {
-                //boss->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
                 boss->StopAnimation(10001);
+                boss->StopShoot();
                 boss->SetBombAnimation("boss_plist/boss_dead/boss_dead-ipadhd.plist", "boss_plist/boss_dead/boss_dead-ipadhd.png","boss_dead", 15, "boss_dead");
             }
     
@@ -490,6 +490,8 @@ void GameScene::update(float dt){
             }
             double length = (bombPosition - boss->getPosition()).length();
             if(length<150){
+                boss->StopAnimation(10001);
+                boss->StopShoot();
                 boss->SetBombAnimation("boss_plist/boss_dead/boss_dead-hd.plist", "boss_plist/boss_dead/boss_dead-hd.png","boss_dead", 15, "boss_dead");
             }
         }

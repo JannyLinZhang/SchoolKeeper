@@ -55,6 +55,8 @@ private:
     SneakyJoystick *joyStick;
     void joyStickInitialize();
     ProgressView *progressView;  //血条
+    ProgressView *changeMode;  //血条
+
     bool isRectCollision (CCRect rect1, CCRect rect2);
     void button1CallBack(Object* pSender);
     void button2CallBack(Object* pSender);
@@ -63,6 +65,8 @@ private:
     void shootFireBall(float delta);
     
     void bossShoot(float delta);
+    
+    void crazyUpdate(float dt);
 
     
 };

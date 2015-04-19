@@ -60,6 +60,8 @@ public:
     Sprite* monstersp;
     Sprite* fireball;
     bool isAdded=false;
+    PhysicsBody* fireBody;
+    PhysicsBody* monsterBody;
 
     
    

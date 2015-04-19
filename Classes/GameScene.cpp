@@ -88,7 +88,7 @@ bool GameScene::init()
     
     //character
     character = Character::create();
-    character->InitCharacterSprite("character.png");
+    character->InitCharacterSprite("19.png");
     character->setPosition(100, 500);
     auto characterBody = PhysicsBody::createBox(character->GetSprite()->getContentSize()/1.1);
     characterBody->setRotationEnable(false);
@@ -183,6 +183,22 @@ bool GameScene::init()
     this->addChild(xuekuang,2);
     this->addChild(progressView, 2);
     
+    changeMode = new ProgressView();
+    changeMode->setPosition(Point(150, 660));
+    changeMode->setScale(2.2f);
+    changeMode->setBackgroundTexture("xue_back.png");
+    changeMode->setForegroundTexture("xue_fore.png");
+    changeMode->setTotalProgress(100.0f);
+    changeMode->setCurrentProgress(0.0f);
+    //下面两个是为了让血条更好好看
+    CCSprite *xuekuang1=CCSprite::create("kuang.png");//添加血条的框架
+    xuekuang1->setPosition(ccp(changeMode->getPositionX(),changeMode->getPositionY()));
+    
+    //    touxiang1->setPosition(ccp(changeMode->getPositionX()-120,changeMode->getPositionY()));
+    //    this->addChild(touxiang1,2);
+    this->addChild(xuekuang1,2);
+    this->addChild(changeMode, 2);
+    
     
     
     this->scheduleUpdate();
@@ -237,25 +253,50 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     }
     
     if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&&FIREBALL_COLLISION_BITMASK==b->getCollisionBitmask())
+        
     {
-        progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
-        b->setEnable(false);
-        if(character->beingAttactDuration==false){
-        character->GetSprite()->stopAllActions();
-        character->stopAllActions();
-        character->Isbomb=true;
-        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
+        printf("*******");
+        if(character->crazyMode==false){
+            progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
+            b->setEnable(false);
+            if(character->beingAttactDuration==false){
+                character->GetSprite()->stopAllActions();
+                character->stopAllActions();
+                character->Isbomb=true;
+                if(a->getPosition().x<=b->getPosition().x){
+                    character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",false);
+                }else{
+                    character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
+                }
+                
+            }
+        }else{
+            
+        }
     }
     
     if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&FIREBALL_COLLISION_BITMASK==a->getCollisionBitmask())
     {
-        progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
-        a->setEnable(false);
-        if(character->beingAttactDuration==false){
-        character->GetSprite()->stopAllActions();
-        character->stopAllActions();
-        character->Isbomb=true;
-        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
+        printf("*******");
+        if(character->crazyMode==false){
+            progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
+            a->setEnable(false);
+            if(character->beingAttactDuration==false){
+                character->GetSprite()->stopAllActions();
+                character->stopAllActions();
+                character->Isbomb=true;
+                //        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
+                //        character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie");
+                if(a->getPosition().x<=b->getPosition().x){
+                    character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
+                }else{
+                    character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",false);
+                }
+                
+            }
+        }else{
+            
+        }
     }
     
     if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&& BREAD_COLLISION_BITMASK==b->getCollisionBitmask())
@@ -281,8 +322,18 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
             character->GetSprite()->stopAllActions();
             character->stopAllActions();
             character->Isbomb=true;
-            character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
+            
+            if(a->getPosition().x<=b->getPosition().x){
+                character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",false);
+            }else{
+                character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
+            }
+
+            
+            
+            //character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
         
+    }
     }
     if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&& BULLET_COLLISION_BITMASK==a->getCollisionBitmask()){
         progressView->setCurrentProgress(progressView->getCurrentProgress()-10);
@@ -291,12 +342,18 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
             character->GetSprite()->stopAllActions();
             character->stopAllActions();
             character->Isbomb=true;
-            character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
+            
+            if(a->getPosition().x<=b->getPosition().x){
+                character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
+            }else{
+                character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",false);
+            }
+          //  character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
     }
 
 
     
-    
+    }
     
     return true;
 }
@@ -361,7 +418,11 @@ void GameScene::update(float dt){
                 character->GetSprite()->stopAllActions();
                 character->stopAllActions();
                 character->Isbomb=true;
-                character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
+                if(character->getPosition().x<boss->getPosition().x){
+                    character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",false);
+                }else{
+                    character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
+                }
             }
         }
     }
@@ -381,38 +442,53 @@ void GameScene::update(float dt){
 
     if(poi.x==0 && poi.y==0){
         
-        character->StopAnimation(10001);
-        
+        if(character->crazyMode==true){
+            character->StopCrazyAnimation("bear1.png",10001);
+            //   character->StopAnimation(<#char *pics#>, <#const unsigned int num#>)
+        }else{
+            character->StopAnimation("19.png",10001);
+        }
     }else{
         if(character->attactDuration==false && character->beingAttactDuration==false){
-        float x_1=abs(poi.x);
-        float y_1=abs(poi.y);
-        float length=pow(x_1*x_1+y_1*y_1,0.5);
-        float x=5*(1/length)*x_1*0.6;
-        float y=5*(1/length)*y_1*0.6;
-        
-        if(poi.x>=0){
-            character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, false);
-            if(poi.y>=0){
-                character->setPosition(character->getPosition().x+x,character->getPosition().y+y);
-            }else{
-                character->setPosition(character->getPosition().x+x,character->getPosition().y-y);
-            }
+            float x_1=abs(poi.x);
+            float y_1=abs(poi.y);
+            float length=pow(x_1*x_1+y_1*y_1,0.5);
+            float x=5*(1/length)*x_1*0.6;
+            float y=5*(1/length)*y_1*0.6;
             
-        }else{
-            character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, true);
-            if(poi.y>=0){
-                character->setPosition(character->getPosition().x-x,character->getPosition().y+y);
+            if(poi.x>=0){
+                if(character->crazyMode==false){
+                    //            character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, false);
+                    character->SetRunAnimation("character/role_run-ipadhd.plist", "character/role_run-ipadhd.png","role_run", 11, false);
+                }else{
+                    character->SetRunAnimation("BearAnimation/bearAnimation.plist", "BearAnimation/bearAnimationSheet.png","bear", 8, true);
+                }
+                if(poi.y>=0){
+                    character->setPosition(character->getPosition().x+x,character->getPosition().y+y);
+                }else{
+                    character->setPosition(character->getPosition().x+x,character->getPosition().y-y);
+                }
+                
             }else{
-                character->setPosition(character->getPosition().x-x,character->getPosition().y-y);
+                if(character->crazyMode==false){
+                    //            character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, true);
+                    character->SetRunAnimation("character/role_run-ipadhd.plist", "character/role_run-ipadhd.png","role_run", 11, true);
+                }else{
+                    character->SetRunAnimation("BearAnimation/bearAnimation.plist", "BearAnimation/bearAnimationSheet.png","bear", 8, false);
+                }
+                if(poi.y>=0){
+                    character->setPosition(character->getPosition().x-x,character->getPosition().y+y);
+                }else{
+                    character->setPosition(character->getPosition().x-x,character->getPosition().y-y);
+                }
             }
-        }
-        }
         }
     }
     
+    }
+    
     if(character->IsAttack){
-        
+        if(character->crazyMode==false){
         character->IsAttack=false;
         if(abs(character->getPositionY()-boss->getPositionY())<40)
         {
@@ -429,6 +505,8 @@ void GameScene::update(float dt){
                 boss->StopAnimation(10001);
                 boss->StopShoot();
                 boss->SetBombAnimation("boss_plist/boss_dead/boss_dead-ipadhd.plist", "boss_plist/boss_dead/boss_dead-ipadhd.png","boss_dead", 15, "boss_dead");
+                changeMode->setCurrentProgress(changeMode->getCurrentProgress()+60);
+
             }
     
 
@@ -456,10 +534,13 @@ void GameScene::update(float dt){
                                                  testMonster->GetSprite()->getContentSize().height)))
             {
                 testMonster->InjuredAnimation("MonsterAnimation/monster_fall", 2, true);
+                changeMode->setCurrentProgress(changeMode->getCurrentProgress()+60);
             }
         }
         }//end of for loop
         
+    }
+    
     }//end of control of character
     
    
@@ -492,9 +573,21 @@ void GameScene::update(float dt){
             if(length<150){
                 boss->StopAnimation(10001);
                 boss->StopShoot();
-                boss->SetBombAnimation("boss_plist/boss_dead/boss_dead-hd.plist", "boss_plist/boss_dead/boss_dead-hd.png","boss_dead", 15, "boss_dead");
+                boss->SetBombAnimation("boss_plist/boss_dead/boss_dead-ipadhd.plist", "boss_plist/boss_dead/boss_dead-ipadhd.png","boss_dead", 15, "boss_dead");
             }
         }
+    }
+    
+    
+    if(changeMode->getCurrentProgress()==100){
+        
+        changeMode->setCurrentProgress(0.0f);
+        character->crazyMode=true;
+        
+        character->crazyStart("bear1.png");
+        this->scheduleOnce( schedule_selector(GameScene::crazyUpdate), 50.0f );
+        
+        //
     }
     
     
@@ -554,19 +647,27 @@ bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
 
 void GameScene::button1CallBack(Object* pSender)
 {
+    if(character->crazyMode==false){
     for(int i=0; i<numberOfItem; i++){
         if (canPickUp[i]==1) {
             canPickUp[i]=0;
             items[i]->explode();
             items[i]->havePickedUp=1;
             character->Isbomb=true;
-            character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
+            character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",false);
             progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
         }
     }
+    }
     
     if(character->Isbomb==false && character->beingAttactDuration == false){
-        character->SetAnimation("character/ch_hit-ipadhd.plist", "character/ch_hit-ipadhd.png","hit", 9, "hit");
+        if(character->crazyMode==false){
+            character->SetAnimation("character/role_hit-ipadhd.plist", "character/role_hit-ipadhd.png","role_hit", 10, "hit");
+        }else{
+            if(character->IsAttack==false){
+                character->sendStorm();
+            }
+        }
     }
 }
 
@@ -628,14 +729,17 @@ void GameScene::InitialMonsters(int num){
     }
     
     for(int i=0;i<num;i++){
-        auto monsterBody = PhysicsBody::createBox(monsters[i]->GetSprite()->getContentSize());
-        monsterBody->setRotationEnable(false);
-        monsterBody->setDynamic(false);
-        monsterBody->setCollisionBitmask( MONSTER_COLLISION_BITMASK );
-        monsterBody->setCategoryBitmask(2);
-        monsterBody->setContactTestBitmask(1);
-        monsters[i]->setPhysicsBody(monsterBody);
-        this->addChild(monsters[i], 50);
+        //Mon
+        monsters[i]->monsterBody  = PhysicsBody::createBox(monsters[i]->GetSprite()->getContentSize());
+        printf("the wird is %f",monsters[i]->GetSprite()->getContentSize().width);
+        monsters[i]->monsterBody->setRotationEnable(false);
+        //monsters[i]->monsterBody->setDynamic(false);
+        monsters[i]->monsterBody->setCollisionBitmask(MONSTER_COLLISION_BITMASK );
+        monsters[i]->monsterBody->setCategoryBitmask(9);
+        monsters[i]->monsterBody->setContactTestBitmask(10);
+        monsters[i]->monsterBody->setEnable(true);
+        monsters[i]->setPhysicsBody(monsters[i]->monsterBody);
+        this->addChild(monsters[i]);
         monsters[i]->gamelogic();
         this->addChild(monsters[i]->fireball);
         }
@@ -666,6 +770,17 @@ void GameScene::bossShoot(float delta){
     boss->SetAnimation("boss_plist/boss_shot/boss_shot-ipadhd.plist", "boss_plist/boss_shot/boss_shot-ipadhd.png","boss_shot", 23, "boss_shot");
     boss->shoot(this);
 }
+
+void GameScene::crazyUpdate(float dt)
+{
+    //CCSprite* sp4 = (CCSprite*)this->getChildByTag(104); //获取 tag=104 的精灵
+    //sp4->setPosition( sp4->getPosition() + ccp(100,0) ); //移动100
+    //character->InitCharacterSprite("character.png");
+    //  character->StopAnimation("character.png",10001);
+    character->crazyEnd("19.png");
+    
+}
+
 
 
 

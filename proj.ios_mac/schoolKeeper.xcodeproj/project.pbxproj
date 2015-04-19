@@ -82,6 +82,7 @@
 		B94A28741AAB91B600E67907 /* MonsterAnimation in Resources */ = {isa = PBXBuildFile; fileRef = B94A28721AAB91B600E67907 /* MonsterAnimation */; };
 		B94A28791AAB9B4600E67907 /* bbg_fall_grassland.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B94A28781AAB9B4600E67907 /* bbg_fall_grassland.jpg */; };
 		B94A287A1AAB9B4600E67907 /* bbg_fall_grassland.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B94A28781AAB9B4600E67907 /* bbg_fall_grassland.jpg */; };
+		B94CEBC01AE46D550054D735 /* 19.png in Resources */ = {isa = PBXBuildFile; fileRef = B94CEBBF1AE46D550054D735 /* 19.png */; };
 		B953A8991A7C9C6C00C85339 /* Hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B953A8501A7C9C6C00C85339 /* Hit.mp3 */; };
 		B953A89A1A7C9C6C00C85339 /* Hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B953A8501A7C9C6C00C85339 /* Hit.mp3 */; };
 		B953A89B1A7C9C6C00C85339 /* Point.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B953A8511A7C9C6C00C85339 /* Point.mp3 */; };
@@ -237,6 +238,7 @@
 		B94A286F1AAB916700E67907 /* monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = monster.h; sourceTree = "<group>"; };
 		B94A28721AAB91B600E67907 /* MonsterAnimation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MonsterAnimation; sourceTree = "<group>"; };
 		B94A28781AAB9B4600E67907 /* bbg_fall_grassland.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bbg_fall_grassland.jpg; sourceTree = "<group>"; };
+		B94CEBBF1AE46D550054D735 /* 19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 19.png; sourceTree = "<group>"; };
 		B953A8501A7C9C6C00C85339 /* Hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Hit.mp3; sourceTree = "<group>"; };
 		B953A8511A7C9C6C00C85339 /* Point.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Point.mp3; sourceTree = "<group>"; };
 		B953A8521A7C9C6C00C85339 /* Wing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Wing.mp3; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B94CEBBF1AE46D550054D735 /* 19.png */,
 				B9DC41811AE0AC640015BDEA /* boss_plist */,
 				B90D94FD1AC797D1005E8020 /* health.png */,
 				B99FA24F1AE0821200E52705 /* bullet.png */,
@@ -681,6 +684,7 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				B99FA2501AE0821200E52705 /* bullet.png in Resources */,
 				B924E6B31AA9873D008D38EB /* Buttons in Resources */,
+				B94CEBC01AE46D550054D735 /* 19.png in Resources */,
 				B9A7EE861AAD6D87001196AD /* fireball.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,

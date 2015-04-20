@@ -6,12 +6,13 @@
 //
 //
 #include <iostream>
-#include "monster.h"
+#include "monster2.h"
 #include "Definitions.h"
 USING_NS_CC;
 using namespace std;
 
-Monster::Monster(void)
+
+Monster2::Monster2(void)
 {
     dead=false;
     injured=false;
@@ -24,13 +25,13 @@ Monster::Monster(void)
 
 }
 
-Monster::~Monster(void){}
+Monster2::~Monster2(void){}
 
-Sprite* Monster::GetSprite(){
+Sprite* Monster2::GetSprite(){
     return monstersp;
 }
 
-void Monster::InitMonsterSprite(char* name){
+void Monster2::InitMonsterSprite(char* name){
     Monster_name = name;
     this->monstersp = Sprite::create(name);
     //monstersp->setFlippedX(MonsterDirection);
@@ -50,7 +51,7 @@ void Monster::InitMonsterSprite(char* name){
 }
 
 
-void::Monster::InitMonsterSprite(char *name, char *blood_back, char *blood_fore){
+void::Monster2::InitMonsterSprite(char *name, char *blood_back, char *blood_fore){
     InitMonsterSprite(name);
     Monster_blood = new ProgressView();
     Monster_blood -> setPosition(Point(monstersp->getPositionX()+25, monstersp->getPositionY()+50));
@@ -63,7 +64,7 @@ void::Monster::InitMonsterSprite(char *name, char *blood_back, char *blood_fore)
 }
 
 /*Monster itself Animation*/
-void Monster:: SetAnimation(const char *name_each, int num, bool run_directon){
+void Monster2:: SetAnimation(const char *name_each, int num, bool run_directon){
     
     monstersp->setFlippedX(run_directon);
     if(isrunning||injured||isattack||dead){
@@ -85,7 +86,7 @@ void Monster:: SetAnimation(const char *name_each, int num, bool run_directon){
     isrunning=true;
 }
 
-void Monster::StopAnimation(){
+void Monster2::StopAnimation(){
     if(!isrunning)
         return;
     monstersp->stopAllActions();
@@ -110,7 +111,7 @@ void Monster::StopAnimation(){
 
 /*Monster random move animation*/
 
-void Monster:: MonsterSeeRun(){
+void Monster2:: MonsterSeeRun(){
 /*next position*/
     Size visibleSize = Director::getInstance()->getVisibleSize();
     int minY = monstersp->getContentSize().height / 2;
@@ -135,37 +136,37 @@ void Monster:: MonsterSeeRun(){
     //if((MonsterDirection==false && actualX >= currPoint.x))
     if(actualX >= currPoint.x)
     {
-        this->SetAnimation("MonsterAnimation/monster1_run", 8, false);
+        this->SetAnimation("MonsterAnimation2/monster2_run", 5, false);
         MonsterDirection = false;
     }
     //else if(MonsterDirection==true && actualX < currPoint.x){
     else
     {
-        this->SetAnimation("MonsterAnimation/monster1_run", 8, true);
+        this->SetAnimation("MonsterAnimation2/monster2_run", 5, true);
         MonsterDirection = true;
     }
 
-    CallFunc* callFunc = CallFunc::create(this, callfunc_selector(Monster::StopAnimation));
+    CallFunc* callFunc = CallFunc::create(this, callfunc_selector(Monster2::StopAnimation));
     ActionInterval* rand_walk = Sequence::create(moveto1, callFunc, NULL);
     this->runAction(rand_walk);
 }
 
 /*Play injure animation*/
-void Monster::InjuredAnimation(const char* name_each, const unsigned int num,bool dir){
+void Monster2::InjuredAnimation(const char* name_each, const unsigned int num,bool dir){
     
     if(injured||dead) return;
     
     if(isrunning||isattack){
         this->stopAllActions();  //When being attacked, stop all animation.
         this->removeChild(monstersp,true); //remove current monster
-        monstersp = Sprite::create("MonsterAnimation/monster1.png");
+        monstersp = Sprite::create("MonsterAnimation2/monster2.png");
         monstersp -> setFlippedX(dir);
         this->addChild(monstersp);
         isrunning=false;
         isattack=false;
     }
     
-    this->unschedule(schedule_selector(Monster::updateMonster));
+    this->unschedule(schedule_selector(Monster2::updateMonster));
  
     Animation* animation = Animation::create();
     for(int i=1;i<=num;i++){
@@ -178,7 +179,7 @@ void Monster::InjuredAnimation(const char* name_each, const unsigned int num,boo
     animation->setLoops(1);   //anaimtion loop
     Animate* act = Animate::create(animation);
     
-    CallFunc* callFunc=CallFunc::create(this,callfunc_selector(Monster::InjuredEnd));
+    CallFunc* callFunc=CallFunc::create(this,callfunc_selector(Monster2::InjuredEnd));
     ActionInterval* getinjured = Sequence::create(act, callFunc, NULL);
     monstersp->runAction(getinjured);
     injured=true;
@@ -193,20 +194,20 @@ void Monster::InjuredEnd(){
     }
 }
 */
-void Monster::InjuredEnd(){
+void Monster2::InjuredEnd(){
     injured=false;
     Monster_blood->setCurrentProgress(Monster_blood->getCurrentProgress()-250);
     if(Monster_blood->getCurrentProgress()<=0){
-        DeadAnimation("MonsterAnimation/monster1_fall", 2, MonsterDirection);
+        DeadAnimation("MonsterAnimation2/monster2_dead", 7, MonsterDirection);
     }
     else{
-        this->schedule(schedule_selector(Monster::updateMonster), 0.2f);
+        this->schedule(schedule_selector(Monster2::updateMonster), 0.2f);
         this->stopAllActions();
     }
 }
 
 /*Monster dead animation*/
-void Monster::DeadAnimation(const char *name_each,const unsigned int num,bool dir){
+void Monster2::DeadAnimation(const char *name_each,const unsigned int num,bool dir){
     dead=true;
     this->stopAllActions();
     Animation* animation = Animation::create();
@@ -221,16 +222,16 @@ void Monster::DeadAnimation(const char *name_each,const unsigned int num,bool di
     animation->setLoops(1);   //anaimtion loop
     Animate* act = Animate::create(animation);
     
-    CallFunc* callFunc=CallFunc::create(this,callfunc_selector(Monster::DeadEnd));
+    CallFunc* callFunc=CallFunc::create(this,callfunc_selector(Monster2::DeadEnd));
     ActionInterval* getdead = Sequence::create(act, callFunc, NULL);
     monstersp->runAction(getdead);
 }
 
     /*Dead Animation End*/
-    void Monster::DeadEnd(){
+    void Monster2::DeadEnd(){
 
     this->removeChild(monstersp,true);
-    monstersp = Sprite::create("MonsterAnimation/monster1_fall2.png");
+    monstersp = Sprite::create("MonsterAnimation2/monster2_dead7.png");
     monstersp->setFlippedX(MonsterDirection);
     this->addChild(monstersp);
     isrunning=true;
@@ -245,33 +246,33 @@ void Monster::DeadAnimation(const char *name_each,const unsigned int num,bool di
     }
     /*monster blink before being removed*/
     Blink* monblink = Blink::create(2,4);
-    CallFunc* callFunc = CallFunc::create(this,callfunc_selector(Monster::BlinkEnd));
+    CallFunc* callFunc = CallFunc::create(this,callfunc_selector(Monster2::BlinkEnd));
     ActionInterval* getdead = Sequence::create(monblink, callFunc, NULL);
     monstersp->runAction(getdead);
 }
 
-void Monster::BlinkEnd(){
+void Monster2::BlinkEnd(){
     this->removeAllChildren();
     
 }
 
-void Monster::GetInjured(){
-    this->InjuredAnimation("MonsterAnimation/monster_fall", 2, false);
+void Monster2::GetInjured(){
+    this->InjuredAnimation("MonsterAnimation2/monster_dead", 7, false);
 }
 
 
-void Monster::updateMonster(float delta){
+void Monster2::updateMonster(float delta){
     if(dead) return;
     if(!isrunning)
     MonsterSeeRun();
 }
 
-void Monster::gamelogic(){
+void Monster2::gamelogic(){
     if(dead) return;
-    this->schedule(schedule_selector(Monster::updateMonster), 0.2f);
+    this->schedule(schedule_selector(Monster2::updateMonster), 0.2f);
 }
 
-void Monster::shoot(cocos2d::Layer* layer){
+void Monster2::shoot(cocos2d::Layer* layer){
     fireball->setPosition(this->getPosition());
     fireball->setVisible(true);
     
@@ -284,11 +285,11 @@ void Monster::shoot(cocos2d::Layer* layer){
     direction.normalize();
     Point destination = this->getPosition()+1200*direction;
     MoveTo *moveto = MoveTo::create(6, destination);
-    Sequence* shoot=Sequence::create(moveto, CallFunc::create( std::bind(&Monster::shootEnd,this) ), NULL);
+    Sequence* shoot=Sequence::create(moveto, CallFunc::create( std::bind(&Monster2::shootEnd,this) ), NULL);
     fireball->runAction(shoot);    
 }
 
-void Monster::shootEnd(){
+void Monster2::shootEnd(){
     fireball->setVisible(false);
 }
 

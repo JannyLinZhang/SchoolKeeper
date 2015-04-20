@@ -11,7 +11,6 @@
 
 #include <iostream>
 
-#endif /* defined(__schoolKeeper__Character__) */
 using namespace cocos2d;
 class Character:public cocos2d::CCNode{
     
@@ -73,3 +72,5 @@ private:
     int numberOfBomb;
     
 };
+
+#endif /* defined(__schoolKeeper__Character__) */

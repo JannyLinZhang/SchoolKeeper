@@ -15,7 +15,7 @@
 using namespace std;
 
 
-class GameScene : public cocos2d::Layer
+class GameScene3 : public cocos2d::Layer
 {
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -25,7 +25,7 @@ public:
     virtual bool init();
     void InitialMonsters(int num);
     // implement the "static create()" method manually
-    CREATE_FUNC(GameScene);
+    CREATE_FUNC(GameScene3);
     
 private:
     void RoleLogic(float dt);

@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "SneakyJoystick.h"
 #include "SneakyJoystickSkinnedBase.h"
-#include "monster.h"
+#include "monster2.h"
 #include "Character.h"
 #include "Item.h"
 #include "bread.h"
@@ -15,7 +15,7 @@
 using namespace std;
 
 
-class GameScene : public cocos2d::Layer
+class GameScene2 : public cocos2d::Layer
 {
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -25,7 +25,7 @@ public:
     virtual bool init();
     void InitialMonsters(int num);
     // implement the "static create()" method manually
-    CREATE_FUNC(GameScene);
+    CREATE_FUNC(GameScene2);
     
 private:
     void RoleLogic(float dt);
@@ -44,9 +44,9 @@ private:
     int batch;
 
     
-    Monster *monster;
-    vector<Monster*> monsters;
-    Monster *testMonster;
+    Monster2 *monster;
+    vector<Monster2*> monsters;
+    Monster2 *testMonster;
 
 
     cocos2d::PhysicsWorld *sceneWorld;

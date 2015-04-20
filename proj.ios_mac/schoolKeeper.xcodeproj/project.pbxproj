@@ -109,6 +109,16 @@
 		B9DC41821AE0AC640015BDEA /* boss_plist in Resources */ = {isa = PBXBuildFile; fileRef = B9DC41811AE0AC640015BDEA /* boss_plist */; };
 		B9E53B821AA7DF6C004684AC /* explode in Resources */ = {isa = PBXBuildFile; fileRef = B9E53B811AA7DF6C004684AC /* explode */; };
 		B9E53B831AA7DF6C004684AC /* explode in Resources */ = {isa = PBXBuildFile; fileRef = B9E53B811AA7DF6C004684AC /* explode */; };
+		B9E5D5761AE479E600FB2DF5 /* Level1.png in Resources */ = {isa = PBXBuildFile; fileRef = B9E5D5721AE479E600FB2DF5 /* Level1.png */; };
+		B9E5D5771AE479E600FB2DF5 /* Level2.png in Resources */ = {isa = PBXBuildFile; fileRef = B9E5D5731AE479E600FB2DF5 /* Level2.png */; };
+		B9E5D5781AE479E600FB2DF5 /* MonsterAnimation2 in Resources */ = {isa = PBXBuildFile; fileRef = B9E5D5741AE479E600FB2DF5 /* MonsterAnimation2 */; };
+		B9E5D5791AE479E600FB2DF5 /* TransBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9E5D5751AE479E600FB2DF5 /* TransBackground.jpg */; };
+		B9E5D5841AE4822B00FB2DF5 /* monster2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9E5D5801AE4822B00FB2DF5 /* monster2.cpp */; };
+		B9E5D5851AE4822B00FB2DF5 /* TransScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9E5D5821AE4822B00FB2DF5 /* TransScene.cpp */; };
+		B9E5D58A1AE4840700FB2DF5 /* GameScene2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9E5D5861AE4840700FB2DF5 /* GameScene2.cpp */; };
+		B9E5D58F1AE48E2000FB2DF5 /* GameScene3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9E5D58D1AE48E2000FB2DF5 /* GameScene3.cpp */; };
+		B9E5D5921AE4916B00FB2DF5 /* TranScene2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9E5D5901AE4916B00FB2DF5 /* TranScene2.cpp */; };
+		B9E5D5961AE497F500FB2DF5 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B9E5D5951AE497F500FB2DF5 /* background.mp3 */; };
 		B9F980AA1AA803A000FF2CA4 /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F980A91AA803A000FF2CA4 /* empty.png */; };
 		B9F980AE1AA9217E00FF2CA4 /* character in Resources */ = {isa = PBXBuildFile; fileRef = B9F980AD1AA9217E00FF2CA4 /* character */; };
 		B9F980AF1AA9217E00FF2CA4 /* character in Resources */ = {isa = PBXBuildFile; fileRef = B9F980AD1AA9217E00FF2CA4 /* character */; };
@@ -262,6 +272,21 @@
 		B9D3EFE21A9E535E00DEB208 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		B9DC41811AE0AC640015BDEA /* boss_plist */ = {isa = PBXFileReference; lastKnownFileType = folder; path = boss_plist; sourceTree = "<group>"; };
 		B9E53B811AA7DF6C004684AC /* explode */ = {isa = PBXFileReference; lastKnownFileType = folder; path = explode; sourceTree = "<group>"; };
+		B9E5D5721AE479E600FB2DF5 /* Level1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Level1.png; sourceTree = "<group>"; };
+		B9E5D5731AE479E600FB2DF5 /* Level2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Level2.png; sourceTree = "<group>"; };
+		B9E5D5741AE479E600FB2DF5 /* MonsterAnimation2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MonsterAnimation2; sourceTree = "<group>"; };
+		B9E5D5751AE479E600FB2DF5 /* TransBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TransBackground.jpg; sourceTree = "<group>"; };
+		B9E5D5801AE4822B00FB2DF5 /* monster2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = monster2.cpp; sourceTree = "<group>"; };
+		B9E5D5811AE4822B00FB2DF5 /* monster2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = monster2.h; sourceTree = "<group>"; };
+		B9E5D5821AE4822B00FB2DF5 /* TransScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransScene.cpp; sourceTree = "<group>"; };
+		B9E5D5831AE4822B00FB2DF5 /* TransScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransScene.h; sourceTree = "<group>"; };
+		B9E5D5861AE4840700FB2DF5 /* GameScene2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene2.cpp; sourceTree = "<group>"; };
+		B9E5D5871AE4840700FB2DF5 /* GameScene2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene2.h; sourceTree = "<group>"; };
+		B9E5D58D1AE48E2000FB2DF5 /* GameScene3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene3.cpp; sourceTree = "<group>"; };
+		B9E5D58E1AE48E2000FB2DF5 /* GameScene3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene3.h; sourceTree = "<group>"; };
+		B9E5D5901AE4916B00FB2DF5 /* TranScene2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TranScene2.cpp; sourceTree = "<group>"; };
+		B9E5D5911AE4916B00FB2DF5 /* TranScene2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranScene2.h; sourceTree = "<group>"; };
+		B9E5D5951AE497F500FB2DF5 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
 		B9F980A91AA803A000FF2CA4 /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 		B9F980AD1AA9217E00FF2CA4 /* character */ = {isa = PBXFileReference; lastKnownFileType = folder; path = character; sourceTree = "<group>"; };
 		B9F980B01AA921AA00FF2CA4 /* ProgressView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProgressView.cpp; sourceTree = "<group>"; };
@@ -392,6 +417,11 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B9E5D5951AE497F500FB2DF5 /* background.mp3 */,
+				B9E5D5721AE479E600FB2DF5 /* Level1.png */,
+				B9E5D5731AE479E600FB2DF5 /* Level2.png */,
+				B9E5D5741AE479E600FB2DF5 /* MonsterAnimation2 */,
+				B9E5D5751AE479E600FB2DF5 /* TransBackground.jpg */,
 				B94CEBBF1AE46D550054D735 /* 19.png */,
 				B9DC41811AE0AC640015BDEA /* boss_plist */,
 				B90D94FD1AC797D1005E8020 /* health.png */,
@@ -425,6 +455,14 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B9E5D58D1AE48E2000FB2DF5 /* GameScene3.cpp */,
+				B9E5D58E1AE48E2000FB2DF5 /* GameScene3.h */,
+				B9E5D5861AE4840700FB2DF5 /* GameScene2.cpp */,
+				B9E5D5871AE4840700FB2DF5 /* GameScene2.h */,
+				B9E5D5801AE4822B00FB2DF5 /* monster2.cpp */,
+				B9E5D5811AE4822B00FB2DF5 /* monster2.h */,
+				B9E5D5821AE4822B00FB2DF5 /* TransScene.cpp */,
+				B9E5D5831AE4822B00FB2DF5 /* TransScene.h */,
 				B968ED381ADC349C00E957B8 /* Boss.cpp */,
 				B968ED391ADC349C00E957B8 /* Boss.h */,
 				B90D94FA1AC77DFF005E8020 /* bread.cpp */,
@@ -452,6 +490,8 @@
 				B953A8A01A7C9DC800C85339 /* SplashScene.h */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
+				B9E5D5901AE4916B00FB2DF5 /* TranScene2.cpp */,
+				B9E5D5911AE4916B00FB2DF5 /* TranScene2.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -641,18 +681,22 @@
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				B94A28791AAB9B4600E67907 /* bbg_fall_grassland.jpg in Resources */,
+				B9E5D5781AE479E600FB2DF5 /* MonsterAnimation2 in Resources */,
 				B953A89B1A7C9C6C00C85339 /* Point.mp3 in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
+				B9E5D5761AE479E600FB2DF5 /* Level1.png in Resources */,
 				B94434071A999EDF001CC802 /* Menu Button.png in Resources */,
 				B94434081A999EDF001CC802 /* Pipe.png in Resources */,
 				B9DC41821AE0AC640015BDEA /* boss_plist in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				B9B5839A1AA3D26200C82040 /* numbers in Resources */,
 				B94433F41A999D78001CC802 /* Virtual Joystick in Resources */,
+				B9E5D5961AE497F500FB2DF5 /* background.mp3 in Resources */,
 				B94434091A999EDF001CC802 /* Play Button Clicked.png in Resources */,
 				B944340D1A999EDF001CC802 /* SplashScene_ipad.png in Resources */,
 				B94A28731AAB91B600E67907 /* MonsterAnimation in Resources */,
+				B9E5D5771AE479E600FB2DF5 /* Level2.png in Resources */,
 				B9F980BA1AA9221D00FF2CA4 /* touxiang.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
@@ -681,6 +725,7 @@
 				B90D94FE1AC797D1005E8020 /* health.png in Resources */,
 				B953A8991A7C9C6C00C85339 /* Hit.mp3 in Resources */,
 				B9E53B821AA7DF6C004684AC /* explode in Resources */,
+				B9E5D5791AE479E600FB2DF5 /* TransBackground.jpg in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				B99FA2501AE0821200E52705 /* bullet.png in Resources */,
 				B924E6B31AA9873D008D38EB /* Buttons in Resources */,
@@ -726,7 +771,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9E5D5841AE4822B00FB2DF5 /* monster2.cpp in Sources */,
 				B968ED3A1ADC349C00E957B8 /* Boss.cpp in Sources */,
+				B9E5D58F1AE48E2000FB2DF5 /* GameScene3.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				B953A8A11A7C9DC800C85339 /* SplashScene.cpp in Sources */,
 				B953A8AD1A7CA01D00C85339 /* MainMenuScene.cpp in Sources */,
@@ -735,12 +782,15 @@
 				B93F95451A7F3FF700F21148 /* SneakyJoystick.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				B9F980B21AA921AA00FF2CA4 /* ProgressView.cpp in Sources */,
+				B9E5D5921AE4916B00FB2DF5 /* TranScene2.cpp in Sources */,
 				B94A28701AAB916700E67907 /* monster.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				B953A8AB1A7CA01D00C85339 /* GameScene.cpp in Sources */,
 				B90D94FC1AC77DFF005E8020 /* bread.cpp in Sources */,
 				B953A8A91A7CA01D00C85339 /* GameOverScene.cpp in Sources */,
+				B9E5D5851AE4822B00FB2DF5 /* TransScene.cpp in Sources */,
 				B9D3EFE31A9E535E00DEB208 /* Item.cpp in Sources */,
+				B9E5D58A1AE4840700FB2DF5 /* GameScene2.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

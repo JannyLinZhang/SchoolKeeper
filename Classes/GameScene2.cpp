@@ -1,15 +1,13 @@
-#include "GameScene.h"
+#include "GameScene2.h"
 #include "Definitions.h"
 #include "GameOverScene.h"
-#include "TransScene.h"
-#include "SimpleAudioEngine.h"
-
+#include "TranScene2.h"
 
 
 
 USING_NS_CC;
 
-Scene* GameScene::createScene()
+Scene* GameScene2::createScene()
 {
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
@@ -20,7 +18,7 @@ Scene* GameScene::createScene()
     
     
     // 'layer' is an autorelease object
-    auto layer = GameScene::create();
+    auto layer = GameScene2::create();
     layer->SetPhysicsWorld(scene->getPhysicsWorld());
 
     // add layer as a child to scene
@@ -31,21 +29,19 @@ Scene* GameScene::createScene()
 
 
 // on "init" you need to initialize your instance
-bool GameScene::init()
+bool GameScene2::init()
 {
     // 1. super init first
     if ( !Layer::init() )
     {
         return false;
     }
-    CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("background.mp3",true);
-    
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
     //background
-    auto backgroundSprite = Sprite::create("Level1.png");
+    auto backgroundSprite = Sprite::create("Level2.png");
     backgroundSprite->setScale(1.5, 1.2);
     backgroundSprite->setPosition(Point(visibleSize.width/2+origin.x, visibleSize.height/2+origin.y));
     this->addChild(backgroundSprite);
@@ -61,7 +57,7 @@ bool GameScene::init()
     
     auto button1 = MenuItemImage::create(
                                         "Buttons/attack.png",
-                                        "empty.png", CC_CALLBACK_1(GameScene::button1CallBack, this));
+                                        "empty.png", CC_CALLBACK_1(GameScene2::button1CallBack, this));
     button1->setPosition(Point(1050, 80));
     auto button_1 = Menu::create(button1, NULL);
     button_1->setPosition(Point::ZERO);
@@ -71,7 +67,7 @@ bool GameScene::init()
     
     auto button2 = MenuItemImage::create(
                                          "Buttons/loot.png",
-                                         "empty.png", CC_CALLBACK_1(GameScene::button2CallBack, this));
+                                         "empty.png", CC_CALLBACK_1(GameScene2::button2CallBack, this));
     button2->setPosition(Point(940, 80));
     auto button_2 = Menu::create(button2, NULL);
     button_2->setPosition(Point::ZERO);
@@ -81,7 +77,7 @@ bool GameScene::init()
     
     auto button3 = MenuItemImage::create(
                                          "Buttons/bombButton.png",
-                                         "empty.png", CC_CALLBACK_1(GameScene::button3CallBack, this));
+                                         "empty.png", CC_CALLBACK_1(GameScene2::button3CallBack, this));
     button3->setPosition(Point(1000, 550));
     auto button_3 = Menu::create(button3, NULL);
     button_3->setPosition(Point::ZERO);
@@ -106,11 +102,11 @@ bool GameScene::init()
     
     
     //Boss
-    //boss = Boss::create();
-    //boss->InitBullets(this);
-    //boss->InitCharacterSprite("boss_plist/boss.png");
-    //boss->setPosition(500, 500);
-    //this->addChild(boss);
+   // boss = Boss::create();
+   // boss->InitBullets(this);
+   // boss->InitCharacterSprite("boss_plist/boss.png");
+   // boss->setPosition(500, 500);
+   // this->addChild(boss);
     
     
     
@@ -162,12 +158,12 @@ bool GameScene::init()
     this->addChild(edgeNode);
     
     auto contactListener = EventListenerPhysicsContact::create();
-    contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
+    contactListener->onContactBegin = CC_CALLBACK_1(GameScene2::onContactBegin, this);
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
     
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->setSwallowTouches(true);
-    touchListener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
+    touchListener->onTouchBegan = CC_CALLBACK_2(GameScene2::onTouchBegan, this);
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
     
     
@@ -215,7 +211,7 @@ bool GameScene::init()
 
 
 
-bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
+bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
 
     PhysicsBody *a = contact.getShapeA()->getBody();
     PhysicsBody *b = contact.getShapeB()->getBody();
@@ -368,14 +364,14 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact){
     
 
 
-bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
+bool GameScene2::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
     if(character->beingAttactDuration==false && character->attactDuration==false)
     character->Jump();
     return true;
 }
 
 
-void GameScene::update(float dt){
+void GameScene2::update(float dt){
     
     /*Update by Lin*/
     
@@ -397,7 +393,7 @@ void GameScene::update(float dt){
         label->setPosition(Vec2(visibleSize.width / 2,  visibleSize.height / 2));
         this->addChild(label);
         
-        this->scheduleOnce(schedule_selector(GameScene::GoToTransScene), 2.0);
+        this->scheduleOnce(schedule_selector(GameScene2::GoToTransScene), 2.0);
     }
     
     else if(currNumMonsters == 0 && batch != 1){
@@ -585,11 +581,11 @@ void GameScene::update(float dt){
             {
                 //testMonster->InjuredAnimation("MonsterAnimation/monster_fall", 2, true);
                 /*Update by Lin*/
-                bool dir = false;
+                bool dir = true;
                 if(character->getPosition().x > testMonster->getPosition().x){
-                    dir = true;
+                    dir = false;
                 }
-                testMonster->InjuredAnimation("MonsterAnimation/monster1_blood", 20, dir);
+                testMonster->InjuredAnimation("MonsterAnimation2/monster2_injured", 4, dir);
                 /*Update by Lin*/
                 changeMode->setCurrentProgress(changeMode->getCurrentProgress()+1);
             }
@@ -625,11 +621,11 @@ void GameScene::update(float dt){
                 if(length<150){
                     //monsters[j]->InjuredAnimation("MonsterAnimation/monster_fall", 2, true);
                     /*new added by Lin*/
-                    bool dir = false;
+                    bool dir = true;
                     if(character->getPosition().x > monsterPosition.x){
-                        dir = true;
+                        dir = false;
                     }
-                    monsters[j]->InjuredAnimation("MonsterAnimation/monster1_blood", 20, dir);
+                    monsters[j]->InjuredAnimation("MonsterAnimation2/monster2_injured", 4, dir);
                     /*Over*/
                 }
             }
@@ -650,7 +646,7 @@ void GameScene::update(float dt){
         character->crazyMode=true;
         
         character->crazyStart("bear1.png");
-        this->scheduleOnce( schedule_selector(GameScene::crazyUpdate), 50.0f );
+        this->scheduleOnce( schedule_selector(GameScene2::crazyUpdate), 50.0f );
         
         //
     }
@@ -658,7 +654,7 @@ void GameScene::update(float dt){
     
 }
 
-void GameScene::joyStickInitialize(){
+void GameScene2::joyStickInitialize(){
     float joystickRadius = 220;
     joyStick=new SneakyJoystick();
     joyStick->autorelease();
@@ -686,7 +682,7 @@ void GameScene::joyStickInitialize(){
 
 
 
-bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
+bool GameScene2::isRectCollision (CCRect rect1, CCRect rect2)
 {
     float x1 = rect1.origin.x;
     float y1 = rect1.origin.y;
@@ -710,7 +706,7 @@ bool GameScene::isRectCollision (CCRect rect1, CCRect rect2)
 }
 
 
-void GameScene::button1CallBack(Object* pSender)
+void GameScene2::button1CallBack(Object* pSender)
 {
     if(character->crazyMode==false){
     for(int i=0; i<numberOfItem; i++){
@@ -741,7 +737,7 @@ void GameScene::button1CallBack(Object* pSender)
 
 
 
-void GameScene::button2CallBack(Object* pSender)
+void GameScene2::button2CallBack(Object* pSender)
 {
    
     for(int i=0; i<numberOfItem; i++){
@@ -759,7 +755,7 @@ void GameScene::button2CallBack(Object* pSender)
     }
 }
 
-void GameScene::button3CallBack(Object* pSender)
+void GameScene2::button3CallBack(Object* pSender)
 {
     if(character->getNumOfBomb()>0){
         for(int i=0; i<numberOfItem; i++){
@@ -779,12 +775,12 @@ void GameScene::button3CallBack(Object* pSender)
     
 }
 
-void GameScene::InitialMonsters(int num){
+void GameScene2::InitialMonsters(int num){
     Size visibleSize = Director::getInstance()->getVisibleSize();
      int premonsternum = monsters.size();
     for(int i=0; i<num; i++){
-        monster = Monster::create();
-        monster-> InitMonsterSprite("MonsterAnimation/monster1.png","MonsterAnimation/Blood_back.png","MonsterAnimation/Blood_fore.png");
+        monster = Monster2::create();
+        monster-> InitMonsterSprite("MonsterAnimation2/monster2.png","MonsterAnimation2/Blood_back.png","MonsterAnimation2/Blood_fore.png");
         int minY = monster->monstersp->getContentSize().height / 2;
         int maxY = (visibleSize.height - monster->monstersp->getContentSize().height / 2)-170;
         int rangeY = maxY-minY;
@@ -817,13 +813,13 @@ void GameScene::InitialMonsters(int num){
         this->addChild(monsters[i]->fireball);
         }
     
-    //schedule(schedule_selector(GameScene::shootFireBall), 7.0f, 100, 1.0f);
-    //schedule(schedule_selector(GameScene::bossShoot), 7.0f, 100, 1.0f);
+    schedule(schedule_selector(GameScene2::shootFireBall), 7.0f, 100, 1.0f);
+    //schedule(schedule_selector(GameScene2::bossShoot), 7.0f, 100, 1.0f);
     
     
 }
 
-void GameScene::shootFireBall(float delta){
+void GameScene2::shootFireBall(float delta){
     int j=0;
     for(int i=0; i<numbeOfMonster; i++){
         monsters[i]->fireball->getPhysicsBody()->setEnable(true);
@@ -838,13 +834,13 @@ void GameScene::shootFireBall(float delta){
     
 }
 
-void GameScene::bossShoot(float delta){
+void GameScene2::bossShoot(float delta){
     boss->StopAnimation(10001);
     boss->SetAnimation("boss_plist/boss_shot/boss_shot-ipadhd.plist", "boss_plist/boss_shot/boss_shot-ipadhd.png","boss_shot", 23, "boss_shot");
     boss->shoot(this);
 }
 
-void GameScene::crazyUpdate(float dt)
+void GameScene2::crazyUpdate(float dt)
 {
     //CCSprite* sp4 = (CCSprite*)this->getChildByTag(104); //获取 tag=104 的精灵
     //sp4->setPosition( sp4->getPosition() + ccp(100,0) ); //移动100
@@ -856,8 +852,8 @@ void GameScene::crazyUpdate(float dt)
 
 
 
-void GameScene::GoToTransScene(float dt){
-    auto transcene = TransScene::createScene();
+void GameScene2::GoToTransScene(float dt){
+    auto transcene = TransScene2::createScene();
     Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, transcene));
 }
 

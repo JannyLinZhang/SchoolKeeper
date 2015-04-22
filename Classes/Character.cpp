@@ -266,10 +266,9 @@ void Character::BombEnd(){
 
 
 void Character::sendStorm(const char *name_plist, const char *name_png, const char *name_each, const unsigned int num,const char *name_type){
-    //if(IsAttack)
-    //  return;
+
     IsAttack=true;
-    attactDuration = false;
+    attactDuration = true;
     storm->setVisible(true);
     if(CharDirecton==false){
         storm->setPositionX(character->getPosition().x+100);

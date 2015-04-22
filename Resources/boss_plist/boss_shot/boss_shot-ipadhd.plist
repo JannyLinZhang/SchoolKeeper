@@ -7,7 +7,7 @@
             <key>boss_shot1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{357,153}}</string>
+                <string>{{429,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>boss_shot10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,2},{357,153}}</string>
+                <string>{{788,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,20 +33,20 @@
             <key>boss_shot11.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{720,2},{357,153}}</string>
+                <string>{{2,2},{425,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{357,153}}</string>
+                <string>{{0,0},{425,153}}</string>
                 <key>sourceSize</key>
-                <string>{357,153}</string>
+                <string>{425,153}</string>
             </dict>
             <key>boss_shot12.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1079,2},{357,153}}</string>
+                <string>{{1147,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>boss_shot13.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1079,2},{357,153}}</string>
+                <string>{{1147,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>boss_shot14.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1438,2},{357,153}}</string>
+                <string>{{1506,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>boss_shot15.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1797,2},{357,153}}</string>
+                <string>{{1865,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>boss_shot16.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1797,2},{357,153}}</string>
+                <string>{{1865,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>boss_shot17.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1797,2},{357,153}}</string>
+                <string>{{1865,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -124,7 +124,7 @@
             <key>boss_shot18.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1797,2},{357,153}}</string>
+                <string>{{1865,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -137,7 +137,7 @@
             <key>boss_shot19.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1797,2},{357,153}}</string>
+                <string>{{1865,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -150,7 +150,7 @@
             <key>boss_shot2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2156,2},{357,153}}</string>
+                <string>{{2224,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -163,7 +163,7 @@
             <key>boss_shot20.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1797,2},{357,153}}</string>
+                <string>{{1865,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -176,7 +176,7 @@
             <key>boss_shot21.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2515,2},{357,153}}</string>
+                <string>{{2583,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -189,7 +189,7 @@
             <key>boss_shot22.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2515,2},{357,153}}</string>
+                <string>{{2583,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -202,7 +202,7 @@
             <key>boss_shot23.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2515,2},{357,153}}</string>
+                <string>{{2583,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -215,7 +215,7 @@
             <key>boss_shot3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2874,2},{357,153}}</string>
+                <string>{{2942,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -228,7 +228,7 @@
             <key>boss_shot4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,2},{357,153}}</string>
+                <string>{{788,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -241,7 +241,7 @@
             <key>boss_shot5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,2},{357,153}}</string>
+                <string>{{788,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -254,7 +254,7 @@
             <key>boss_shot6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,2},{357,153}}</string>
+                <string>{{788,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -267,7 +267,7 @@
             <key>boss_shot7.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,2},{357,153}}</string>
+                <string>{{788,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -280,7 +280,7 @@
             <key>boss_shot8.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,2},{357,153}}</string>
+                <string>{{788,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -293,7 +293,7 @@
             <key>boss_shot9.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{361,2},{357,153}}</string>
+                <string>{{788,2},{357,153}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -309,13 +309,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>boss_shot-ipadhd.png</string>
+            <string>boss_shoot-ipadhd.png</string>
             <key>size</key>
-            <string>{3233,157}</string>
+            <string>{3301,157}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:879aea9ffe8f82e083bb1b532cd336b6:4b54ae90455ec7cc37d8297ae6ac91ba:9f11c539f28b74db58f63b3e6b97a9c1$</string>
+            <string>$TexturePacker:SmartUpdate:62eeb939f809917962521316622e706e:3536ce83c60981e4f452c928558018b8:fe2107e069eac5ae5600d6ee06095a75$</string>
             <key>textureFileName</key>
-            <string>boss_shot-ipadhd.png</string>
+            <string>boss_shoot-ipadhd.png</string>
         </dict>
     </dict>
 </plist>

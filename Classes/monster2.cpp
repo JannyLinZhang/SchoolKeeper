@@ -40,12 +40,12 @@ void Monster2::InitMonsterSprite(char* name){
     //initialize it's fireball
     fireball = Sprite::create("fireball.png");
     fireball->setVisible(false);
-    fireball->setScale(0.2);
+    fireball->setScale(0.3);
     auto fireBody = PhysicsBody::createBox( fireball->getContentSize()/5);
     //fireBody->setDynamic(false);
-    fireBody->setCollisionBitmask( FIREBALL_COLLISION_BITMASK );
-    fireBody->setCategoryBitmask(2);
-    fireBody->setContactTestBitmask( 1 );
+    fireBody->setCollisionBitmask(FIREBALL_COLLISION_BITMASK);
+    fireBody->setCategoryBitmask(8);
+    fireBody->setContactTestBitmask(1);
     fireball->setPhysicsBody(fireBody);
     this->addChild(monstersp);
 }

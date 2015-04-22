@@ -94,8 +94,10 @@ bool GameScene2::init()
     auto characterBody = PhysicsBody::createBox(character->GetSprite()->getContentSize()/1.1);
     characterBody->setRotationEnable(false);
     characterBody->setCollisionBitmask( CHARACTER_COLLISION_BITMASK );
-    characterBody->setCategoryBitmask(1);
-    characterBody->setContactTestBitmask(2);
+    //characterBody->setCategoryBitmask(1);
+    //characterBody->setContactTestBitmask(2);
+    characterBody->setCategoryBitmask(9);
+    characterBody->setContactTestBitmask(10);
     characterBody->setPositionOffset(Point(0,-5));
     character->setPhysicsBody( characterBody );
     this->addChild(character);
@@ -259,7 +261,6 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
     if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&&FIREBALL_COLLISION_BITMASK==b->getCollisionBitmask())
         
     {
-        printf("*******");
         if(character->crazyMode==false){
             progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
             b->setEnable(false);
@@ -275,7 +276,6 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
                 
             }
         }else{
-            //******
             progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
             b->setEnable(false);
             if(character->beingAttactDuration==false){
@@ -296,7 +296,6 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
     
     if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&&FIREBALL_COLLISION_BITMASK==a->getCollisionBitmask())
     {
-        printf("*******");
         if(character->crazyMode==false){
             progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
             a->setEnable(false);
@@ -304,8 +303,6 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
                 character->GetSprite()->stopAllActions();
                 character->stopAllActions();
                 character->Isbomb=true;
-                //        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
-                //        character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie");
                 if(a->getPosition().x<=b->getPosition().x){
                     character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
                 }else{
@@ -314,7 +311,6 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
                 
             }
         }else{
-            //******
             progressView->setCurrentProgress(progressView->getCurrentProgress()-20);
             a->setEnable(false);
             if(character->beingAttactDuration==false){
@@ -351,7 +347,6 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
         
         
     {
-        printf("======");
         for(int i=0; i<numbeOfMonster; i++){
             if(monsters[i]->dead==true)
                 continue;
@@ -365,8 +360,6 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
                 }
                 
                 testMonster->InjuredAnimation("MonsterAnimation2/monster2_injured", 4, dir);
-                /*Update by Lin*/
-               // changeMode->setCurrentProgress(changeMode->getCurrentProgress()+20);
                 
             }
             
@@ -388,57 +381,12 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
                 }
                 
                 testMonster->InjuredAnimation("MonsterAnimation2/monster2_injured", 4, dir);
-                /*Update by Lin*/
-               // changeMode->setCurrentProgress(changeMode->getCurrentProgress()+5);
-                
             }
             
         }
     }
-    
-    if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&& BULLET_COLLISION_BITMASK==b->getCollisionBitmask()){
-        progressView->setCurrentProgress(progressView->getCurrentProgress()-10);
-        b->setEnable(false);
-        if(character->beingAttactDuration==false){
-            character->GetSprite()->stopAllActions();
-            character->stopAllActions();
-            character->Isbomb=true;
-            
-            if(a->getPosition().x<=b->getPosition().x){
-                character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",false);
-            }else{
-                character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
-            }
-
-            
-            
-            //character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
-        
-    }
-    }
-    if(CHARACTER_COLLISION_BITMASK==b->getCollisionBitmask()&& BULLET_COLLISION_BITMASK==a->getCollisionBitmask()){
-        progressView->setCurrentProgress(progressView->getCurrentProgress()-10);
-        a->setEnable(false);
-        if(character->beingAttactDuration==false){
-            character->GetSprite()->stopAllActions();
-            character->stopAllActions();
-            character->Isbomb=true;
-            
-            if(a->getPosition().x<=b->getPosition().x){
-                character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
-            }else{
-                character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",false);
-            }
-          //  character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
-    }
-
-
-    
-    }
-    
     return true;
 }
-    
 
 
 bool GameScene2::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
@@ -461,7 +409,7 @@ void GameScene2::update(float dt){
     }
     
     
-    if(currNumMonsters == 0 && batch == 2){
+    if(currNumMonsters == 0 && batch == 1){
         
         Size visibleSize = Director::getInstance()->getVisibleSize();
         Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -473,7 +421,7 @@ void GameScene2::update(float dt){
         this->scheduleOnce(schedule_selector(GameScene2::GoToTransScene), 2.0);
     }
     
-    else if(currNumMonsters == 0 && batch != 2){
+    else if(currNumMonsters == 0 && batch != 1){
     
      batch++;
         InitialMonsters(10);
@@ -879,7 +827,6 @@ void GameScene2::InitialMonsters(int num){
         monsters[i]->monsterBody  = PhysicsBody::createBox(monsters[i]->GetSprite()->getContentSize());
         printf("the wird is %f",monsters[i]->GetSprite()->getContentSize().width);
         monsters[i]->monsterBody->setRotationEnable(false);
-        //monsters[i]->monsterBody->setDynamic(false);
         monsters[i]->monsterBody->setCollisionBitmask(MONSTER_COLLISION_BITMASK );
         monsters[i]->monsterBody->setCategoryBitmask(9);
         monsters[i]->monsterBody->setContactTestBitmask(10);
@@ -891,9 +838,6 @@ void GameScene2::InitialMonsters(int num){
         }
     
     schedule(schedule_selector(GameScene2::shootFireBall), 7.0f, 100, 1.0f);
-    //schedule(schedule_selector(GameScene2::bossShoot), 7.0f, 100, 1.0f);
-    
-    
 }
 
 void GameScene2::shootFireBall(float delta){
@@ -919,12 +863,7 @@ void GameScene2::bossShoot(float delta){
 
 void GameScene2::crazyUpdate(float dt)
 {
-    //CCSprite* sp4 = (CCSprite*)this->getChildByTag(104); //获取 tag=104 的精灵
-    //sp4->setPosition( sp4->getPosition() + ccp(100,0) ); //移动100
-    //character->InitCharacterSprite("character.png");
-    //  character->StopAnimation("character.png",10001);
     character->crazyEnd("19.png");
-    
 }
 
 

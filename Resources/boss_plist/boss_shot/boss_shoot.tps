@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.7.1</string>
         <key>fileName</key>
-        <string>C:/Users/Caroline/Desktop/526/rename/boss_shot/boss_shot.tps</string>
+        <string>C:/Users/Caroline/Desktop/plist副本2/boss shoot/boss_shoot.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -179,7 +179,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>boss_shot{v}.plist</filename>
+                <filename>boss_shoot{v}.plist</filename>
             </struct>
         </map>
         <key>multiPack</key>

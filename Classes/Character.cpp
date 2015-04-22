@@ -87,7 +87,6 @@ void Character::StopCrazyAnimation(char* pics,const unsigned int num){
     this->removeChild(character,true);//把原来的精灵删除掉
     character=CCSprite::create(pics);//恢复精灵原来的贴图样子
     character->setFlipX(CharDirecton);
-    character->setScale(0.5f);
     this->addChild(character);;
     
     IsRunning=false;
@@ -185,7 +184,6 @@ void Character::crazyStart(char* pics){
     this->removeChild(character,true);//把原来的精灵删除掉
     character=CCSprite::create(pics);//恢复精灵原来的贴图样子
     character->setFlipX(CharDirecton);
-    character->setScale(0.5f);
     this->addChild(character);
     IsAttack=false;
     // IsRunning=false;
@@ -267,13 +265,13 @@ void Character::BombEnd(){
 
 
 
-void Character::sendStorm(){
+void Character::sendStorm(const char *name_plist, const char *name_png, const char *name_each, const unsigned int num,const char *name_type){
     //if(IsAttack)
     //  return;
     IsAttack=true;
     attactDuration = false;
     storm->setVisible(true);
-    if(CharDirecton==true){
+    if(CharDirecton==false){
         storm->setPositionX(character->getPosition().x+100);
     }else{
         storm->setPositionX(character->getPosition().x-100);
@@ -291,7 +289,7 @@ void Character::sendStorm(){
     int y=storm->getPosition().y;
     MoveTo *moveto ;
     
-    if(CharDirecton==true){
+    if(CharDirecton==false){
         // x =storm->getPosition().x+800;
         moveto = MoveTo::create(1, ccp(storm->getPosition().x+800,storm->getPosition().y));
         //         MoveTo *moveto = MoveTo::create(6, ccp());
@@ -307,8 +305,35 @@ void Character::sendStorm(){
     //CCActionInterval* attackact=CCSequence::create(moveto,callFunc,NULL);
     
     storm->runAction(shoot);
+    
+    
+    CCSpriteFrameCache *m_frameCache=CCSpriteFrameCache::sharedSpriteFrameCache();
+    m_frameCache->addSpriteFramesWithFile(name_plist,name_png);
+    Vector<SpriteFrame*> animFrames(num);
+    char str[100]={0};
+    for(int i=1; i<=num; i++){
+        sprintf(str, "%s%d.png",name_each,i);
+        SpriteFrame* frame = m_frameCache->getSpriteFrameByName(str);
+        animFrames.insert(i-1, frame);
+    }
+    CCAnimation* animation=CCAnimation::createWithSpriteFrames(animFrames);
+    
+    
+    
+    animation->setLoops(1);//alwasy loop
+    animation->setDelayPerUnit(0.1f);
+    
+    CCAnimate* act=CCAnimate::create(animation);
+    CCCallFunc* callFunc=CCCallFunc::create(this,callfunc_selector(Character::stormEnd));
+    CCActionInterval* attackact=CCSequence::create(act,callFunc,NULL);
+    
+    character->runAction(attackact);
+    act->setTag(10002);
+    
+    return;
+    
+    
 }
-
 
 void Character::stormEnd(){
     

@@ -103,13 +103,19 @@ bool GameScene3::init()
     boss->InitBullets(this);
     boss->InitCharacterSprite("boss_plist/boss.png");
     boss->setPosition(500, 500);
+    
+    auto bossBody = PhysicsBody::createBox(boss->GetSprite()->getContentSize()/1.1);
+    bossBody->setCollisionBitmask( BOSS_COLLISION_BITMASK );
+    bossBody->setCategoryBitmask(9);
+    bossBody->setContactTestBitmask(10);
+    boss->setPhysicsBody(bossBody);
     this->addChild(boss);
     
     
     
     
     //Monster
-    numbeOfMonster = 1;
+    numbeOfMonster = 10;
     currNumMonsters = 0;
     batch = 0;
     InitialMonsters(numbeOfMonster);
@@ -252,7 +258,67 @@ bool GameScene3::onContactBegin(cocos2d::PhysicsContact &contact){
         }
         
     }
-    
+    if(STORM_COLLISION_BITMASK==b->getCollisionBitmask()&&BOSS_COLLISION_BITMASK==a->getCollisionBitmask())
+    {
+        boss->StopAnimation(10001);
+        boss->StopShoot();
+        boss->SetBombAnimation("boss_plist/boss_dead/boss_dead-ipadhd.plist", "boss_plist/boss_dead/boss_dead-ipadhd.png","boss_dead", 15, "boss_dead");
+    }
+
+    if(STORM_COLLISION_BITMASK==a->getCollisionBitmask()&&BOSS_COLLISION_BITMASK==b->getCollisionBitmask())
+    {
+        boss->StopAnimation(10001);
+        boss->StopShoot();
+        boss->SetBombAnimation("boss_plist/boss_dead/boss_dead-ipadhd.plist", "boss_plist/boss_dead/boss_dead-ipadhd.png","boss_dead", 15, "boss_dead");
+    }
+
+    if(STORM_COLLISION_BITMASK==b->getCollisionBitmask()&&MONSTER_COLLISION_BITMASK==a->getCollisionBitmask())
+        
+        
+    {
+        for(int i=0; i<numbeOfMonster; i++){
+            if(monsters[i]->dead==true)
+                continue;
+            
+            testMonster=monsters[i];
+            
+            if(testMonster->monsterBody==a){
+                bool dir = false;
+                if(character->getPosition().x > testMonster->getPosition().x){
+                    dir = true;
+                }
+                
+                testMonster->InjuredAnimation("MonsterAnimation/monster1_blood", 20, dir);
+                /*Update by Lin*/
+              //  changeMode->setCurrentProgress(changeMode->getCurrentProgress()+20);
+                
+            }
+            
+        }
+    }
+    if(STORM_COLLISION_BITMASK==a->getCollisionBitmask()&&MONSTER_COLLISION_BITMASK==b->getCollisionBitmask())
+        
+    {
+        for(int i=0; i<numbeOfMonster; i++){
+            if(monsters[i]->dead==true)
+                continue;
+            
+            testMonster=monsters[i];
+            
+            if(testMonster->monsterBody==b){
+                bool dir = false;
+                if(character->getPosition().x > testMonster->getPosition().x){
+                    dir = true;
+                }
+                
+                testMonster->InjuredAnimation("MonsterAnimation/monster1_blood", 20, dir);
+                /*Update by Lin*/
+               // changeMode->setCurrentProgress(changeMode->getCurrentProgress()+20);
+                
+            }
+            
+        }
+    }
     if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&&FIREBALL_COLLISION_BITMASK==b->getCollisionBitmask())
         
     {
@@ -286,8 +352,6 @@ bool GameScene3::onContactBegin(cocos2d::PhysicsContact &contact){
                 character->GetSprite()->stopAllActions();
                 character->stopAllActions();
                 character->Isbomb=true;
-                //        character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");
-                //        character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie");
                 if(a->getPosition().x<=b->getPosition().x){
                     character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
                 }else{
@@ -319,15 +383,27 @@ bool GameScene3::onContactBegin(cocos2d::PhysicsContact &contact){
     if(CHARACTER_COLLISION_BITMASK==a->getCollisionBitmask()&& BULLET_COLLISION_BITMASK==b->getCollisionBitmask()){
         progressView->setCurrentProgress(progressView->getCurrentProgress()-10);
         b->setEnable(false);
+        
         if(character->beingAttactDuration==false){
+            
+            
             character->GetSprite()->stopAllActions();
             character->stopAllActions();
             character->Isbomb=true;
             
+            
             if(a->getPosition().x<=b->getPosition().x){
+                if(character->crazyMode==false){
                 character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",false);
+                }else{
+                    character->SetBombAnimation("character/red/red_role_down-ipadhd.plist", "character/red/red_role_down-ipadhd.png","red_role_down", 5, "lie",false);
+                }
             }else{
+                if(character->crazyMode==false){
                 character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
+                }else{
+                    character->SetBombAnimation("character/red/red_role_down-ipadhd.plist", "character/red/red_role_down-ipadhd.png","red_role_down", 5, "lie",true);
+                }
             }
 
             
@@ -345,9 +421,17 @@ bool GameScene3::onContactBegin(cocos2d::PhysicsContact &contact){
             character->Isbomb=true;
             
             if(a->getPosition().x<=b->getPosition().x){
+                if(character->crazyMode==false){
                 character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
+                }else{
+                    character->SetBombAnimation("character/red/red_role_down-ipadhd.plist", "character/red/red_role_down-ipadhd.png","red_role_down", 5, "lie",true);
+                }
             }else{
+                 if(character->crazyMode==false){
                 character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",false);
+                 } else{
+                         character->SetBombAnimation("character/red/red_role_down-ipadhd.plist", "character/red/red_role_down-ipadhd.png","red_role_down", 5, "lie",false);
+                     }
             }
           //  character->SetBombAnimation("character/lie/lie-ipadhd.plist", "character/lie/lie-ipadhd.png","lie", 11, "lie");}
     }
@@ -370,43 +454,6 @@ bool GameScene3::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
 
 void GameScene3::update(float dt){
     
-    /*Update by Lin*/
-    
-    //determine whether all monsters being killed
-    /*
-    for(int i=0; i<monsters.size(); i++){
-        if(monsters[i]->dead != true){
-            currNumMonsters++;
-        }
-    }
-    
-    
-    if(currNumMonsters == 0 && batch == 2){
-        
-        Size visibleSize = Director::getInstance()->getVisibleSize();
-        Vec2 origin = Director::getInstance()->getVisibleOrigin();
-        
-        auto label = Label::createWithTTF("YOU WIN !", "fonts/Marker Felt.ttf", 256);
-        label->setPosition(Vec2(visibleSize.width / 2,  visibleSize.height / 2));
-        this->addChild(label);
-        
-        this->scheduleOnce(schedule_selector(GameScene::GoToTransScene), 2.0);
-    }
-    
-    else if(currNumMonsters == 0 && batch != 2){
-    
-     batch++;
-        InitialMonsters(2);
-        numbeOfMonster += 2;
-    }
-    
-    else{
-        currNumMonsters = 0;
-    }
-    */
-    /*Update by Lin over*/
-    
-
     
     
     Point poi = ccpMult(joyStick->getVelocity(), 50);
@@ -459,10 +506,20 @@ void GameScene3::update(float dt){
                 character->GetSprite()->stopAllActions();
                 character->stopAllActions();
                 character->Isbomb=true;
+                if(character->crazyMode==false){
                 if(character->getPosition().x<boss->getPosition().x){
                     character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",false);
                 }else{
                     character->SetBombAnimation("character/role_down-ipadhd.plist", "character/role_down-ipadhd.png","role_down", 5, "lie",true);
+                }
+                }else{
+                    
+                    if(character->getPosition().x<boss->getPosition().x){
+                        character->SetBombAnimation("character/red/red_role_down-ipadhd.plist", "character/red/red_role_down-ipadhd.png","red_role_down", 5, "lie",false);
+                    }else{
+                      character->SetBombAnimation("character/red/red_role_down-ipadhd.plist", "character/red/red_role_down-ipadhd.png","red_role_down", 5, "lie",true);
+                    }
+                    
                 }
             }
         }
@@ -484,7 +541,7 @@ void GameScene3::update(float dt){
     if(poi.x==0 && poi.y==0){
         
         if(character->crazyMode==true){
-            character->StopCrazyAnimation("bear1.png",10001);
+            character->StopCrazyAnimation("character/red/20.png",10001);
             //   character->StopAnimation(<#char *pics#>, <#const unsigned int num#>)
         }else{
             character->StopAnimation("19.png",10001);
@@ -502,7 +559,7 @@ void GameScene3::update(float dt){
                     //            character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, false);
                     character->SetRunAnimation("character/role_run-ipadhd.plist", "character/role_run-ipadhd.png","role_run", 11, false);
                 }else{
-                    character->SetRunAnimation("BearAnimation/bearAnimation.plist", "BearAnimation/bearAnimationSheet.png","bear", 8, true);
+                    character->SetRunAnimation("character/red/red_role_run-ipadhd.plist", "character/red/red_role_run-ipadhd.png","red_role_run", 11, false);
                 }
                 if(poi.y>=0){
                     character->setPosition(character->getPosition().x+x,character->getPosition().y+y);
@@ -515,7 +572,7 @@ void GameScene3::update(float dt){
                     //            character->SetRunAnimation("character/ch_go-ipadhd.plist", "character/ch_go-ipadhd.png","run", 6, true);
                     character->SetRunAnimation("character/role_run-ipadhd.plist", "character/role_run-ipadhd.png","role_run", 11, true);
                 }else{
-                    character->SetRunAnimation("BearAnimation/bearAnimation.plist", "BearAnimation/bearAnimationSheet.png","bear", 8, false);
+                    character->SetRunAnimation("character/red/red_role_run-ipadhd.plist", "character/red/red_role_run-ipadhd.png","red_role_run", 11, true);
                 }
                 if(poi.y>=0){
                     character->setPosition(character->getPosition().x-x,character->getPosition().y+y);
@@ -546,7 +603,7 @@ void GameScene3::update(float dt){
                 boss->StopAnimation(10001);
                 boss->StopShoot();
                 boss->SetBombAnimation("boss_plist/boss_dead/boss_dead-ipadhd.plist", "boss_plist/boss_dead/boss_dead-ipadhd.png","boss_dead", 15, "boss_dead");
-                changeMode->setCurrentProgress(changeMode->getCurrentProgress()+1);
+                changeMode->setCurrentProgress(changeMode->getCurrentProgress()+20);
 
             }
     
@@ -582,7 +639,7 @@ void GameScene3::update(float dt){
                 }
                 testMonster->InjuredAnimation("MonsterAnimation/monster1_blood", 20, dir);
                 /*Update by Lin*/
-                changeMode->setCurrentProgress(changeMode->getCurrentProgress()+1);
+                changeMode->setCurrentProgress(changeMode->getCurrentProgress()+20);
             }
         }
         }//end of for loop
@@ -639,7 +696,7 @@ void GameScene3::update(float dt){
         changeMode->setCurrentProgress(0.0f);
         character->crazyMode=true;
         
-        character->crazyStart("bear1.png");
+        character->crazyStart("character/red/20.png");
         this->scheduleOnce( schedule_selector(GameScene3::crazyUpdate), 50.0f );
         
         //
@@ -720,7 +777,7 @@ void GameScene3::button1CallBack(Object* pSender)
             character->SetAnimation("character/role_hit-ipadhd.plist", "character/role_hit-ipadhd.png","role_hit", 10, "hit");
         }else{
             if(character->IsAttack==false){
-                character->sendStorm();
+                 character->sendStorm("character/red/red_role_special-ipadhd.plist", "character/red/red_role_special-ipadhd.png","red_role_special", 16, "hit");
             }
         }
     }

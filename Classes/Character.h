@@ -59,7 +59,7 @@ public:
     cocos2d::CCSprite* GetSprite();
     cocos2d::CCSprite* GetStormSprite();
     CREATE_FUNC(Character);
-    void sendStorm();
+    void sendStorm(const char *name_plist, const char *name_png, const char *name_each, const unsigned int num,const char *name_type);
     void stormEnd();
     cocos2d::CCSprite* character;//精灵
     Sprite* storm;//技能风暴

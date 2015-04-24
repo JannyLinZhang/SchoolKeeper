@@ -136,13 +136,13 @@ void Monster2:: MonsterSeeRun(){
     //if((MonsterDirection==false && actualX >= currPoint.x))
     if(actualX >= currPoint.x)
     {
-        this->SetAnimation("MonsterAnimation2/monster2_run", 5, false);
+        this->SetAnimation("MonsterAnimation2/monster2_run", 8, false);
         MonsterDirection = false;
     }
     //else if(MonsterDirection==true && actualX < currPoint.x){
     else
     {
-        this->SetAnimation("MonsterAnimation2/monster2_run", 5, true);
+        this->SetAnimation("MonsterAnimation2/monster2_run", 8, true);
         MonsterDirection = true;
     }
 
@@ -198,7 +198,8 @@ void Monster2::InjuredEnd(){
     injured=false;
     Monster_blood->setCurrentProgress(Monster_blood->getCurrentProgress()-250);
     if(Monster_blood->getCurrentProgress()<=0){
-        DeadAnimation("MonsterAnimation2/monster2_dead", 7, MonsterDirection);
+        
+        DeadAnimation("MonsterAnimation2/monster2_dead", 2, MonsterDirection);
     }
     else{
         this->schedule(schedule_selector(Monster2::updateMonster), 0.2f);
@@ -231,8 +232,8 @@ void Monster2::DeadAnimation(const char *name_each,const unsigned int num,bool d
     void Monster2::DeadEnd(){
 
     this->removeChild(monstersp,true);
-    monstersp = Sprite::create("MonsterAnimation2/monster2_dead7.png");
-    monstersp->setFlippedX(MonsterDirection);
+    monstersp = Sprite::create("MonsterAnimation2/monster2_dead2.png");
+    monstersp->setFlippedX(!MonsterDirection);
     this->addChild(monstersp);
     isrunning=true;
     isattack=false;
@@ -257,7 +258,7 @@ void Monster2::BlinkEnd(){
 }
 
 void Monster2::GetInjured(){
-    this->InjuredAnimation("MonsterAnimation2/monster_dead", 7, false);
+    this->InjuredAnimation("MonsterAnimation2/monster_dead", 2, false);
 }
 
 
@@ -271,7 +272,7 @@ void Monster2::gamelogic(){
     if(dead) return;
     this->schedule(schedule_selector(Monster2::updateMonster), 0.2f);
 }
-
+/*
 void Monster2::shoot(cocos2d::Layer* layer){
     fireball->setPosition(this->getPosition());
     fireball->setVisible(true);
@@ -291,5 +292,63 @@ void Monster2::shoot(cocos2d::Layer* layer){
 
 void Monster2::shootEnd(){
     fireball->setVisible(false);
+}*/
+
+void Monster2::shoot(const char* name_each, const unsigned int num,bool dir)
+{
+    
+    this->stopAllActions();  //When being attacked, stop all animation.
+    this->removeChild(monstersp,true); //remove current monster
+    this->unschedule(schedule_selector(Monster2::updateMonster));
+    monstersp = Sprite::create("MonsterAnimation2/monster2.png");
+    monstersp -> setFlippedX(!(this->MonsterDirection));
+    this->addChild(monstersp);
+    
+    Animation* animation = Animation::create();
+    for(int i=1;i<=num;i++){
+        char str[100] = {0};
+        sprintf(str,"%s%d.png",name_each,i);
+        animation->addSpriteFrameWithFile(str);
+    }
+    animation->setDelayPerUnit(2.8 / 40.0f);
+    animation->setRestoreOriginalFrame(true);
+    animation->setLoops(1);   //anaimtion loop
+    Animate* act = Animate::create(animation);
+    
+    CallFunc* callFunc=CallFunc::create(this,callfunc_selector(Monster2::shootInprocess));
+    ActionInterval* startshoot = Sequence::create(act, callFunc, NULL);
+    monstersp->runAction(startshoot);
+ 
 }
+
+void Monster2::shootInprocess()
+{
+    isrunning = false;
+    this->schedule(schedule_selector(Monster2::updateMonster), 0.2f);
+
+    fireball->getPhysicsBody()->setEnable(true);
+    fireball->setPosition(this->getPosition());
+    fireball->setVisible(true);
+    
+    Point direction;
+    if(this->MonsterDirection==true){
+        direction = Point(1, 0);
+    }else{
+        direction = Point(-1, 0);
+    }
+    direction.normalize();
+    Point destination = this->getPosition()+1200*direction;
+    MoveTo *moveto = MoveTo::create(6, destination);
+    Sequence* shoot=Sequence::create(moveto, CallFunc::create( std::bind(&Monster2::shootEnd,this) ), NULL);
+    
+    fireball->runAction(shoot);
+}
+
+void Monster2::shootEnd(){
+    fireball->setVisible(false);
+}
+
+void Monster2::shootAnimationEnd(){
+}
+
 

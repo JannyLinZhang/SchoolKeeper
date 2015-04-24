@@ -359,7 +359,7 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
                     dir = true;
                 }
                 
-                testMonster->InjuredAnimation("MonsterAnimation2/monster2_injured", 4, dir);
+                testMonster->InjuredAnimation("MonsterAnimation2/monster2_blood", 19, dir);
                 
             }
             
@@ -380,7 +380,7 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
                     dir = true;
                 }
                 
-                testMonster->InjuredAnimation("MonsterAnimation2/monster2_injured", 4, dir);
+                testMonster->InjuredAnimation("MonsterAnimation2/monster2_blood", 19, dir);
             }
             
         }
@@ -606,11 +606,11 @@ void GameScene2::update(float dt){
             {
                 //testMonster->InjuredAnimation("MonsterAnimation/monster_fall", 2, true);
                 /*Update by Lin*/
-                bool dir = true;
+                bool dir = false;
                 if(character->getPosition().x > testMonster->getPosition().x){
-                    dir = false;
+                    dir = true;
                 }
-                testMonster->InjuredAnimation("MonsterAnimation2/monster2_injured", 4, dir);
+                testMonster->InjuredAnimation("MonsterAnimation2/monster2_blood", 19, dir);
                 /*Update by Lin*/
                 changeMode->setCurrentProgress(changeMode->getCurrentProgress()+5);
             }
@@ -646,11 +646,11 @@ void GameScene2::update(float dt){
                 if(length<150){
                     //monsters[j]->InjuredAnimation("MonsterAnimation/monster_fall", 2, true);
                     /*new added by Lin*/
-                    bool dir = true;
+                    bool dir = false;
                     if(character->getPosition().x > monsterPosition.x){
-                        dir = false;
+                        dir = true;
                     }
-                    monsters[j]->InjuredAnimation("MonsterAnimation2/monster2_injured", 4, dir);
+                    monsters[j]->InjuredAnimation("MonsterAnimation2/monster2_blood", 19, dir);
                     /*Over*/
                 }
             }
@@ -839,13 +839,34 @@ void GameScene2::InitialMonsters(int num){
     
     schedule(schedule_selector(GameScene2::shootFireBall), 7.0f, 100, 1.0f);
 }
-
+/*
 void GameScene2::shootFireBall(float delta){
     int j=0;
     for(int i=0; i<numbeOfMonster; i++){
         monsters[i]->fireball->getPhysicsBody()->setEnable(true);
         if(CCRANDOM_0_1()>0.7&& monsters[i]->dead == false){
         monsters[i]->shoot(this);
+            j++;
+        }
+        if(j==2){
+            return;
+        }
+    }
+    
+}*/
+void GameScene2::shootFireBall(float delta){
+    int j=0;
+    for(int i=0; i<numbeOfMonster; i++){
+        //monsters[i]->fireball->getPhysicsBody()->setEnable(true);
+        if(CCRANDOM_0_1()>0.7&& monsters[i]->dead == false){
+            testMonster=monsters[i];
+            bool dir = true;
+            if(character->getPosition().x > testMonster->getPosition().x){
+                dir = false;
+            }
+            
+            monsters[i]->shoot("MonsterAnimation2/shoot",23,false);
+            //monsters[i]->fireball->getPhysicsBody()->setEnable(true);
             j++;
         }
         if(j==2){

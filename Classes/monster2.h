@@ -46,8 +46,12 @@ public:
     //void update(float delta);
     void updateMonster(float delta);
     void gamelogic();
-    void shoot(cocos2d::Layer *layer);
+    //void shoot(cocos2d::Layer *layer);
+    //void shootEnd();
+    void shoot(const char* name_each, const unsigned int num,bool dir);
+    void shootInprocess();
     void shootEnd();
+    void shootAnimationEnd();
     CREATE_FUNC(Monster2);
     
     

@@ -38,7 +38,7 @@ void Monster2::InitMonsterSprite(char* name){
     monstersp->setScale(1.0);
     
     //initialize it's fireball
-    fireball = Sprite::create("fireball.png");
+    fireball = Sprite::create("arrow.png");
     fireball->setVisible(false);
     fireball->setScale(0.3);
     auto fireBody = PhysicsBody::createBox( fireball->getContentSize()/5);
@@ -336,6 +336,7 @@ void Monster2::shootInprocess()
         direction = Point(1, 0);
     }else{
         direction = Point(-1, 0);
+        fireball->setFlippedX(true);
     }
     direction.normalize();
     Point destination = this->getPosition()+1200*direction;

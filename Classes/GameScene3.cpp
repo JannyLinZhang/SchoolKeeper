@@ -652,8 +652,8 @@ void GameScene3::update(float dt){
     //for explode
     for(int i=0; i<numberOfItem; i++){
         if(     abs(character->getPositionX()-items[i]->getX())<100  &&
-                ((character->getPositionY()-items[i]->getY())-80)<20 &&
-                ((character->getPositionY()-items[i]->getY())-80)>-20){
+                ((character->getPositionY()-items[i]->getY())-80)<50 &&
+                ((character->getPositionY()-items[i]->getY())-80)>-50){
             if(items[i]->havePickedUp == 0)
                 canPickUp[i]=1;
         }else{

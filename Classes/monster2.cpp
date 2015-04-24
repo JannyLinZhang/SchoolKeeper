@@ -22,7 +22,7 @@ Monster2::Monster2(void)
     Monster_blood = NULL;
     speed = 100;
     isAdded = false;
-
+    isShooting=false;
 }
 
 Monster2::~Monster2(void){}
@@ -296,7 +296,7 @@ void Monster2::shootEnd(){
 
 void Monster2::shoot(const char* name_each, const unsigned int num,bool dir)
 {
-    
+    isShooting=true;
     this->stopAllActions();  //When being attacked, stop all animation.
     this->removeChild(monstersp,true); //remove current monster
     this->unschedule(schedule_selector(Monster2::updateMonster));
@@ -323,6 +323,7 @@ void Monster2::shoot(const char* name_each, const unsigned int num,bool dir)
 
 void Monster2::shootInprocess()
 {
+    isShooting=false;
     isrunning = false;
     this->schedule(schedule_selector(Monster2::updateMonster), 0.2f);
 

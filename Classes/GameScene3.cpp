@@ -102,7 +102,7 @@ bool GameScene3::init()
     boss = Boss::create();
     boss->InitBullets(this);
     boss->InitCharacterSprite("boss_plist/boss.png");
-    boss->setPosition(500, 500);
+    boss->setPosition(700, 300);
     
     auto bossBody = PhysicsBody::createBox(boss->GetSprite()->getContentSize()/1.1);
     bossBody->setCollisionBitmask( BOSS_COLLISION_BITMASK );
@@ -128,7 +128,7 @@ bool GameScene3::init()
         breads[i] = new Bread(this);
         breads[i]->bread->getPhysicsBody()->setTag(i);
     }
-    breads[0]->setPosition(600, 500);
+    breads[0]->setPosition(600,500);
     
     
     
@@ -460,8 +460,8 @@ void GameScene3::update(float dt){
     
     if(character->getPosition().y<10)
         character->setPositionY(10);
-    if(character->getPosition().y>500)
-        character->setPositionY(500);
+    if(character->getPosition().y>410)
+        character->setPositionY(410);
     if(character->getPosition().x<5)
         character->setPositionX(5);
     if(character->getPosition().x>1130)

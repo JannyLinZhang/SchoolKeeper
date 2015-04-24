@@ -127,7 +127,8 @@ bool GameScene2::init()
         breads[i] = new Bread(this);
         breads[i]->bread->getPhysicsBody()->setTag(i);
     }
-    breads[0]->setPosition(600, 500);
+    breads[0]->setPosition(600, 520);
+    breads[1]->setPosition(300, 520);
     
     
     
@@ -358,8 +359,9 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
                 if(character->getPosition().x > testMonster->getPosition().x){
                     dir = true;
                 }
-                
+                if(testMonster->isShooting==false){
                 testMonster->InjuredAnimation("MonsterAnimation2/monster2_blood", 19, dir);
+                }
                 
             }
             
@@ -379,8 +381,9 @@ bool GameScene2::onContactBegin(cocos2d::PhysicsContact &contact){
                 if(character->getPosition().x > testMonster->getPosition().x){
                     dir = true;
                 }
-                
+                if(testMonster->isShooting==false){
                 testMonster->InjuredAnimation("MonsterAnimation2/monster2_blood", 19, dir);
+                }
             }
             
         }
@@ -441,8 +444,8 @@ void GameScene2::update(float dt){
     
     if(character->getPosition().y<10)
         character->setPositionY(10);
-    if(character->getPosition().y>500)
-        character->setPositionY(500);
+    if(character->getPosition().y>450)
+        character->setPositionY(450);
     if(character->getPosition().x<5)
         character->setPositionX(5);
     if(character->getPosition().x>1130)
@@ -610,9 +613,11 @@ void GameScene2::update(float dt){
                 if(character->getPosition().x > testMonster->getPosition().x){
                     dir = true;
                 }
+                if(testMonster->isShooting==false){
                 testMonster->InjuredAnimation("MonsterAnimation2/monster2_blood", 19, dir);
-                /*Update by Lin*/
+                }
                 changeMode->setCurrentProgress(changeMode->getCurrentProgress()+5);
+                
             }
         }
         }//end of for loop
@@ -650,7 +655,9 @@ void GameScene2::update(float dt){
                     if(character->getPosition().x > monsterPosition.x){
                         dir = true;
                     }
+                    if(testMonster->isShooting==false){
                     monsters[j]->InjuredAnimation("MonsterAnimation2/monster2_blood", 19, dir);
+                    }
                     /*Over*/
                 }
             }

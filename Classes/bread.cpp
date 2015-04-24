@@ -22,7 +22,7 @@ Bread::Bread(cocos2d::Layer *layer)
     breadBody->setCategoryBitmask(2);
     breadBody->setContactTestBitmask( 1 );
     bread->setScale(1.0);
-    bread->setPosition(300, 200);
+    bread->setPosition(300, 500);
     bread->setPhysicsBody( breadBody );
     layer->addChild(bread);
     }

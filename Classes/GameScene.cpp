@@ -494,8 +494,8 @@ void GameScene::update(float dt){
     
     if(character->getPosition().y<10)
         character->setPositionY(10);
-    if(character->getPosition().y>500)
-        character->setPositionY(500);
+    if(character->getPosition().y>410)
+        character->setPositionY(410);
     if(character->getPosition().x<5)
         character->setPositionX(5);
     if(character->getPosition().x>1130)

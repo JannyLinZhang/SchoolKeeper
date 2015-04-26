@@ -43,7 +43,7 @@ void Character::InitCharacterSprite(char* char_name){
     
     
     
-    storm = Sprite::create("fireball.png");
+    storm = Sprite::create("k.png");
     storm->setVisible(false);
     storm->setScale(1.0f);
     auto stormBody = PhysicsBody::createBox( storm->getContentSize());
@@ -280,10 +280,6 @@ void Character::sendStorm(const char *name_plist, const char *name_png, const ch
         storm->setPositionX(character->getPosition().x-100);
     }
     storm->setPositionY(character->getPosition().y);
-    //   storm->setPosition(character->getPosition());
-    //    printf("XXX%f",storm->getPositionX());
-    //    printf("YYYY%f",storm->getPositionY());
-    
     storm->getPhysicsBody()->setEnable(true);
     
     

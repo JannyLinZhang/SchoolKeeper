@@ -289,8 +289,10 @@ void Character::sendStorm(const char *name_plist, const char *name_png, const ch
     MoveTo *moveto ;
     
     if(CharDirecton==false){
+        storm->setFlippedX(false);
         moveto = MoveTo::create(1, ccp(storm->getPosition().x+800,storm->getPosition().y));
     }else{
+        storm->setFlippedX(true);
         moveto = MoveTo::create(1, ccp(storm->getPosition().x-800,storm->getPosition().y));
     }
     

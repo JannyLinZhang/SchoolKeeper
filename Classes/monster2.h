@@ -61,7 +61,7 @@ public:
     bool injured;
     bool dead;
     bool MonsterDirection;
-    bool isShooting;
+    bool isShooting = false;
     Sprite* monstersp;
     Sprite* fireball;
     bool isAdded=false;

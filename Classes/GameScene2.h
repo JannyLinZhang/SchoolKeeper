@@ -11,6 +11,7 @@
 #include <vector>
 #include "ProgressView.h"
 #include "Boss.h"
+#include "GameOverScene.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ public:
     void InitialMonsters(int num);
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene2);
+    void GoToGameOverScene(float dt);
     
 private:
     void RoleLogic(float dt);

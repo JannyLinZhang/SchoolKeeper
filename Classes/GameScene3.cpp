@@ -454,6 +454,26 @@ bool GameScene3::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
 
 void GameScene3::update(float dt){
     
+    if(progressView->getCurrentProgress()<=0){
+        Size visibleSize = Director::getInstance()->getVisibleSize();
+        Vec2 origin = Director::getInstance()->getVisibleOrigin();
+        auto label = Label::createWithTTF("YOU LOSE !", "fonts/Marker Felt.ttf", 256);
+        label->setPosition(Vec2(visibleSize.width / 2,  visibleSize.height / 2));
+        this->addChild(label);
+        this->scheduleOnce(schedule_selector(GameScene3::GoToGameOverScene), 2.0);
+        
+    }
+    
+    if(boss->Boss_health->getCurrentProgress()<=0){
+        Size visibleSize = Director::getInstance()->getVisibleSize();
+        Vec2 origin = Director::getInstance()->getVisibleOrigin();
+        
+        auto label = Label::createWithTTF("YOU CONQUER THE SCHOOL !", "fonts/Marker Felt.ttf", 128);
+        label->setPosition(Vec2(visibleSize.width / 2,  visibleSize.height / 2));
+        this->addChild(label);
+        this->scheduleOnce(schedule_selector(GameScene3::GoToGameOverSceneWin), 2.0);
+    }
+    
     
     
     Point poi = ccpMult(joyStick->getVelocity(), 50);
@@ -903,11 +923,15 @@ void GameScene3::crazyUpdate(float dt)
 }
 
 
-/*
-void GameScene::GoToTransScene(float dt){
-    auto transcene = TransScene::createScene();
-    Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, transcene));
+
+void GameScene3:: GoToGameOverScene(float dt){
+    auto gameoverscene = GameOverScene::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, gameoverscene));
 }
-*/
+
+void GameScene3::GoToGameOverSceneWin(float dt){
+    auto gameoverscenewin = GameOverScene::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, gameoverscenewin));
+}
 
 

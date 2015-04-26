@@ -400,6 +400,15 @@ bool GameScene2::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
 
 
 void GameScene2::update(float dt){
+    if(progressView->getCurrentProgress()<=0){
+        Size visibleSize = Director::getInstance()->getVisibleSize();
+        Vec2 origin = Director::getInstance()->getVisibleOrigin();
+        auto label = Label::createWithTTF("YOU LOSE !", "fonts/Marker Felt.ttf", 256);
+        label->setPosition(Vec2(visibleSize.width / 2,  visibleSize.height / 2));
+        this->addChild(label);
+        this->scheduleOnce(schedule_selector(GameScene2::GoToGameOverScene), 2.0);
+        
+    }
     
     /*Update by Lin*/
     
@@ -871,7 +880,7 @@ void GameScene2::shootFireBall(float delta){
             if(character->getPosition().x > testMonster->getPosition().x){
                 dir = false;
             }
-            
+            if(monsters[i]->injured==false)
             monsters[i]->shoot("MonsterAnimation2/shoot",23,false);
             //monsters[i]->fireball->getPhysicsBody()->setEnable(true);
             j++;
@@ -899,6 +908,11 @@ void GameScene2::crazyUpdate(float dt)
 void GameScene2::GoToTransScene(float dt){
     auto transcene = TransScene2::createScene();
     Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, transcene));
+}
+
+void GameScene2:: GoToGameOverScene(float dt){
+    auto gameoverscene = GameOverScene::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, gameoverscene));
 }
 
 

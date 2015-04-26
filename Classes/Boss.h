@@ -35,6 +35,8 @@ public:
     void shoot(cocos2d::Layer* layer);
     void shootEnd();
     void StopShoot();
+    ProgressView* Boss_health;
+
 
 
     
@@ -67,7 +69,6 @@ private:
     cocos2d::Sprite* bullet3;
     char *Char_name;//用来保存初始状态的精灵图片名称
     int numberOfBomb;
-    ProgressView* Boss_health;
 
 
 };

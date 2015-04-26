@@ -450,6 +450,15 @@ bool GameScene::onTouchBegan( cocos2d::Touch *touch, cocos2d::Event *event){
 
 
 void GameScene::update(float dt){
+    if(progressView->getCurrentProgress()<=0){
+        Size visibleSize = Director::getInstance()->getVisibleSize();
+        Vec2 origin = Director::getInstance()->getVisibleOrigin();
+        auto label = Label::createWithTTF("YOU LOSE !", "fonts/Marker Felt.ttf", 256);
+        label->setPosition(Vec2(visibleSize.width / 2,  visibleSize.height / 2));
+        this->addChild(label);
+        this->scheduleOnce(schedule_selector(GameScene::GoToGameOverScene), 2.0);
+        
+    }
     
     /*Update by Lin*/
     
@@ -856,5 +865,9 @@ void GameScene::GoToTransScene(float dt){
     Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, transcene));
 }
 
+void GameScene:: GoToGameOverScene(float dt){
+    auto gameoverscene = GameOverScene::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, gameoverscene));
+}
 
 

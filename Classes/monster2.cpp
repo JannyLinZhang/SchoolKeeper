@@ -156,6 +156,7 @@ void Monster2::InjuredAnimation(const char* name_each, const unsigned int num,bo
     
     if(injured||dead) return;
     
+    injured=true;
     if(isrunning||isattack){
         this->stopAllActions();  //When being attacked, stop all animation.
         this->removeChild(monstersp,true); //remove current monster
@@ -182,7 +183,6 @@ void Monster2::InjuredAnimation(const char* name_each, const unsigned int num,bo
     CallFunc* callFunc=CallFunc::create(this,callfunc_selector(Monster2::InjuredEnd));
     ActionInterval* getinjured = Sequence::create(act, callFunc, NULL);
     monstersp->runAction(getinjured);
-    injured=true;
 }
 
 /*Injured animation end
@@ -195,13 +195,14 @@ void Monster::InjuredEnd(){
 }
 */
 void Monster2::InjuredEnd(){
-    injured=false;
+
     Monster_blood->setCurrentProgress(Monster_blood->getCurrentProgress()-250);
     if(Monster_blood->getCurrentProgress()<=0){
         
         DeadAnimation("MonsterAnimation2/monster2_dead", 2, MonsterDirection);
     }
     else{
+        injured = false;
         this->schedule(schedule_selector(Monster2::updateMonster), 0.2f);
         this->stopAllActions();
     }

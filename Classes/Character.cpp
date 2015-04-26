@@ -254,7 +254,11 @@ void Character::SetBombAnimation(const char *name_plist, const char *name_png, c
 void Character::BombEnd(){
     character->stopActionByTag(10001);
     this->removeChild(character,true);//把原来的精灵删除掉
-    character=CCSprite::create(Char_name);//恢复精灵原来的贴图样子
+    if(this->crazyMode==false){
+        character=CCSprite::create(Char_name);//恢复精灵原来的贴图样子
+    }else{
+        character=CCSprite::create("20.png");
+    }
     character->setFlipX(CharDirecton);
     this->addChild(character);
     Isbomb=false;
@@ -289,20 +293,12 @@ void Character::sendStorm(const char *name_plist, const char *name_png, const ch
     MoveTo *moveto ;
     
     if(CharDirecton==false){
-        // x =storm->getPosition().x+800;
         moveto = MoveTo::create(1, ccp(storm->getPosition().x+800,storm->getPosition().y));
-        //         MoveTo *moveto = MoveTo::create(6, ccp());
     }else{
         moveto = MoveTo::create(1, ccp(storm->getPosition().x-800,storm->getPosition().y));
     }
     
-    
-    //MoveBy *moveto = MoveBy::create(6, ccp(800,0));
     Sequence* shoot=Sequence::create(moveto, CallFunc::create( std::bind(&Character::stormEnd,this) ), NULL);
-    
-    // CCCallFunc* callFunc=CCCallFunc::create(this,callfunc_selector(Character::stormEnd));
-    //CCActionInterval* attackact=CCSequence::create(moveto,callFunc,NULL);
-    
     storm->runAction(shoot);
     
     
@@ -320,7 +316,7 @@ void Character::sendStorm(const char *name_plist, const char *name_png, const ch
     
     
     animation->setLoops(1);//alwasy loop
-    animation->setDelayPerUnit(0.1f);
+    animation->setDelayPerUnit(0.05f);
     
     CCAnimate* act=CCAnimate::create(animation);
     CCCallFunc* callFunc=CCCallFunc::create(this,callfunc_selector(Character::stormEnd));

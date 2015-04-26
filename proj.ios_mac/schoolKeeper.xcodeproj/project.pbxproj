@@ -83,6 +83,7 @@
 		B94A28791AAB9B4600E67907 /* bbg_fall_grassland.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B94A28781AAB9B4600E67907 /* bbg_fall_grassland.jpg */; };
 		B94A287A1AAB9B4600E67907 /* bbg_fall_grassland.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B94A28781AAB9B4600E67907 /* bbg_fall_grassland.jpg */; };
 		B94CEBC01AE46D550054D735 /* 19.png in Resources */ = {isa = PBXBuildFile; fileRef = B94CEBBF1AE46D550054D735 /* 19.png */; };
+		B94FB9CB1AED90B50087383A /* 20.png in Resources */ = {isa = PBXBuildFile; fileRef = B94FB9CA1AED90B50087383A /* 20.png */; };
 		B953A8991A7C9C6C00C85339 /* Hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B953A8501A7C9C6C00C85339 /* Hit.mp3 */; };
 		B953A89A1A7C9C6C00C85339 /* Hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B953A8501A7C9C6C00C85339 /* Hit.mp3 */; };
 		B953A89B1A7C9C6C00C85339 /* Point.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B953A8511A7C9C6C00C85339 /* Point.mp3 */; };
@@ -99,6 +100,7 @@
 		B953A8AE1A7CA01D00C85339 /* MainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B953A8A71A7CA01D00C85339 /* MainMenuScene.cpp */; };
 		B968ED3A1ADC349C00E957B8 /* Boss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B968ED381ADC349C00E957B8 /* Boss.cpp */; };
 		B99737591AEA1D97007FFE2F /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = B99737581AEA1D97007FFE2F /* arrow.png */; };
+		B997375D1AEA204B007FFE2F /* GameOverSceneWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B997375B1AEA204B007FFE2F /* GameOverSceneWin.cpp */; };
 		B99FA2501AE0821200E52705 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = B99FA24F1AE0821200E52705 /* bullet.png */; };
 		B9A7EE861AAD6D87001196AD /* fireball.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A7EE851AAD6D87001196AD /* fireball.png */; };
 		B9B583981AA3C99B00C82040 /* bomb.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B583971AA3C99B00C82040 /* bomb.png */; };
@@ -250,6 +252,7 @@
 		B94A28721AAB91B600E67907 /* MonsterAnimation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MonsterAnimation; sourceTree = "<group>"; };
 		B94A28781AAB9B4600E67907 /* bbg_fall_grassland.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bbg_fall_grassland.jpg; sourceTree = "<group>"; };
 		B94CEBBF1AE46D550054D735 /* 19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 19.png; sourceTree = "<group>"; };
+		B94FB9CA1AED90B50087383A /* 20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 20.png; path = character/red/20.png; sourceTree = "<group>"; };
 		B953A8501A7C9C6C00C85339 /* Hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Hit.mp3; sourceTree = "<group>"; };
 		B953A8511A7C9C6C00C85339 /* Point.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Point.mp3; sourceTree = "<group>"; };
 		B953A8521A7C9C6C00C85339 /* Wing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Wing.mp3; sourceTree = "<group>"; };
@@ -265,6 +268,8 @@
 		B968ED381ADC349C00E957B8 /* Boss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Boss.cpp; sourceTree = "<group>"; };
 		B968ED391ADC349C00E957B8 /* Boss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boss.h; sourceTree = "<group>"; };
 		B99737581AEA1D97007FFE2F /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow.png; path = MonsterAnimation2/arrow.png; sourceTree = "<group>"; };
+		B997375B1AEA204B007FFE2F /* GameOverSceneWin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverSceneWin.cpp; sourceTree = "<group>"; };
+		B997375C1AEA204B007FFE2F /* GameOverSceneWin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverSceneWin.h; sourceTree = "<group>"; };
 		B99FA24F1AE0821200E52705 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		B9A7EE851AAD6D87001196AD /* fireball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireball.png; sourceTree = "<group>"; };
 		B9B583971AA3C99B00C82040 /* bomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb.png; sourceTree = "<group>"; };
@@ -421,6 +426,7 @@
 			children = (
 				B9E5D5951AE497F500FB2DF5 /* background.mp3 */,
 				B9E5D5721AE479E600FB2DF5 /* Level1.png */,
+				B94FB9CA1AED90B50087383A /* 20.png */,
 				B99737581AEA1D97007FFE2F /* arrow.png */,
 				B9E5D5731AE479E600FB2DF5 /* Level2.png */,
 				B9E5D5741AE479E600FB2DF5 /* MonsterAnimation2 */,
@@ -458,6 +464,8 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B997375B1AEA204B007FFE2F /* GameOverSceneWin.cpp */,
+				B997375C1AEA204B007FFE2F /* GameOverSceneWin.h */,
 				B9E5D58D1AE48E2000FB2DF5 /* GameScene3.cpp */,
 				B9E5D58E1AE48E2000FB2DF5 /* GameScene3.h */,
 				B9E5D5861AE4840700FB2DF5 /* GameScene2.cpp */,
@@ -704,6 +712,7 @@
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				B9F980AA1AA803A000FF2CA4 /* empty.png in Resources */,
+				B94FB9CB1AED90B50087383A /* 20.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				B944340E1A999EDF001CC802 /* SplashScene.png in Resources */,
 				B944340A1A999EDF001CC802 /* Play Button.png in Resources */,
@@ -782,6 +791,7 @@
 				B953A8A11A7C9DC800C85339 /* SplashScene.cpp in Sources */,
 				B953A8AD1A7CA01D00C85339 /* MainMenuScene.cpp in Sources */,
 				B934FD7F1A916170004AE287 /* Character.cpp in Sources */,
+				B997375D1AEA204B007FFE2F /* GameOverSceneWin.cpp in Sources */,
 				B93F95471A7F3FF700F21148 /* SneakyJoystickSkinnedBase.cpp in Sources */,
 				B93F95451A7F3FF700F21148 /* SneakyJoystick.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,

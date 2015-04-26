@@ -45,7 +45,7 @@ void Character::InitCharacterSprite(char* char_name){
     
     storm = Sprite::create("k.png");
     storm->setVisible(false);
-    storm->setScale(1.0f);
+    storm->setScale(0.6f);
     auto stormBody = PhysicsBody::createBox( storm->getContentSize());
     // stormBody->setDynamic(false);
     stormBody->setCollisionBitmask( STORM_COLLISION_BITMASK );

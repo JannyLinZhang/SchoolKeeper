@@ -195,7 +195,7 @@ bool GameScene::init()
     changeMode->setPosition(Point(150, 580));
     changeMode->setScale(2.2f);
     changeMode->setBackgroundTexture("xue_back.png");
-    changeMode->setForegroundTexture("xue_fore.png");
+    changeMode->setForegroundTexture("xue_fore_rage.png");
     changeMode->setTotalProgress(100.0f);
     changeMode->setCurrentProgress(0.0f);
     //下面两个是为了让血条更好好看
